@@ -53,11 +53,11 @@ function ProductValues(props) {
             <div className={classes.item}>
               <img
                 className={classes.image}
-                src="/static/themes/onepirate/productValues1.svg"
-                alt="suitcase"
+                src="/images/pediatrician.svg"
+                alt="pediatra"
               />
               <Typography variant="h6" className={classes.title}>
-                The best luxury hotels
+                Controles Medicos
               </Typography>
               <Typography variant="h5">
                 {'From the latest trendy boutique hotel to the iconic palace with XXL pool'}
@@ -69,11 +69,11 @@ function ProductValues(props) {
             <div className={classes.item}>
               <img
                 className={classes.image}
-                src="/static/themes/onepirate/productValues2.svg"
+                src="/images/calendar.svg"
                 alt="graph"
               />
               <Typography variant="h6" className={classes.title}>
-                New experiences
+              Calendario de Vacunacion
               </Typography>
               <Typography variant="h5">
                 {'Privatize a pool, take a Japanese bath or wake up in 900m2 of garden… '}
@@ -85,11 +85,11 @@ function ProductValues(props) {
             <div className={classes.item}>
               <img
                 className={classes.image}
-                src="/static/themes/onepirate/productValues3.svg"
+                src="/images/benefit.svg"
                 alt="clock"
               />
               <Typography variant="h6" className={classes.title}>
-                Exclusive rates
+                Control de crecimiento
               </Typography>
               <Typography variant="h5">
                 {'By registering, you will access specially negotiated rates '}
