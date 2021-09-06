@@ -85,7 +85,7 @@ function ProductValues(props) {
             <div className={classes.item}>
               <img
                 className={classes.image}
-                src="/images/benefit.svg"
+                src="/images/growth.svg"
                 alt="clock"
               />
               <Typography variant="h6" className={classes.title}>
