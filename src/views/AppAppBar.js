@@ -2,9 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
-import Link from '@material-ui/core/Link';
+//import Link from '@material-ui/core/Link';
+import {Link} from 'react-router-dom';
 import AppBar from '../components/AppBar';
 import Toolbar, { styles as toolbarStyles } from '../components/Toolbar';
+import {Typography, Button } from '@material-ui/core';
 
 const styles = (theme) => ({
   title: {
@@ -35,7 +37,7 @@ const styles = (theme) => ({
   },
 });
 
-function AppAppBar(props) {
+const AppAppBar = (props) => {
   const { classes } = props;
 
   return (
@@ -43,33 +45,45 @@ function AppAppBar(props) {
       <AppBar position="fixed">
         <Toolbar className={classes.toolbar}>
           <div className={classes.left} />
-          <Link
+          {/* <Typography> */}
+            <Link 
+              to='/' 
+              variant="h6" 
+              underline="none" 
+              color="inherit"
+              className={classes.title}>
+            {/* component={Link}
+            to='/'
             variant="h6"
             underline="none"
             color="inherit"
             className={classes.title}
             //href="/premium-themes/onepirate/"
-          >
+          > */}
             {'El rincon de los MaPadres'}
-          </Link>
-          <div className={classes.right}>
-            <Link
+            </Link>
+          {/* </Typography> */}
+          <div className={classes.right}>             
+            <Typography 
+              component={Link}
+              to='/sign-in'
               color="inherit"
               variant="h6"
               underline="none"
-              className={classes.rightLink}
-              href="/sign-in"
-            >
-              {'Ingresar'}
-            </Link>
-            <Link
+              className={classes.rightLink}>              
+              Ingresar
+            </Typography>
+            {/* <Link to='/sign-up'> Pepito </Link> */}
+            <Typography
+              component={Link}
+              to='/sign-up'
               variant="h6"
               underline="none"
               className={clsx(classes.rightLink, classes.linkSecondary)}
-              href="/premium-themes/onepirate/sign-up/"
+              //href="/premium-themes/onepirate/sign-up/"
             >
               {'Registrarse'}
-            </Link>
+            </Typography>
           </div>
         </Toolbar>
       </AppBar>

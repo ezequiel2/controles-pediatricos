@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SignIn() {
+const SignIn = () =>  {
   const classes = useStyles();
   const [sent, setSent] = React.useState(false);
 
