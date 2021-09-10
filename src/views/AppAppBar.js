@@ -7,6 +7,7 @@ import {Link} from 'react-router-dom';
 import AppBar from '../components/AppBar';
 import Toolbar, { styles as toolbarStyles } from '../components/Toolbar';
 import {Typography, Button } from '@material-ui/core';
+import { LinkedCamera } from '@material-ui/icons';
 
 const styles = (theme) => ({
   title: {
@@ -45,45 +46,34 @@ const AppAppBar = (props) => {
       <AppBar position="fixed">
         <Toolbar className={classes.toolbar}>
           <div className={classes.left} />
-          {/* <Typography> */}
-            <Link 
-              to='/' 
-              variant="h6" 
-              underline="none" 
-              color="inherit"
-              className={classes.title}>
-            {/* component={Link}
-            to='/'
-            variant="h6"
-            underline="none"
-            color="inherit"
-            className={classes.title}
-            //href="/premium-themes/onepirate/"
-          > */}
-            {'El rincon de los MaPadres'}
+            <Link to='/' style={{ color: 'inherit', textDecoration: 'inherit'}}>
+              <Typography 
+                className={classes.title}
+                color="inherit"
+                variant="h6" 
+                underline='none'
+                >
+                El rincon de los MaPadres
+              </Typography>
             </Link>
-          {/* </Typography> */}
           <div className={classes.right}>             
-            <Typography 
-              component={Link}
-              to='/sign-in'
-              color="inherit"
-              variant="h6"
-              underline="none"
-              className={classes.rightLink}>              
-              Ingresar
-            </Typography>
-            {/* <Link to='/sign-up'> Pepito </Link> */}
-            <Typography
-              component={Link}
-              to='/sign-up'
-              variant="h6"
-              underline="none"
-              className={clsx(classes.rightLink, classes.linkSecondary)}
-              //href="/premium-themes/onepirate/sign-up/"
-            >
-              {'Registrarse'}
-            </Typography>
+            <Link to='/sign-in' style={{ color: 'inherit', textDecoration: 'inherit'}}>
+              <Typography 
+                color="inherit"
+                variant="h6"
+                underline="none"
+                className={classes.rightLink}>              
+                  Ingresar
+              </Typography>
+            </Link>
+            <Link to='/sign-up' style={{ color: 'inherit', textDecoration: 'inherit'}}>
+              <Typography
+                variant="h6"
+                underline="none"
+                className={clsx(classes.rightLink, classes.linkSecondary)}>
+                  Registrarse
+              </Typography>
+            </Link>
           </div>
         </Toolbar>
       </AppBar>
