@@ -3,7 +3,8 @@ import withRoot from '../withRoot';
 import React from 'react';
 import { Field, Form, FormSpy } from 'react-final-form';
 import { makeStyles } from '@material-ui/core/styles';
-import Link from '@material-ui/core/Link';
+//import Link from '@material-ui/core/Link';
+import {Link} from 'react-router-dom';
 import Typography from '../components/Typography';
 import AppFooter from '../views/AppFooter'
 import AppAppBar from '../views/AppAppBar';
@@ -53,12 +54,12 @@ const SignIn = () =>  {
       <AppForm>
         <React.Fragment>
           <Typography variant="h3" gutterBottom marked="center" align="center">
-            Sign In
+            Ingresar
           </Typography>
           <Typography variant="body2" align="center">
-            {'Not a member yet? '}
-            <Link href="/premium-themes/onepirate/sign-up/" align="center" underline="always">
-              Sign Up here
+            {'No sos miembro todavia? '}
+            <Link to="/sign-up" align="center" underline="always">
+              Registrarse
             </Link>
           </Typography>
         </React.Fragment>
@@ -85,7 +86,7 @@ const SignIn = () =>  {
                 required
                 name="password"
                 autoComplete="current-password"
-                label="Password"
+                label="Contraseña"
                 type="password"
                 margin="normal"
               />
@@ -105,14 +106,14 @@ const SignIn = () =>  {
                 color="secondary"
                 fullWidth
               >
-                {submitting || sent ? 'In progress…' : 'Sign In'}
+                {submitting || sent ? 'Ingresando…' : 'Ingresar'}
               </FormButton>
             </form>
           )}
         </Form>
         <Typography align="center">
-          <Link underline="always" href="/premium-themes/onepirate/forgot-password/">
-            Forgot password?
+          <Link underline="always" to="/forgot-password">
+            Olvidaste la contraseña?
           </Link>
         </Typography>
       </AppForm>
