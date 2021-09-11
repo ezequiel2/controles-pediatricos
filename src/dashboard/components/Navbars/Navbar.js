@@ -15,7 +15,7 @@ import RTLNavbarLinks from "./RTLNavbarLinks.js";
 import Button from "../../components/CustomButtons/Button.js";
 
 //hooks
-import { useRouteName } from "hooks";
+import { useRouteName } from "../../hooks";
 
 import styles from "../../assets/jss/material-dashboard-react/components/headerStyle.js";
 
