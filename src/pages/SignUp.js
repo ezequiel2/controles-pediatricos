@@ -90,6 +90,16 @@ function SignUp() {
                 </Grid>
               </Grid>
               <Field
+                autoComplete="dni"
+                component={RFTextField}
+                disabled={submitting || sent}
+                fullWidth
+                label="DNI"
+                margin="normal"
+                name="dni"
+                required
+              />
+              <Field
                 autoComplete="email"
                 component={RFTextField}
                 disabled={submitting || sent}

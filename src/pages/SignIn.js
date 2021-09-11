@@ -105,6 +105,8 @@ const SignIn = () =>  {
                 size="large"
                 color="secondary"
                 fullWidth
+                component={Link}
+                to='/user-profile'
               >
                 {submitting || sent ? 'Ingresando…' : 'Ingresar'}
               </FormButton>
