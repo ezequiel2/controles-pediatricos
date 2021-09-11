@@ -32,7 +32,7 @@ import Typography from "../dashboard/views/Typography/Typography.js";
 import Icons from "../dashboard/views/Icons/Icons.js";
 import Maps from "../dashboard/views/Maps/Maps.js";
 import NotificationsPage from "../dashboard/views/Notifications/Notifications.js";
-import UpgradeToPro from "../dashboard/views/UpgradeToPro/UpgradeToPro.js";
+//import UpgradeToPro from "../dashboard/views/UpgradeToPro/UpgradeToPro.js";
 // core components/views for RTL layout
 import RTLPage from "../dashboard/views/RTLPage/RTLPage.js";
 
@@ -101,14 +101,14 @@ const dashboardRoutes = [
     component: RTLPage,
     layout: "/rtl",
   },
-  {
-    path: "/upgrade-to-pro",
-    name: "Upgrade To PRO",
-    rtlName: "التطور للاحترافية",
-    icon: Unarchive,
-    component: UpgradeToPro,
-    layout: "/admin",
-  },
+  // {
+  //   path: "/upgrade-to-pro",
+  //   name: "Upgrade To PRO",
+  //   rtlName: "التطور للاحترافية",
+  //   icon: Unarchive,
+  //   component: UpgradeToPro,
+  //   layout: "/admin",
+  // },
 ];
 
 export default dashboardRoutes;
