@@ -110,6 +110,16 @@ function SignUp() {
                 required
               />
               <Field
+                autoComplete="telefono"
+                component={RFTextField}
+                disabled={submitting || sent}
+                fullWidth
+                label="Telefono"
+                margin="normal"
+                name="telefono"
+                required
+              />
+              <Field
                 fullWidth
                 component={RFTextField}
                 disabled={submitting || sent}
