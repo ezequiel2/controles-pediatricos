@@ -38,9 +38,8 @@ import NotificationsPage from "../dashboard/views/Notifications/Notifications.js
 
 const dashboardRoutes = [
   {
-    path: "/miperfil",
+    path: "/dashboard",
     name: "Mi Perfil",
-    //rtlName: "لوحة القيادة",
     icon: Dashboard,
     component: DashboardPage,
     layout: "/user-profile",

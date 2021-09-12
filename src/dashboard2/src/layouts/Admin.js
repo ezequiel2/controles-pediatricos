@@ -11,7 +11,7 @@ import Footer from "../components/Footer/Footer.js";
 import Sidebar from "../components/Sidebar/Sidebar.js";
 import FixedPlugin from "../components/FixedPlugin/FixedPlugin.js";
 
-import routes from "../../dashboard/routes";
+import routes from "../routes.js";
 
 import styles from "../assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
@@ -23,7 +23,7 @@ let ps;
 const switchRoutes = (
   <Switch>
     {routes.map((prop, key) => {
-      if (prop.layout === "/user-profile") {
+      if (prop.layout === "/admin") {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -34,7 +34,7 @@ const switchRoutes = (
       }
       return null;
     })}
-    <Redirect from="/user-profile" to="/user-profile/dashboard" />
+    <Redirect from="/admin" to="/admin/dashboard" />
   </Switch>
 );
 
@@ -67,7 +67,7 @@ export default function Admin({ ...rest }) {
     setMobileOpen(!mobileOpen);
   };
   const getRoute = () => {
-    return window.location.pathname !== "/user-profile/maps";
+    return window.location.pathname !== "/admin/maps";
   };
   const resizeFunction = () => {
     if (window.innerWidth >= 960) {
@@ -96,7 +96,7 @@ export default function Admin({ ...rest }) {
     <div className={classes.wrapper}>
       <Sidebar
         routes={routes}
-        logoText={"El rincon de los MaPadres"}
+        logoText={"Creative Tim"}
         logo={logo}
         image={image}
         handleDrawerToggle={handleDrawerToggle}
