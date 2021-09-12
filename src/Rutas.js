@@ -6,6 +6,7 @@ import SignUp from './pages/SignUp';
 import ForgotPassword from './pages/ForgotPassword';
 import UserProfile from './pages/UserProfile';
 import Admin from "../src/dashboard/layouts/Admin";
+import Dashboard from './dashboard/views/Dashboard/Dashboard';
 
 
 
@@ -17,6 +18,8 @@ const Rutas = () => {
             <Route exact path='/sign-up' component={SignUp}/>
             <Route exact path='/forgot-password' component={ForgotPassword}/>
             <Route exact path='/user-profile' component={Admin}/>
+            {/* <Route exact path='/admin' component={Admin}/> */}
+            {/* <Route exact path='/admin/dashboard' component={Admin}/> */}
         </Switch>
     )
 }

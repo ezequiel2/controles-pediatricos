@@ -40,7 +40,8 @@ export default function Sidebar(props) {
         } else {
           listItemClasses = classNames({
             [" " + classes[color]]: activeRoute(prop.layout + prop.path),
-          });
+          }
+          );
         }
         const whiteFontClasses = classNames({
           [" " + classes.whiteFont]: activeRoute(prop.layout + prop.path),
