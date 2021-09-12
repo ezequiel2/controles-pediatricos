@@ -50,18 +50,22 @@ function ProductValues(props) {
         />
         <Grid container spacing={5}>
           <Grid item xs={12} md={4}>
-            <div className={classes.item}>
+            <div>
+              <div className={classes.item}>
               <img
                 className={classes.image}
+                align="justify"
                 src="/images/pediatrician.svg"
                 alt="pediatra"
               />
+              </div>
               <Typography variant="h6" className={classes.title}>
-                Controles Medicos
+                Controles Pediatricos
               </Typography>
-              <Typography variant="h5">
-                {'From the latest trendy boutique hotel to the iconic palace with XXL pool'}
-                {', go for a mini-vacation just a few subway stops away from your home.'}
+              <Typography variant="h5" align="justify">
+                {'Te acompañamos en el cuidado de la salud de tu hij@ brindandote un '}
+                {'espacio para registrar los controles medicos y poder llevar la historia clinica '}
+                {'con vos todo el tiempo'}
               </Typography>
             </div>
           </Grid>
@@ -75,9 +79,9 @@ function ProductValues(props) {
               <Typography variant="h6" className={classes.title}>
               Calendario de Vacunacion
               </Typography>
-              <Typography variant="h5">
-                {'Privatize a pool, take a Japanese bath or wake up in 900m2 of garden… '}
-                {'your Sundays will not be alike.'}
+              <Typography variant="h5" align="justify">
+                {'Con nosotros te será mas fácil recordar aquellas fechas importantes para tus '}
+                {'hijos. También podrás registrar las aplicaciones facil y rápidamente'}
               </Typography>
             </div>
           </Grid>
@@ -91,9 +95,10 @@ function ProductValues(props) {
               <Typography variant="h6" className={classes.title}>
                 Control de crecimiento
               </Typography>
-              <Typography variant="h5">
-                {'By registering, you will access specially negotiated rates '}
-                {'that you will not find anywhere else.'}
+              <Typography variant="h5" align="justify">
+                {'El control de crecimiento es una de las tareas mas importantes que llevan '}
+                {'adelante los pediatras. Lo sabemos y por eso te acompañamos para que puedas '}
+                {'registrar y conocer toda la informacion necesaria.'}
               </Typography>
             </div>
           </Grid>

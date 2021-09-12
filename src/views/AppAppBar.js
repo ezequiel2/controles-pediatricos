@@ -47,6 +47,11 @@ const AppAppBar = (props) => {
         <Toolbar className={classes.toolbar}>
           <div className={classes.left} />
             <Link to='/' style={{ color: 'inherit', textDecoration: 'inherit'}}>
+              {/* <img
+                src="/images/onlinepngtools.png"
+                className={classes.curvyLines}
+                alt="curvy lines"
+              />               */}
               <Typography 
                 className={classes.title}
                 color="inherit"

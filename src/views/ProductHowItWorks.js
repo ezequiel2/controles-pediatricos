@@ -75,7 +75,7 @@ function ProductHowItWorks(props) {
                   alt="suitcase"
                   className={classes.image}
                 />
-                <Typography variant="h5" align="center">
+                <Typography variant="h5" align="justify">
                   Appointment every Wednesday 9am.
                 </Typography>
               </div>
