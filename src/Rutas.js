@@ -6,6 +6,7 @@ import SignUp from './pages/SignUp';
 import ForgotPassword from './pages/ForgotPassword';
 //import UserProfile from './pages/UserProfile';
 import Admin from "../src/dashboard2/src/layouts/Admin";
+import "./dashboard2/src/assets/css/material-dashboard-react.css?v=1.10.0";
 
 const Rutas = () => {
     return(
