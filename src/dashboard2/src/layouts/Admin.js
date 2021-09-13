@@ -15,7 +15,7 @@ import routes from "../routes.js";
 
 import styles from "../assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
-import bgImage from "../assets/img/sidebar-2.jpg";
+import bgImage from "../assets/img/side-bar2.jpg";
 import logo from "../assets/img/reactlogo.png";
 
 let ps;
@@ -98,7 +98,7 @@ export default function Admin({ ...rest }) {
         routes={routes}
         logoText={"Creative Tim"}
         logo={logo}
-        image={image}
+        image={bgImage}
         handleDrawerToggle={handleDrawerToggle}
         open={mobileOpen}
         color={color}
