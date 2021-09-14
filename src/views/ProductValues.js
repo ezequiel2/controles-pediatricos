@@ -25,10 +25,17 @@ const styles = (theme) => ({
   },
   image: {
     height: 55,
+    flexDirection: 'column',
+    alignItems: 'center',
+    display: 'flex',
+    padding: theme.spacing(0, 20),
   },
   title: {
     marginTop: theme.spacing(5),
     marginBottom: theme.spacing(5),
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'column',
   },
   curvyLines: {
     pointerEvents: 'none',
@@ -44,28 +51,27 @@ function ProductValues(props) {
     <section className={classes.root}>
       <Container className={classes.container}>
         <img
-          src="/static/themes/onepirate/productCurvyLines.png"
+          src="/images/productCurvyLines.png"
           className={classes.curvyLines}
           alt="curvy lines"
         />
         <Grid container spacing={5}>
           <Grid item xs={12} md={4}>
             <div>
-              <div className={classes.item}>
+              {/* <div className={classes.item}> */}
               <img
                 className={classes.image}
-                align="justify"
                 src="/images/pediatrician.svg"
                 alt="pediatra"
               />
-              </div>
+              {/* </div> */}
               <Typography variant="h6" className={classes.title}>
                 Controles Pediatricos
               </Typography>
-              <Typography variant="h5" align="justify">
+              <Typography variant="h5" align="center">
                 {'Te acompañamos en el cuidado de la salud de tu hij@ brindandote un '}
                 {'espacio para registrar los controles medicos y poder llevar la historia clinica '}
-                {'con vos todo el tiempo'}
+                {'con vos todo el tiempo.'}
               </Typography>
             </div>
           </Grid>
@@ -79,9 +85,9 @@ function ProductValues(props) {
               <Typography variant="h6" className={classes.title}>
               Calendario de Vacunacion
               </Typography>
-              <Typography variant="h5" align="justify">
+              <Typography variant="h5" align="center">
                 {'Con nosotros te será mas fácil recordar aquellas fechas importantes para tus '}
-                {'hijos. También podrás registrar las aplicaciones facil y rápidamente'}
+                {'hijos. También podrás registrar las aplicaciones facil y rápidamente.'}
               </Typography>
             </div>
           </Grid>
@@ -95,10 +101,10 @@ function ProductValues(props) {
               <Typography variant="h6" className={classes.title}>
                 Control de crecimiento
               </Typography>
-              <Typography variant="h5" align="justify">
-                {'El control de crecimiento es una de las tareas mas importantes que llevan '}
-                {'adelante los pediatras. Lo sabemos y por eso te acompañamos para que puedas '}
-                {'registrar y conocer toda la informacion necesaria.'}
+              <Typography variant="h5" align="center">
+                {'Sabemos que el control de crecimiento es una de las tareas mas importantes que '}
+                {'llevan adelante los pediatras. Por eso te acompañamos para que puedas '}
+                {'tener toda la informacion necesaria.'}
               </Typography>
             </div>
           </Grid>

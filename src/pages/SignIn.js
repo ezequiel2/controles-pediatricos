@@ -120,7 +120,7 @@ const SignIn = () =>  {
           </Link>
         </Typography>
       </AppForm>
-      <AppFooter />
+      {/* <AppFooter /> */}
     </React.Fragment>
   );
 }

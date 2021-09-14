@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '../components/Button';
 import Typography from '../components/Typography';
 import ProductHeroLayout from './ProductHeroLayout';
+import {Link} from 'react-router-dom';
 
 const backgroundImage =
   'https://cdn.pixabay.com/photo/2019/06/08/12/30/baby-feet-4260035_960_720.jpg';
@@ -37,23 +38,25 @@ function ProductHero(props) {
       {/* Increase the network loading priority of the background image. */}
       <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" />
       <Typography color="inherit" align="center" variant="h2" marked="center">
-        Upgrade your Sundays
+        Nos preocupamos por la salud de tus hijos
       </Typography>
       <Typography color="inherit" align="center" variant="h5" className={classes.h5}>
-        Enjoy secret offers up to -70% off the best luxury hotels every Sunday.
+        Nos preocupamos por la salud de tus hijos
       </Typography>
-      <Button
-        color="secondary"
-        variant="contained"
-        size="large"
-        className={classes.button}
-        component="a"
-        href="/premium-themes/onepirate/sign-up/"
-      >
-        Registrate
-      </Button>
+      <Link to='/sign-up' style={{ color: 'inherit', textDecoration: 'inherit'}}>
+          <Button
+            color="secondary"
+            size="large"
+            variant="contained"
+            className={classes.button}
+            component="a"
+            href="/sign-up/"
+          >
+            Registrate
+          </Button>
+        </Link> 
       <Typography variant="body2" color="inherit" className={classes.more}>
-        Discover the experience
+        Una vida mas simple y cerca de tus hijos
       </Typography>
     </ProductHeroLayout>
   );

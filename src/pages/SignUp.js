@@ -151,7 +151,7 @@ function SignUp() {
           )}
         </Form>
       </AppForm>
-      <AppFooter />
+      {/* <AppFooter /> */}
     </React.Fragment>
   );
 }

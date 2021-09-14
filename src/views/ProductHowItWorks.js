@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Button from '../components/Button';
 import Typography from '../components/Typography';
+import {Link} from 'react-router-dom';
 
 const styles = (theme) => ({
   root: {
@@ -58,12 +59,12 @@ function ProductHowItWorks(props) {
     <section className={classes.root}>
       <Container className={classes.container}>
         <img
-          src="/static/themes/onepirate/productCurvyLines.png"
+          src="/images/productCurvyLines.png"
           className={classes.curvyLines}
           alt="curvy lines"
         />
         <Typography variant="h4" marked="center" className={classes.title} component="h2">
-          How it works
+          Como funciona
         </Typography>
         <div>
           <Grid container spacing={5}>
@@ -71,12 +72,12 @@ function ProductHowItWorks(props) {
               <div className={classes.item}>
                 <div className={classes.number}>1.</div>
                 <img
-                  src="/static/themes/onepirate/productHowItWorks1.svg"
+                  src="/images/add-user-comoFunciona.svg"
                   alt="suitcase"
                   className={classes.image}
                 />
                 <Typography variant="h5" align="justify">
-                  Appointment every Wednesday 9am.
+                  Da de alta tu usuario desde la opcion Ingresar.
                 </Typography>
               </div>
             </Grid>
@@ -84,12 +85,13 @@ function ProductHowItWorks(props) {
               <div className={classes.item}>
                 <div className={classes.number}>2.</div>
                 <img
-                  src="/static/themes/onepirate/productHowItWorks2.svg"
+                  src="/images/hijos2-ComoFunciona.svg"
                   alt="graph"
                   className={classes.image}
                 />
                 <Typography variant="h5" align="center">
-                  First come, first served. Our offers are in limited quantities, so be quick.
+                  {'Registra a tus hijos, las aplicaciones de sus vacunas, sus controles '}
+                  {'pediatricos.'}
                 </Typography>
               </div>
             </Grid>
@@ -97,28 +99,30 @@ function ProductHowItWorks(props) {
               <div className={classes.item}>
                 <div className={classes.number}>3.</div>
                 <img
-                  src="/static/themes/onepirate/productHowItWorks3.svg"
+                  src="/images/search-comoFunciona.svg"
                   alt="clock"
                   className={classes.image}
                 />
                 <Typography variant="h5" align="center">
-                  {'New offers every week. New experiences, new surprises. '}
-                  {'Your Sundays will no longer be alike.'}
+                  {'Compará las mediciones de tu pediatra con los percentiles de '}
+                  {'Curva de Crecimiento ofrecidos por la OMS.'}
                 </Typography>
               </div>
             </Grid>
           </Grid>
         </div>
-        <Button
-          color="secondary"
-          size="large"
-          variant="contained"
-          className={classes.button}
-          component="a"
-          href="/premium-themes/onepirate/sign-up/"
-        >
-          Get started
-        </Button>
+        <Link to='/sign-up' style={{ color: 'inherit', textDecoration: 'inherit'}}>
+          <Button
+            color="secondary"
+            size="large"
+            variant="contained"
+            className={classes.button}
+            component="a"
+            href="/sign-up/"
+          >
+            Registrate
+          </Button>
+        </Link>  
       </Container>
     </section>
   );
