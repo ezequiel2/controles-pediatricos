@@ -1,6 +1,6 @@
 import React from 'react';
-import UserProfile from '../UserProfile/UserProfile';
 import Button from "../../../../components/Button.js";
+import ControlPedForm from '../../components/PedControlForm/PedControlForm.js';
 
 class ControlPed extends React.Component{
 
@@ -15,7 +15,7 @@ class ControlPed extends React.Component{
 
     mostrarForm = () => {
         this.setState({
-            showMyComponent: true
+            showMyComponent: !this.state.showMyComponent
         })
     };
 
@@ -24,7 +24,7 @@ class ControlPed extends React.Component{
         return(
             <React.Fragment>
                 <Button onClick={this.mostrarForm}> Desplegar </Button>
-                { this.state.showMyComponent ? <UserProfile /> : null }
+                { this.state.showMyComponent ? <ControlPedForm /> : null }
             </React.Fragment>
         );
     }
