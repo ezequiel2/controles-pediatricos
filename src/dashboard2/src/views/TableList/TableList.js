@@ -8,6 +8,9 @@ import Table from "../../components/Table/Table.js";
 import Card from "../../components/Card/Card.js";
 import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
+import KidsForm from "../KidsForm/KidsForm.js";
+import reactDom from "react-dom";
+import Button from "../../../../components/Button.js";
 
 const styles = {
   cardCategoryWhite: {
@@ -44,6 +47,9 @@ const useStyles = makeStyles(styles);
 export default function TableList() {
   const classes = useStyles();
   return (
+    <React.Fragment>
+    {/* <Button>Desplegar</Button> */}
+      <KidsForm />
     <GridContainer>
       <GridItem xs={12} sm={12} md={12}>
         <Card>
@@ -108,5 +114,6 @@ export default function TableList() {
         </Card>
       </GridItem>
     </GridContainer>
+    </React.Fragment>
   );
 }
