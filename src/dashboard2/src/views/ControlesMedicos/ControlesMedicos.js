@@ -11,6 +11,9 @@ import CardBody from "../../components/Card/CardBody.js";
 import ControlPed from "../ControlPed/ControlPed.js";
 import reactDom from "react-dom";
 import Button from "../../../../components/Button.js";
+import EditIconButton from "../../components/EditIconButton/EditIconButton.js";
+import DeleteIconButton from "../../components/DeleteIconButton/DeleteIconButton.js";
+
 
 const styles = {
   cardCategoryWhite: {
@@ -62,11 +65,11 @@ export default function TableList() {
           <CardBody>
             <Table
               tableHeaderColor="primary"
-              tableHead={["Nombre", "Fecha", "Especialista", "Salary"]}
+              tableHead={["Nombre", "Fecha", "Especialista", "Salary", "", ""]}
               tableData={[
-                ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738"],
-                ["Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789"],
-                ["Sage Rodriguez", "Netherlands", "Baileux", "$56,142"],
+                ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738", <EditIconButton />, <DeleteIconButton/>],
+                ["Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789", <EditIconButton />, <DeleteIconButton/>],
+                ["Sage Rodriguez", "Netherlands", "Baileux", "$56,142", <EditIconButton />, <DeleteIconButton/>],
                 // ["Philip Chaney", "Korea, South", "Overland Park", "$38,735"],
                 // ["Doris Greene", "Malawi", "Feldkirchen in Kärnten", "$63,542"],
                 // ["Mason Porter", "Chile", "Gloucester", "$78,615"],
