@@ -2,7 +2,7 @@ import React from 'react';
 import UserProfile from '../UserProfile/UserProfile';
 import Button from "../../../../components/Button.js";
 
-class KidsForm extends React.Component{
+class ControlPed extends React.Component{
 
     constructor(props){
         super(props);
@@ -30,4 +30,4 @@ class KidsForm extends React.Component{
     }
 };
 
-export default KidsForm;
+export default ControlPed;

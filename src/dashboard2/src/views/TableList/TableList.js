@@ -8,7 +8,7 @@ import Table from "../../components/Table/Table.js";
 import Card from "../../components/Card/Card.js";
 import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
-import KidsForm from "../KidsForm/KidsForm.js";
+import ControlPed from "../ControlPed/ControlPed.js";
 import reactDom from "react-dom";
 import Button from "../../../../components/Button.js";
 
@@ -49,7 +49,7 @@ export default function TableList() {
   return (
     <React.Fragment>
     {/* <Button>Desplegar</Button> */}
-      <KidsForm />
+      <ControlPed />
     <GridContainer>
       <GridItem xs={12} sm={12} md={12}>
         <Card>
