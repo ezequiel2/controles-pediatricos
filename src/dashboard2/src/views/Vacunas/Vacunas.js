@@ -15,6 +15,7 @@ import CardFooter from "../../components/Card/CardFooter.js";
 import UploadButton from '../../components/UploadButton/UploadButton';
 import Table from "../../components/Table/Table.js";
 import { CardMedia } from "@material-ui/core";
+import calendario from '../../assets/img/CalendarVac2020.jpg'
 
 
 
@@ -42,21 +43,22 @@ const useStyles = makeStyles(styles);
 
 export default function Vacunas() {
   const classes = useStyles();
+  const [image, setImage] = React.useState(calendario);
   return (
     <div>
     <React.Fragment>
       <GridContainer>
-        <GridItem xs={12} sm={12} md={8}>
+        <GridItem xs={12} sm={12} md={12}>
           <Card>
-            {/* <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Edita tu Perfil</h4>
-              <p className={classes.cardCategoryWhite}>Completa tu perfil</p>
-            </CardHeader> */}
+            <CardHeader color="primary">
+              <h4 className={classes.cardTitleWhite}>Calendario de Vacunacion</h4>
+              {/* <p className={classes.cardCategoryWhite}>Completa tu perfil</p> */}
+            </CardHeader>
             <CardBody>
             <CardMedia
               component="img"
               sx={{ width: 151 }}
-              image=""
+              image= {image}
             />
               {/* <GridContainer> */}
                 {/* <GridItem xs={12} sm={12} md={5}>
@@ -161,7 +163,7 @@ export default function Vacunas() {
               </GridContainer> */}
             </CardBody>
             <CardFooter>
-              <Button color="primary">Actualizar Perfil</Button>
+              {/* <Button color="primary">Actualizar Perfil</Button> */}
             </CardFooter>
           </Card>
         </GridItem>

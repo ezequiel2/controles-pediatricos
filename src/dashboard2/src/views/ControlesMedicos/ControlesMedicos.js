@@ -15,6 +15,8 @@ import EditIconButton from "../../components/EditIconButton/EditIconButton.js";
 import DeleteIconButton from "../../components/DeleteIconButton/DeleteIconButton.js";
 import PedControlForm from "../../components/PedControlForm/PedControlForm.js";
 import VisualIconButton from "../../components/VisualIconButton/VisualIconButton.js";
+import IconButton from "@material-ui/core/IconButton";
+import RemoveRedEye from "@material-ui/icons/RemoveRedEye";
 
 
 
@@ -34,6 +36,7 @@ const styles = {
   cardTitleWhite: {
     color: "#FFFFFF",
     marginTop: "0px",
+    display: 'inline-block',
     minHeight: "auto",
     fontWeight: "300",
     fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
@@ -71,8 +74,14 @@ export default function TableList() {
     <GridContainer>
       <GridItem xs={12} sm={12} md={12}>
         <Card>
-          <CardHeader color="primary">
-            <h4 className={classes.cardTitleWhite}>Historial de Controles Pediatricos</h4>         
+        {/* //aca esta la mugre para arreglar */}
+          <CardHeader color="primary" display='inline-block'>
+            {/* <div display='inline-block'> */}
+              <h4 className={classes.cardTitleWhite}>Historial de Controles Pediatricos</h4> 
+              {/* <div>  */}
+                <Button size='small' float='right' onClick={OnClickAgregarControl}>Boton feo</Button>
+              {/* </div>  */}
+            {/* </div>        */}
           </CardHeader> 
           <Button onClick={OnClickAgregarControl}> Agregar control </Button>  
           {showAgregarControl ? (
@@ -84,11 +93,8 @@ export default function TableList() {
               tableHead={["Nombre", "Fecha", "Especialista", "Salary", "", ""]}
               tableData={[
                 ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738", <VisualIconButton />, <Button onClick={OnClickEditarControl} size='sm'> <EditIconButton/> </Button>, <DeleteIconButton/>],
-                ["Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789", <VisualIconButton />, <EditIconButton onClick={OnClickEditarControl}/>, <DeleteIconButton/>],
-                ["Sage Rodriguez", "Netherlands", "Baileux", "$56,142", <VisualIconButton />, <EditIconButton onClick={OnClickEditarControl}/>, <DeleteIconButton/>],
-                // ["Philip Chaney", "Korea, South", "Overland Park", "$38,735"],
-                // ["Doris Greene", "Malawi", "Feldkirchen in Kärnten", "$63,542"],
-                // ["Mason Porter", "Chile", "Gloucester", "$78,615"],
+                ["Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789", <VisualIconButton onClick={() => { alert('clicked') }}/>, <EditIconButton onClick={OnClickEditarControl}/>, <DeleteIconButton/>],
+                ["Sage Rodriguez", "Netherlands", "Baileux", "$56,142", <IconButton onClick={() => { alert('clicked') }}> <RemoveRedEye/> </IconButton>, <VisualIconButton />, <EditIconButton onClick={OnClickEditarControl}/>, <DeleteIconButton/>],
               ]}
             />
           </CardBody>
