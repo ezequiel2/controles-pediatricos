@@ -13,7 +13,9 @@ import CardAvatar from "../../components/Card/CardAvatar.js";
 import CardBody from "../../components/Card/CardBody.js";
 import CardFooter from "../../components/Card/CardFooter.js";
 import UploadButton from '../../components/UploadButton/UploadButton';
-
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import avatar from "../../assets/img/faces/marc.jpg";
 
 const styles = {
@@ -50,7 +52,24 @@ export default function ControlPedForm() {
             </CardHeader>
             <CardBody>
               <GridContainer>
-                <GridItem xs={12} sm={12} md={3}>
+                <GridItem xs={12} sm={12} md={6}>
+                  <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                  <InputLabel id="demo-simple-select-standard-label">Hij@</InputLabel>
+                    <Select
+                      labelId="demo-simple-select-standard-label"
+                      id="demo-simple-select-standard"
+                      label="Age"
+                    >
+                      <MenuItem value="">
+                        <em>None</em>
+                      </MenuItem>
+                      <MenuItem value={10}>Ten</MenuItem>
+                      <MenuItem value={20}>Twenty</MenuItem>
+                      <MenuItem value={30}>Thirty</MenuItem>
+                    </Select>
+                  </FormControl>
+
+
                   <CustomInput
                     labelText="Fecha"
                     id='fecha'
@@ -59,6 +78,8 @@ export default function ControlPedForm() {
                     }}
                   />
                 </GridItem>
+              </GridContainer>
+              <GridContainer>
                 <GridItem xs={12} sm={12} md={3}>
                   <CustomInput
                     labelText="Peso(Kg)"
@@ -77,8 +98,6 @@ export default function ControlPedForm() {
                     }}
                   />
                 </GridItem>
-              </GridContainer>
-              <GridContainer>
                 <GridItem xs={12} sm={12} md={3}>
                   <CustomInput
                     labelText="Diametro cabeza"
@@ -88,6 +107,8 @@ export default function ControlPedForm() {
                     }}
                   />
                 </GridItem>
+              </GridContainer>
+              <GridContainer>
                 <GridItem xs={12} sm={12} md={3}>
                   <CustomInput
                     labelText="Medicamento Recetado"

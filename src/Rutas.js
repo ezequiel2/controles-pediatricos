@@ -7,6 +7,7 @@ import ForgotPassword from './pages/ForgotPassword';
 //import UserProfile from './pages/UserProfile';
 import Admin from "../src/dashboard2/src/layouts/Admin";
 import "./dashboard2/src/assets/css/material-dashboard-react.css?v=1.10.0";
+import PedControlImportance from './pages/Articles/PedControlImportance';
 
 const Rutas = () => {
     return(
@@ -17,6 +18,7 @@ const Rutas = () => {
             <Route exact path='/forgot-password' component={ForgotPassword}/>
             <Route path="/admin" component={Admin} />
             <Redirect from="/admin" to="/admin/dashboard" />
+            <Route path="/importancia-control-pediatrico" component={PedControlImportance} />
         </Switch>
     )
 }
