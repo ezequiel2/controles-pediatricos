@@ -10,7 +10,7 @@ import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
 import ControlPed from "../ControlPed/ControlPed.js";
 import reactDom from "react-dom";
-import Button from "../../../../components/Button.js";
+import Button from '../../components/CustomButtons/Button';
 import EditIconButton from "../../components/EditIconButton/EditIconButton.js";
 import DeleteIconButton from "../../components/DeleteIconButton/DeleteIconButton.js";
 import PedControlForm from "../../components/PedControlForm/PedControlForm.js";
@@ -47,7 +47,11 @@ const styles = {
       fontSize: "65%",
       fontWeight: "400",
       lineHeight: "1",
-    },
+    },  
+  },
+  cardHeaderButton: {
+    float: 'right',
+    color: 'primary',
   },
 };
 
@@ -79,13 +83,13 @@ export default function TableList() {
             {/* <div display='inline-block'> */}
               <h4 className={classes.cardTitleWhite}>Historial de Controles Pediatricos</h4> 
               {/* <div>  */}
-                <Button size='small' float='right' onClick={OnClickAgregarControl}>Boton feo</Button>
+                <Button color= 'primary' size='sm' className={classes.cardHeaderButton} onClick={OnClickAgregarControl}>Boton feo</Button>
               {/* </div>  */}
             {/* </div>        */}
           </CardHeader> 
-          <Button onClick={OnClickAgregarControl}> Agregar control </Button>  
+          {/* <Button onClick={OnClickAgregarControl}> Agregar control </Button>   */}
           {showAgregarControl ? (
-            <div><PedControlForm /> </div>
+            <div><br/><PedControlForm /> </div>
           ) :null}               
           <CardBody>
             <Table
