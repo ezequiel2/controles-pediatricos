@@ -50,9 +50,9 @@ const useStyles = makeStyles(styles);
 export default function TableList() {
   const classes = useStyles();
   return (
-    <React.Fragment>
+  <React.Fragment>
     {/* <Button>Desplegar</Button> */}
-      <ControlPed />
+    {/* <ControlPed /> */}
     <GridContainer>
       <GridItem xs={12} sm={12} md={12}>
         <Card>
@@ -61,7 +61,11 @@ export default function TableList() {
             {/* <p className={classes.cardCategoryWhite}>
               Here is a subtitle for this table
             </p> */}
+            
           </CardHeader>
+
+          <ControlPed />
+          
           <CardBody>
             <Table
               tableHeaderColor="primary"
