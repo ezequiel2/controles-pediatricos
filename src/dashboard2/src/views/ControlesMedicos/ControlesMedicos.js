@@ -14,7 +14,7 @@ import Button from "../../../../components/Button.js";
 import EditIconButton from "../../components/EditIconButton/EditIconButton.js";
 import DeleteIconButton from "../../components/DeleteIconButton/DeleteIconButton.js";
 import PedControlForm from "../../components/PedControlForm/PedControlForm.js";
-//import VisualIconButton from "../../components/VisualIconButton/VisualIconButton.js";
+import VisualIconButton from "../../components/VisualIconButton/VisualIconButton.js";
 
 
 
@@ -83,9 +83,9 @@ export default function TableList() {
               tableHeaderColor="primary"
               tableHead={["Nombre", "Fecha", "Especialista", "Salary", "", ""]}
               tableData={[
-                ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738", <Button onClick={OnClickEditarControl} size='sm'> <EditIconButton/> </Button>, <DeleteIconButton/>],
-                ["Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789", <EditIconButton onClick={OnClickEditarControl}/>, <DeleteIconButton/>],
-                ["Sage Rodriguez", "Netherlands", "Baileux", "$56,142", <EditIconButton onClick={OnClickEditarControl}/>, <DeleteIconButton/>],
+                ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738", <VisualIconButton />, <Button onClick={OnClickEditarControl} size='sm'> <EditIconButton/> </Button>, <DeleteIconButton/>],
+                ["Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789", <VisualIconButton />, <EditIconButton onClick={OnClickEditarControl}/>, <DeleteIconButton/>],
+                ["Sage Rodriguez", "Netherlands", "Baileux", "$56,142", <VisualIconButton />, <EditIconButton onClick={OnClickEditarControl}/>, <DeleteIconButton/>],
                 // ["Philip Chaney", "Korea, South", "Overland Park", "$38,735"],
                 // ["Doris Greene", "Malawi", "Feldkirchen in Kärnten", "$63,542"],
                 // ["Mason Porter", "Chile", "Gloucester", "$78,615"],
