@@ -37,12 +37,12 @@ import NotificationsPage from "./views/Notifications/Notifications.js";
 // import UpgradeToPro from "./views/_UpgradeToPro/_UpgradeToPro.js";
 // core components/views for RTL layout
 //import RTLPage from "./views/RTLPage/RTLPage.js";
+import Vacunas from "./views/Vacunas/Vacunas.js";
 
 const dashboardRoutes = [
   {
     path: "/dashboard",
     name: "Dashboard",
-    //rtlName: "لوحة القيادة",
     icon: Dashboard,
     component: DashboardPage,
     layout: "/admin",
@@ -50,7 +50,6 @@ const dashboardRoutes = [
   {
     path: "/miperfil",
     name: "Mi perfil",
-    //rtlName: "ملف تعريفي للمستخدم",
     icon: Person,
     //component: UserProfile,
     component: MiPerfil,
@@ -59,7 +58,6 @@ const dashboardRoutes = [
   {
     path: "/controles-medicos",
     name: "Controles medicos",
-    //rtlName: "قائمة الجدول",
     icon: "content_paste",
     //component: TableList,
     component: ControlesMedicos,
@@ -68,9 +66,8 @@ const dashboardRoutes = [
   {
     path: "/vacunas",
     name: "Vacunas",
-    //rtlName: "طباعة",
     icon: LibraryBooks,
-    component: Typography,
+    component: Vacunas,
     layout: "/admin",
   },
   // {

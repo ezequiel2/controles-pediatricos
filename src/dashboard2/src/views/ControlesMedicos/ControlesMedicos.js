@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
@@ -13,6 +13,9 @@ import reactDom from "react-dom";
 import Button from "../../../../components/Button.js";
 import EditIconButton from "../../components/EditIconButton/EditIconButton.js";
 import DeleteIconButton from "../../components/DeleteIconButton/DeleteIconButton.js";
+import PedControlForm from "../../components/PedControlForm/PedControlForm.js";
+//import VisualIconButton from "../../components/VisualIconButton/VisualIconButton.js";
+
 
 
 const styles = {
@@ -45,10 +48,22 @@ const styles = {
   },
 };
 
+
+
 const useStyles = makeStyles(styles);
 
 export default function TableList() {
   const classes = useStyles();
+  const [showAgregarControl, setShowAgregarControl] = useState(false);
+  const [showEditarControl, setShowEditarControl] = useState(false);
+
+  const OnClickAgregarControl = () => {
+    setShowAgregarControl(!showAgregarControl);
+  }
+  const OnClickEditarControl = () => {
+    setShowEditarControl(!showEditarControl);
+  }
+
   return (
   <React.Fragment>
     {/* <Button>Desplegar</Button> */}
@@ -57,23 +72,20 @@ export default function TableList() {
       <GridItem xs={12} sm={12} md={12}>
         <Card>
           <CardHeader color="primary">
-            <h4 className={classes.cardTitleWhite}>Historial de Controles Pediatricos</h4>
-            {/* <p className={classes.cardCategoryWhite}>
-              Here is a subtitle for this table
-            </p> */}
-            
-          </CardHeader>
-
-          <ControlPed />
-          
+            <h4 className={classes.cardTitleWhite}>Historial de Controles Pediatricos</h4>         
+          </CardHeader> 
+          <Button onClick={OnClickAgregarControl}> Agregar control </Button>  
+          {showAgregarControl ? (
+            <div><PedControlForm /> </div>
+          ) :null}               
           <CardBody>
             <Table
               tableHeaderColor="primary"
               tableHead={["Nombre", "Fecha", "Especialista", "Salary", "", ""]}
               tableData={[
-                ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738", <EditIconButton />, <DeleteIconButton/>],
-                ["Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789", <EditIconButton />, <DeleteIconButton/>],
-                ["Sage Rodriguez", "Netherlands", "Baileux", "$56,142", <EditIconButton />, <DeleteIconButton/>],
+                ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738", <Button onClick={OnClickEditarControl} size='sm'> <EditIconButton/> </Button>, <DeleteIconButton/>],
+                ["Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789", <EditIconButton onClick={OnClickEditarControl}/>, <DeleteIconButton/>],
+                ["Sage Rodriguez", "Netherlands", "Baileux", "$56,142", <EditIconButton onClick={OnClickEditarControl}/>, <DeleteIconButton/>],
                 // ["Philip Chaney", "Korea, South", "Overland Park", "$38,735"],
                 // ["Doris Greene", "Malawi", "Feldkirchen in Kärnten", "$63,542"],
                 // ["Mason Porter", "Chile", "Gloucester", "$78,615"],
@@ -82,45 +94,12 @@ export default function TableList() {
           </CardBody>
         </Card>
       </GridItem>
-      {/* <GridItem xs={12} sm={12} md={12}>
-        <Card plain>
-          <CardHeader plain color="primary">
-            <h4 className={classes.cardTitleWhite}>
-              Table on Plain Background
-            </h4>
-            <p className={classes.cardCategoryWhite}>
-              Here is a subtitle for this table
-            </p>
-          </CardHeader>
-          <CardBody>
-            <Table
-              tableHeaderColor="primary"
-              tableHead={["ID", "Name", "Country", "City", "Salary"]}
-              tableData={[
-                ["1", "Dakota Rice", "$36,738", "Niger", "Oud-Turnhout"],
-                ["2", "Minerva Hooper", "$23,789", "Curaçao", "Sinaai-Waas"],
-                ["3", "Sage Rodriguez", "$56,142", "Netherlands", "Baileux"],
-                [
-                  "4",
-                  "Philip Chaney",
-                  "$38,735",
-                  "Korea, South",
-                  "Overland Park",
-                ],
-                [
-                  "5",
-                  "Doris Greene",
-                  "$63,542",
-                  "Malawi",
-                  "Feldkirchen in Kärnten",
-                ],
-                ["6", "Mason Porter", "$78,615", "Chile", "Gloucester"],
-              ]}
-            />
-          </CardBody>
-        </Card>
-      </GridItem> */}
     </GridContainer>
+    
+
+    {showEditarControl ? (
+        <div><PedControlForm /> </div>
+    ) :null}    
     </React.Fragment>
   );
 }

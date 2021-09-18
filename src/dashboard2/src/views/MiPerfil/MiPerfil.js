@@ -81,6 +81,9 @@ export default function UserProfile() {
                     formControlProps={{
                       fullWidth: true,
                     }}
+                    inputProps={{
+                      disabled: true,
+                    }}
                   />
                 </GridItem>
               </GridContainer>

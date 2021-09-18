@@ -13,8 +13,11 @@ import CardAvatar from "../../components/Card/CardAvatar.js";
 import CardBody from "../../components/Card/CardBody.js";
 import CardFooter from "../../components/Card/CardFooter.js";
 import UploadButton from '../../components/UploadButton/UploadButton';
+import Table from "../../components/Table/Table.js";
+import { CardMedia } from "@material-ui/core";
 
-import avatar from "../../assets/img/faces/marc.jpg";
+
+
 
 const styles = {
   cardCategoryWhite: {
@@ -37,79 +40,74 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-export default function ControlPedForm() {
+export default function Vacunas() {
   const classes = useStyles();
   return (
     <div>
+    <React.Fragment>
       <GridContainer>
-        <GridItem xs={12} sm={12} md={10}>
+        <GridItem xs={12} sm={12} md={8}>
           <Card>
-            <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Completa tu control pediatrico</h4>
-              {/* <p className={classes.cardCategoryWhite}>-------------------</p> */}
-            </CardHeader>
+            {/* <CardHeader color="primary">
+              <h4 className={classes.cardTitleWhite}>Edita tu Perfil</h4>
+              <p className={classes.cardCategoryWhite}>Completa tu perfil</p>
+            </CardHeader> */}
             <CardBody>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={3}>
+            <CardMedia
+              component="img"
+              sx={{ width: 151 }}
+              image=""
+            />
+              {/* <GridContainer> */}
+                {/* <GridItem xs={12} sm={12} md={5}>
                   <CustomInput
-                    labelText="Fecha"
-                    id='fecha'
+                    labelText="DNI"
+                    //id="company-disabled"
+                    id='dni'
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      disabled: true,
+                    }}
+                  />
+                </GridItem> */}
+                {/* <GridItem xs={12} sm={12} md={3}>
+                  <CustomInput
+                    labelText="Username"
+                    id="username"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                  />
+                </GridItem> */}
+                {/* <GridItem xs={12} sm={12} md={5}>
+                  <CustomInput
+                    labelText="Email"
+                    id="email"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      disabled: true,
+                    }}
+                  />
+                </GridItem> */}
+              {/* </GridContainer> */}
+              {/* <GridContainer>
+                <GridItem xs={12} sm={12} md={5}>
+                  <CustomInput
+                    labelText="Nombre"
+                    id="nombre"
                     formControlProps={{
                       fullWidth: true,
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
+                <GridItem xs={12} sm={12} md={5}>
                   <CustomInput
-                    labelText="Peso(Kg)"
-                    id="peso"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
-                  <CustomInput
-                    labelText="Altura(cm)"
-                    id="altura"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                  />
-                </GridItem>
-              </GridContainer>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={3}>
-                  <CustomInput
-                    labelText="Diametro cabeza"
-                    id="diametroCabeza"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
-                  <CustomInput
-                    labelText="Medicamento Recetado"
-                    id="medicamentosRecetados"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
-                  <CustomInput
-                    labelText="Dosis"
-                    id="dosis"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
-                  <CustomInput
-                    labelText="Período"
-                    id="periodo"
+                    labelText="Apellido"
+                    id="apellido"
                     formControlProps={{
                       fullWidth: true,
                     }}
@@ -125,7 +123,7 @@ export default function ControlPedForm() {
                       fullWidth: true,
                     }}
                   />
-                </GridItem>
+                </GridItem> */}
                 {/* <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
                     labelText="Country"
@@ -144,7 +142,7 @@ export default function ControlPedForm() {
                     }}
                   />
                 </GridItem> */}
-              </GridContainer>
+              {/* </GridContainer> */}
               {/* <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
                   <InputLabel style={{ color: "#AAAAAA" }}>About me</InputLabel>
@@ -163,34 +161,15 @@ export default function ControlPedForm() {
               </GridContainer> */}
             </CardBody>
             <CardFooter>
-              <Button color="primary">Cargar</Button>
-              <Button color="primary">Cancelar</Button>
+              <Button color="primary">Actualizar Perfil</Button>
             </CardFooter>
           </Card>
         </GridItem>
-        {/* <GridItem xs={12} sm={12} md={4}>
-          <Card profile>
-            <CardAvatar profile>
-              <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                <img src={avatar} alt="..." />
-              </a>
-            </CardAvatar>
-            <CardBody profile>
-              {/* <h6 className={classes.cardCategory}>CEO / CO-FOUNDER</h6> }
-              <h4 className={classes.cardTitle}>Alec Thompson</h4>
-              {/* <p className={classes.description}>
-                Don{"'"}t be scared of the truth because we need to restart the
-                human foundation in truth And I love you like Kanye loves Kanye
-                I love Rick Owens’ bed design but the back is...
-              </p>
-              <Button color="primary" round>
-                Follow
-              </Button> }
-              <UploadButton color="primary" round/>
-            </CardBody>
-          </Card>
-        </GridItem> */}
+      <GridItem xs={12} sm={12} md={12}>
+        
+      </GridItem>
       </GridContainer>
+      </React.Fragment>
     </div>
   );
 }
