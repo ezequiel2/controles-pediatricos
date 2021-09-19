@@ -23,17 +23,17 @@ export default function CustomSelect(props) {
     labelText,
     id,
     labelProps,
-    //inputProps,
-    //error,
-    //success,
-    //rtlActive,
+    inputProps,
+    error,
+    success,
+    rtlActive,
   } = props;
 
-  // const labelClasses = classNames({
-  //   [" " + classes.labelRootError]: error,
-  //   [" " + classes.labelRootSuccess]: success && !error,
-  //   [" " + classes.labelRTL]: rtlActive,
-  // });
+  const labelClasses = classNames({
+    [" " + classes.labelRootError]: error,
+    [" " + classes.labelRootSuccess]: success && !error,
+    [" " + classes.labelRTL]: rtlActive,
+  });
    const underlineClasses = classNames({
   //   [classes.underlineError]: error,
   //   [classes.underlineSuccess]: success && !error,
@@ -71,9 +71,10 @@ export default function CustomSelect(props) {
     >
       {labelText !== undefined ? (
         <InputLabel
-          className={classes.labelRoot}// + labelClasses}
+          className={classes.labelRoot + labelClasses}
           htmlFor={id}
           {...labelProps}
+          
         >
           {labelText}
         </InputLabel>

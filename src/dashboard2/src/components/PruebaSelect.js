@@ -19,15 +19,14 @@ import {
     //     backgroundColor: "transparent !important",
     //   },
     // },
-    select: {
-      // "&:hover:not($disabled):before,&:before": {
-      //   borderColor: grayColor[4] + " !important",
-      //   borderWidth: "1px !important",
-      // },
-      // "&:after": {
-      //   borderColor: primaryColor[0],
-      // },
-      borderColor: primaryColor[0],
+    underline: {
+        "&:focused:not($disabled):before,&:before": {
+          borderColor: grayColor[4] + " !important",
+          borderWidth: "1px !important",
+        },
+        "&:after": {
+          borderColor: primaryColor[0],
+        },
     },
     // underlineError: {
     //   "&:after": {
@@ -88,6 +87,7 @@ const useStyles = makeStyles(styles);
 export default function ControlledOpenSelect() {
   const [age, setAge] = React.useState('');
   const [open, setOpen] = React.useState(false);
+  const classes = useStyles();
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -103,17 +103,24 @@ export default function ControlledOpenSelect() {
 
   return (
     <div>
-      <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id="demo-controlled-open-select-label">Age</InputLabel>
+      <FormControl sx={{ m: 1, minWidth: 120, }}>
+        <InputLabel 
+            id="demo-controlled-open-select-label" 
+            //className={classes.underline}
+            color='secondary'   
+            className={classes.labelRoot}         
+            >Age</InputLabel>
         <Select
           labelId="demo-controlled-open-select-label"
           id="demo-controlled-open-select"
+          borderColor = 'secondary'
           open={open}
           onClose={handleClose}
           onOpen={handleOpen}
           value={age}
           label="Age"
           onChange={handleChange}
+          
         >
           <MenuItem value="">
             <em>None</em>

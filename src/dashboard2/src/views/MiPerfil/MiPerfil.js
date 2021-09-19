@@ -183,7 +183,7 @@ export default function UserProfile() {
               <Button color="primary" round>
                 Follow
               </Button> */}
-                <UploadButton color="primary" round />
+                <UploadButton round />
               </CardBody>
             </Card>
           </GridItem>
