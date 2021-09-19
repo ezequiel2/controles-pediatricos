@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 //import Link from '@material-ui/core/Link';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import AppBar from '../components/AppBar';
 import Toolbar, { styles as toolbarStyles } from '../components/Toolbar';
-import {Typography, Button } from '@material-ui/core';
+import { Typography, Button } from '@material-ui/core';
 import { LinkedCamera } from '@material-ui/icons';
 
 const styles = (theme) => ({
@@ -31,10 +31,16 @@ const styles = (theme) => ({
   rightLink: {
     fontSize: 16,
     color: theme.palette.common.white,
-    marginLeft: theme.spacing(3),
+    marginLeft: theme.spacing(6),
   },
   linkSecondary: {
     color: theme.palette.secondary.main,
+  },
+  curvyLines: {
+    width: "150px",
+    height: "150px",
+    padding: "0",
+    marginLeft: theme.spacing(3),
   },
 });
 
@@ -45,38 +51,41 @@ const AppAppBar = (props) => {
     <div>
       <AppBar position="fixed">
         <Toolbar className={classes.toolbar}>
-          <div className={classes.left} />
-            <Link to='/' style={{ color: 'inherit', textDecoration: 'inherit'}}>
-              {/* <img
-                src="/images/onlinepngtools.png"
+          <div className={classes.left}>
+            <Link to='/' style={{ color: 'inherit', textDecoration: 'inherit' }}>
+              <img
+                src="/images/logo.png"
                 className={classes.curvyLines}
                 alt="curvy lines"
-              />               */}
-              <Typography 
+              />
+            </Link>
+          </div>
+
+          {/* <Typography 
                 className={classes.title}
                 color="inherit"
                 variant="h6" 
                 underline='none'
                 >
                 El rincon de los MaPadres
-              </Typography>
-            </Link>
-          <div className={classes.right}>             
-            <Link to='/sign-in' style={{ color: 'inherit', textDecoration: 'inherit'}}>
-              <Typography 
+              </Typography> */}
+
+          <div className={classes.right}>
+            <Link to='/sign-in' style={{ color: 'inherit', textDecoration: 'inherit' }}>
+              <Typography
                 color="inherit"
                 variant="h6"
                 underline="none"
-                className={classes.rightLink}>              
-                  Ingresar
+                className={classes.rightLink}>
+                Ingresar
               </Typography>
             </Link>
-            <Link to='/sign-up' style={{ color: 'inherit', textDecoration: 'inherit'}}>
+            <Link to='/sign-up' style={{ color: 'inherit', textDecoration: 'inherit' }}>
               <Typography
                 variant="h6"
                 underline="none"
                 className={clsx(classes.rightLink, classes.linkSecondary)}>
-                  Registrarse
+                Registrarse
               </Typography>
             </Link>
           </div>

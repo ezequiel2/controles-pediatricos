@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Container from '@material-ui/core/Container';
 import Typography from '../components/Typography';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const styles = (theme) => ({
   root: {
@@ -90,67 +90,67 @@ function ProductCategories(props) {
   const images = [
     {
       url:
-        'https://images.unsplash.com/photo-1534081333815-ae5019106622?auto=format&fit=crop&w=400&q=80',
-      title: 'Snorkeling',
-      width: '40%',
-      //urlArticle: 'https://www.google.com.ar',
-      to:"/importancia-control-pediatrico",
+        'https://source.unsplash.com/collection/2061832/',
+      title: 'Importancia del control pediatrico',
+      width: '50%',
+      urlArticle: 'https://www.clinicapueyrredon.com/importancia-del-control-pediatrico-del-nino-sano/',
+      // to:"/importancia-control-pediatrico",
+    },
+    // {
+    //   url:
+    //     'https://images.unsplash.com/photo-1531299204812-e6d44d9a185c?auto=format&fit=crop&w=400&q=80',
+    //   title: 'Massage',
+    //   width: '20%',
+    //   to:"/",
+    // },
+    {
+      url:
+        'https://source.unsplash.com/collection/22913724',
+      title: 'Calendario de vacunación',
+      width: '50%',
+      urlArticle: "https://www.argentina.gob.ar/salud/vacunas",
     },
     {
       url:
-        'https://images.unsplash.com/photo-1531299204812-e6d44d9a185c?auto=format&fit=crop&w=400&q=80',
-      title: 'Massage',
-      width: '20%',
-      to:"/",
-    },
-    {
-      url:
-        'https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?auto=format&fit=crop&w=400&q=80',
-      title: 'Hiking',
-      width: '40%',
-      to:"/",
-    },
-    {
-      url:
-        'https://images.unsplash.com/photo-1453747063559-36695c8771bd?auto=format&fit=crop&w=400&q=80',
-      title: 'Tour',
+        'https://source.unsplash.com/collection/9496388',
+      title: 'Vacunas durante el embarazo',
       width: '38%',
-      to:"/",
+      urlArticle: "https://www.argentina.gob.ar/salud/vacunas/embarazadas",
     },
     {
       url:
-        'https://images.unsplash.com/photo-1523309996740-d5315f9cc28b?auto=format&fit=crop&w=400&q=80',
-      title: 'Gastronomy',
+        'https://source.unsplash.com/collection/3329685',
+      title: 'Vacunas recien nacidos',
       width: '38%',
-      to:"/",
+      urlArticle: "https://www.argentina.gob.ar/salud/vacunas/recien-nacidos",
     },
     {
       url:
-        'https://images.unsplash.com/photo-1534452203293-494d7ddbf7e0?auto=format&fit=crop&w=400&q=80',
-      title: 'Shopping',
+        'https://source.unsplash.com/collection/10773888',
+      title: 'Vacunas lactantes',
       width: '24%',
-      to:"/",
+      urlArticle: "https://www.argentina.gob.ar/salud/vacunas/vacunacion-lactantes",
     },
     {
       url:
-        'https://images.unsplash.com/photo-1506941433945-99a2aa4bd50a?auto=format&fit=crop&w=400&q=80',
-      title: 'Walking',
+        'https://source.unsplash.com/collection/2017406',
+      title: 'Vacunas hasta los 2 años de vida',
       width: '40%',
-      to:"/",
+      urlArticle: "https://www.argentina.gob.ar/salud/vacunas/vacunacion-niniosyninias",
     },
     {
       url:
-        'https://images.unsplash.com/photo-1533727937480-da3a97967e95?auto=format&fit=crop&w=400&q=80',
-      title: 'Fitness',
+        'https://source.unsplash.com/collection/70933075',
+      title: 'Salud sexual',
       width: '20%',
-      to:"/",
+      urlArticle: "https://www.argentina.gob.ar/salud/sexual",
     },
     {
       url:
-        'https://images.unsplash.com/photo-1518136247453-74e7b5265980?auto=format&fit=crop&w=400&q=80',
-      title: 'Reading',
+        'https://source.unsplash.com/collection/2210494',
+      title: 'Cuidados en edad escolar',
       width: '40%',
-      to:"/",
+      urlArticle: "https://www.argentina.gob.ar/salud/cuidadosedadescolar",
     },
   ];
 
@@ -174,21 +174,21 @@ function ProductCategories(props) {
               style={{
                 backgroundImage: `url(${image.url})`,
               }}>
-              <Link to={image.to} style={{ color: 'inherit', textDecoration: 'inherit'}}>  
-                <div className={classes.imageBackdrop} />
-                <div className={classes.imageButton}>
-                  
-                    <Typography
-                      component="h3"
-                      variant="h6"
-                      color="inherit"
-                      className={classes.imageTitle}
-                    >
-                      {image.title}
-                      <div className={classes.imageMarked} />
-                    </Typography>
-                </div>
-              </Link>  
+              {/* <Link to={image.to} style={{ color: 'inherit', textDecoration: 'inherit'}}>   */}
+              <div className={classes.imageBackdrop} />
+              <div className={classes.imageButton}>
+
+                <Typography
+                  component="h3"
+                  variant="h6"
+                  color="inherit"
+                  className={classes.imageTitle}
+                >
+                  {image.title}
+                  <div className={classes.imageMarked} />
+                </Typography>
+              </div>
+              {/* </Link>   */}
             </div>
           </ButtonBase>
         ))}
