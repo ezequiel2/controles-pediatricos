@@ -17,6 +17,8 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import avatar from "../../assets/img/faces/marc.jpg";
+import CustomSelect from '../CustomSelect/CustomSelect';
+import PruebaSelect from '../PruebaSelect';
 
 const styles = {
   cardCategoryWhite: {
@@ -68,24 +70,25 @@ export default function ControlPedForm(props) {
             </CardHeader>
             <CardBody>
               <GridContainer>
-                <GridItem xs={12} sm={12} md={6}>
-                  <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-                  <InputLabel id="demo-simple-select-standard-label">Hij@</InputLabel>
-                    <Select
-                      labelId="demo-simple-select-standard-label"
-                      id="demo-simple-select-standard"
-                      label="Age"
-                    >
-                      <MenuItem value="">
-                        <em>None</em>
-                      </MenuItem>
-                      <MenuItem value={10}>Ten</MenuItem>
-                      <MenuItem value={20}>Twenty</MenuItem>
-                      <MenuItem value={30}>Thirty</MenuItem>
-                    </Select>
-                  </FormControl>
+                <GridItem xs={12} sm={12} md={3}>
+                  {/* <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}> */}
+                  {/* <InputLabel id="demo-simple-select-standard-label">Hij@</InputLabel> */}
+                    <CustomSelect
+                      labelText="Hijo"
+                      id='Hijo'
+                      formControlProps={{
+                       fullWidth: true,
+                     }}
+                      
+                    />
+                    <PruebaSelect/>
+                  {/* </FormControl> */}
 
-
+                  
+                </GridItem>
+              </GridContainer>
+              <GridContainer>
+                <GridItem GridItem xs={12} sm={12} md={3}>
                   <CustomInput
                     labelText="Fecha"
                     id='fecha'
@@ -94,8 +97,17 @@ export default function ControlPedForm(props) {
                     }}
                   />
                 </GridItem>
-              </GridContainer>
-              <GridContainer>
+                <GridItem GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText="Profesional"
+                    id='profesional'
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                  />
+                </GridItem>
+                </GridContainer>
+                <GridContainer>
                 <GridItem xs={12} sm={12} md={3}>
                   <CustomInput
                     labelText="Peso(Kg)"
@@ -125,35 +137,47 @@ export default function ControlPedForm(props) {
                 </GridItem>
               </GridContainer>
               <GridContainer>
-                <GridItem xs={12} sm={12} md={3}>
+                <GridItem xs={12} sm={12} md={9}>
                   <CustomInput
-                    labelText="Medicamento Recetado"
+                    labelText="Medicamentos recetados"
                     id="medicamentosRecetados"
                     formControlProps={{
                       fullWidth: true,
                     }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
-                  <CustomInput
-                    labelText="Dosis"
-                    id="dosis"
-                    formControlProps={{
-                      fullWidth: true,
+                    inputProps={{
+                      multiline: true,
+                      rows: 5,
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
+                <GridItem xs={12} sm={12} md={9}>
                   <CustomInput
-                    labelText="Período"
-                    id="periodo"
+                    labelText="Estudios"
+                    id="estudios"
                     formControlProps={{
                       fullWidth: true,
+                    }}
+                    inputProps={{
+                      multiline: true,
+                      rows: 5,
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={9}>
+                  <CustomInput
+                    labelText="Observaciones"
+                    id="observaciones"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      multiline: true,
+                      rows: 5,
                     }}
                   />
                 </GridItem>
               </GridContainer>
-              <GridContainer>
+              {/* <GridContainer>
                 <GridItem xs={12} sm={12} md={5}>
                   <CustomInput
                     labelText="Telefono"
@@ -162,7 +186,7 @@ export default function ControlPedForm(props) {
                       fullWidth: true,
                     }}
                   />
-                </GridItem>
+                </GridItem> */}
                 {/* <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
                     labelText="Country"
@@ -181,7 +205,7 @@ export default function ControlPedForm(props) {
                     }}
                   />
                 </GridItem> */}
-              </GridContainer>
+              {/* </GridContainer> */}
               {/* <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
                   <InputLabel style={{ color: "#AAAAAA" }}>About me</InputLabel>
@@ -197,9 +221,10 @@ export default function ControlPedForm(props) {
                     }}
                   />
                 </GridItem>
-              </GridContainer> */}´'
+              </GridContainer> */}
             </CardBody>
             <CardFooter className={classes.cardFooter}>
+              <br/>
               <Button className={classes.formButton} color= 'primary' onClick={OnClickCargarCancelarControl}>Cargar</Button>
               <Button className={classes.formButton} color= 'primary' onClick={OnClickOcultar}>Cancelar</Button>
             </CardFooter>

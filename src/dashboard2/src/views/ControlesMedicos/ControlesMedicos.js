@@ -17,6 +17,16 @@ import PedControlForm from "../../components/PedControlForm/PedControlForm.js";
 import VisualIconButton from "../../components/VisualIconButton/VisualIconButton.js";
 import IconButton from "@material-ui/core/IconButton";
 import RemoveRedEye from "@material-ui/icons/RemoveRedEye";
+import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
+import EditIcon from '@mui/icons-material/Edit';
+import CloseIcon from "@material-ui/icons/Close";
+import {
+  defaultFont,
+  primaryColor,
+  dangerColor,
+  grayColor,
+} from '../../assets/jss/material-dashboard-react'
+
 
 
 
@@ -47,11 +57,30 @@ const styles = {
       fontSize: "65%",
       fontWeight: "400",
       lineHeight: "1",
-    },  
+    },
   },
   cardHeaderButton: {
     float: 'right',
     color: 'primary',
+  },
+  edit: {
+    backgroundColor: "transparent",
+    color: primaryColor[0],
+    boxShadow: "none",
+  },
+  close: {
+    backgroundColor: "transparent",
+    color: dangerColor[0],
+    boxShadow: "none",
+  },
+  tableActionButton: {
+    width: "27px",
+    height: "27px",
+    padding: "0",
+  },
+  tableActionButtonIcon: {
+    width: "17px",
+    height: "17px",
   },
 };
 
@@ -78,41 +107,156 @@ export default function TableList() {
   }
 
   return (
-  <React.Fragment>
-    {/* <Button>Desplegar</Button> */}
-    {/* <ControlPed /> */}
-    <GridContainer>
-      <GridItem xs={12} sm={12} md={12}>
-        <Card>
-        {/* //aca esta la mugre para arreglar */}
-          <CardHeader color="primary" display='inline-block'>
-              <h4 className={classes.cardTitleWhite}>Historial de Controles Pediatricos</h4> 
-              <Button color= 'primary' size='sm' className={classes.cardHeaderButton} onClick={OnClickAgregarControl}>Boton feo</Button>
-          </CardHeader> 
-          {/* <Button onClick={OnClickAgregarControl}> Agregar control </Button>   */}
-          {showAgregarControl ? (
-            <div><br/><PedControlForm
-               OnClickCargarCancelarControl = {OnClickCargarCancelarControl}/> </div>
-          ) :null}               
-          <CardBody>
-            <Table
-              tableHeaderColor="primary"
-              tableHead={["Nombre", "Fecha", "Especialista", "Salary", "", ""]}
-              tableData={[
-                ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738", <VisualIconButton />, <Button onClick={OnClickEditarControl} size='sm'> <EditIconButton/> </Button>, <DeleteIconButton/>],
-                ["Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789", <VisualIconButton onClick={() => { alert('clicked') }}/>, <EditIconButton onClick={OnClickEditarControl}/>, <DeleteIconButton/>],
-                ["Sage Rodriguez", "Netherlands", "Baileux", "$56,142", <IconButton onClick={() => { alert('clicked') }}> <RemoveRedEye/> </IconButton>, <VisualIconButton />, <EditIconButton onClick={OnClickEditarControl}/>, <DeleteIconButton/>],
-              ]}
-            />
-          </CardBody>
-        </Card>
-      </GridItem>
-    </GridContainer>
-    
+    <React.Fragment>
+      {/* <Button>Desplegar</Button> */}
+      {/* <ControlPed /> */}
+      <GridContainer>
+        <GridItem xs={12} sm={12} md={12}>
+          <Card>
+            {/* //aca esta la mugre para arreglar */}
+            <CardHeader color="primary" display='inline-block'>
+              <h4 className={classes.cardTitleWhite}>Historial de Controles Pediatricos</h4>
+              {/* <Button color= 'primary' size='sm' className={classes.cardHeaderButton} onClick={OnClickAgregarControl}>Boton feo</Button> */}
+              <IconButton
+                className={classes.cardHeaderButton}
+                onClick={OnClickAgregarControl}>
+                <AddToPhotosIcon
+                  className={classes.cardTitleWhite}
+                //color='primary'
+                //size='large'
+                />
+              </IconButton>
+            </CardHeader>
+            {/* <Button onClick={OnClickAgregarControl}> Agregar control </Button>   */}
+            {showAgregarControl ? (
+              <div><br /><PedControlForm
+                OnClickCargarCancelarControl={OnClickCargarCancelarControl} /> </div>
+            ) : null}
+            <CardBody>
+              <Table
+                tableHeaderColor="primary"
+                tableHead={["Nombre", "Fecha", "Profesional", "", "", ""]}
+                tableData={[
+                  ["Dakota Rice", "Niger", "Oud-Turnhout",
+                    <IconButton
+                      className={classes.tableActionButton}
+                    //onClick={OnClickAgregarControl}
+                    >
+                      <RemoveRedEye
+                        className={
+                          classes.tableActionButtonIcon + " " + classes.edit
+                        }
+                      // className={classes.edit}
+                      //color='primary'
+                      //size='large'
+                      />
+                    </IconButton>,
+                    <IconButton
+                      className={classes.tableActionButton}
+                      onClick={OnClickAgregarControl}>
+                      <EditIcon
+                        className={
+                          classes.tableActionButtonIcon + " " + classes.edit
+                        }
+                      //color='primary'
+                      //size='large'
+                      />
+                    </IconButton>,
+                    <IconButton
+                      className={classes.tableActionButton}
+                    //onClick={OnClickAgregarControl}
+                    >
+                      <CloseIcon
+                        className={
+                          classes.tableActionButtonIcon + " " + classes.close
+                        }
+                      //color='primary'
+                      //size='large'
+                      />
+                    </IconButton>],
+                  ["Minerva Hooper", "Curaçao", "Sinaai-Waas",
+                    <IconButton
+                      className={classes.tableActionButton}
+                    //onClick={OnClickAgregarControl}
+                    >
+                      <RemoveRedEye
+                        className={
+                          classes.tableActionButtonIcon + " " + classes.edit
+                        }
+                      //color='primary'
+                      //size='large'
+                      />
+                    </IconButton>,
+                    <IconButton
+                      className={classes.tableActionButton}
+                      onClick={OnClickAgregarControl}>
+                      <EditIcon
+                        className={
+                          classes.tableActionButtonIcon + " " + classes.edit
+                        }
+                      //color='primary'
+                      //size='large'
+                      />
+                    </IconButton>,
+                    <IconButton
+                      className={classes.tableActionButton}
+                    //onClick={OnClickAgregarControl}
+                    >
+                      <CloseIcon
+                        className={
+                          classes.tableActionButtonIcon + " " + classes.close
+                        }
+                      //color='primary'
+                      //size='large'
+                      />
+                    </IconButton>],
+                  ["Sage Rodriguez", "Netherlands", "Baileux",
+                    <IconButton
+                      className={classes.tableActionButton}
+                    //onClick={OnClickAgregarControl}
+                    >
+                      <RemoveRedEye
+                        className={
+                          classes.tableActionButtonIcon + " " + classes.edit
+                        }
+                      //color='primary'
+                      //size='large'
+                      />
+                    </IconButton>,
+                    <IconButton
+                      className={classes.tableActionButton}
+                      onClick={OnClickAgregarControl}>
+                      <EditIcon
+                        className={
+                          classes.tableActionButtonIcon + " " + classes.edit
+                        }
+                      //color='primary'
+                      //size='large'
+                      />
+                    </IconButton>,
+                    <IconButton
+                      className={classes.tableActionButton}
+                    //onClick={OnClickAgregarControl}
+                    >
+                      <CloseIcon
+                        className={
+                          classes.tableActionButtonIcon + " " + classes.close
+                        }
+                      //color='primary'
+                      //size='large'
+                      />
+                    </IconButton>],
+                ]}
+              />
+            </CardBody>
+          </Card>
+        </GridItem>
+      </GridContainer>
 
-    {showEditarControl ? (
+
+      {showEditarControl ? (
         <div><PedControlForm /> </div>
-    ) :null}    
+      ) : null}
     </React.Fragment>
   );
 }
