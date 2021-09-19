@@ -32,18 +32,13 @@ import MiPerfil from './views/MiPerfil/MiPerfil';
 import ControlesMedicos from './views/ControlesMedicos/ControlesMedicos';
 import Typography from "./views/Typography/Typography.js";
 import Icons from "./views/Icons/Icons.js";
-import Maps from "./views/Maps/Maps.js";
-import NotificationsPage from "./views/Notifications/Notifications.js";
-// import UpgradeToPro from "./views/_UpgradeToPro/_UpgradeToPro.js";
-// core components/views for RTL layout
-//import RTLPage from "./views/RTLPage/RTLPage.js";
 import Vacunas from "./views/Vacunas/Vacunas.js";
 
 const dashboardRoutes = [
   {
     path: "/dashboard",
     name: "Dashboard",
-    icon: Dashboard,
+    icon: Dashboard, 
     component: DashboardPage,
     layout: "/admin",
   },
@@ -70,46 +65,14 @@ const dashboardRoutes = [
     component: Vacunas,
     layout: "/admin",
   },
-  // {
-  //   path: "/icons",
-  //   name: "Icons",
-  //   rtlName: "الرموز",
-  //   icon: BubbleChart,
-  //   component: Icons,
-  //   layout: "/admin",
-  // },
-  // {
-  //   path: "/maps",
-  //   name: "Maps",
-  //   rtlName: "خرائط",
-  //   icon: LocationOn,
-  //   component: Maps,
-  //   layout: "/admin",
-  // },
   {
     path: "/percentiles",
     name: "Percentiles",
     //rtlName: "إخطارات",
     icon: Notifications,
-    component: NotificationsPage,
+    component: Vacunas,
     layout: "/admin",
   },
-  // {
-  //   path: "/rtl-page",
-  //   name: "RTL Support",
-  //   rtlName: "پشتیبانی از راست به چپ",
-  //   icon: Language,
-  //   component: RTLPage,
-  //   layout: "/rtl",
-  // },
-  // {
-  //   path: "/upgrade-to-pro",
-  //   name: "Upgrade To PRO",
-  //   rtlName: "التطور للاحترافية",
-  //   icon: Unarchive,
-  //   component: UpgradeToPro,
-  //   layout: "/admin",
-  // },
 ];
 
 export default dashboardRoutes;

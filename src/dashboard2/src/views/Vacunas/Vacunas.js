@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -9,13 +9,12 @@ import CustomInput from "../../components/CustomInput/CustomInput.js";
 import Button from "../../components/CustomButtons/Button.js";
 import Card from "../../components/Card/Card.js";
 import CardHeader from "../../components/Card/CardHeader.js";
-import CardAvatar from "../../components/Card/CardAvatar.js";
 import CardBody from "../../components/Card/CardBody.js";
 import CardFooter from "../../components/Card/CardFooter.js";
-import UploadButton from '../../components/UploadButton/UploadButton';
 import Table from "../../components/Table/Table.js";
 import { CardMedia } from "@material-ui/core";
 import calendario from '../../assets/img/CalendarVac2020.jpg'
+import VacunasForm from "../../components/VacunasForm/VacunasForm.js";
 
 
 
@@ -30,12 +29,17 @@ const styles = {
   },
   cardTitleWhite: {
     color: "#FFFFFF",
+    display: 'inline-block',
     marginTop: "0px",
     minHeight: "auto",
     fontWeight: "300",
     fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
     marginBottom: "3px",
     textDecoration: "none",
+  },
+  cardHeaderButton: {
+    float: 'right',
+    color: 'primary',
   },
 };
 
@@ -44,6 +48,10 @@ const useStyles = makeStyles(styles);
 export default function Vacunas() {
   const classes = useStyles();
   const [image, setImage] = React.useState(calendario);
+  const [showAgregarVacuna, setShowAgregarVacuna] = useState(false);
+  const OnClickAgregarControl = () => {
+    setShowAgregarVacuna(!showAgregarVacuna);
+  }
   return (
     <div>
     <React.Fragment>
@@ -161,6 +169,27 @@ export default function Vacunas() {
                   />
                 </GridItem>
               </GridContainer> */}
+            </CardBody>
+            </Card>
+            <br />
+            <Card>
+            <CardHeader color="primary" display='inline-block'>
+              <h4 className={classes.cardTitleWhite}>Vacunas aplicadas</h4>
+              <Button color= 'primary' size='sm' className={classes.cardHeaderButton} onClick={OnClickAgregarControl}>Boton feo</Button>
+            </CardHeader>
+            {showAgregarVacuna ? (
+            <div><br/><VacunasForm/> </div>
+          ) :null} 
+            <CardBody>
+              <Table
+                tableHeaderColor="primary"
+                tableHead={["Nombre", "Fecha", "Especialista", "Salary", "", ""]}
+                tableData={[
+                  ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738"],
+                  ["Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789"],
+                  ["Sage Rodriguez", "Netherlands", "Baileux", "$56,142"],
+                ]}
+              />
             </CardBody>
             <CardFooter>
               {/* <Button color="primary">Actualizar Perfil</Button> */}

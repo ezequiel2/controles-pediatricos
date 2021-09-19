@@ -3,16 +3,16 @@ import React, {useState} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 // core components
-import GridItem from "../../components/Grid/GridItem.js";
-import GridContainer from "../../components/Grid/GridContainer.js";
-import CustomInput from "../../components/CustomInput/CustomInput.js";
-import Button from "../../components/CustomButtons/Button.js";
-import Card from "../../components/Card/Card.js";
-import CardHeader from "../../components/Card/CardHeader.js";
-import CardAvatar from "../../components/Card/CardAvatar.js";
-import CardBody from "../../components/Card/CardBody.js";
-import CardFooter from "../../components/Card/CardFooter.js";
-import UploadButton from '../../components/UploadButton/UploadButton';
+import GridItem from "../Grid/GridItem.js";
+import GridContainer from "../Grid/GridContainer.js";
+import CustomInput from "../CustomInput/CustomInput.js";
+import Button from "../CustomButtons/Button.js";
+import Card from "../Card/Card.js";
+import CardHeader from "../Card/CardHeader.js";
+import CardAvatar from "../Card/CardAvatar.js";
+import CardBody from "../Card/CardBody.js";
+import CardFooter from "../Card/CardFooter.js";
+import UploadButton from '../UploadButton/UploadButton';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
@@ -47,7 +47,7 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-export default function ControlPedForm(props) {
+export default function VacunasForm(props) {
   const classes = useStyles();
   const [mostrar, setMostrar] = useState(true);
   const OnClickOcultar = () => {
@@ -63,7 +63,7 @@ export default function ControlPedForm(props) {
         <GridItem xs={12} sm={12} md={10}>
           <Card>
             <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Completa tu control pediatrico</h4>
+              <h4 className={classes.cardTitleWhite}>Completa los datos de la aplicacion</h4>
               {/* <p className={classes.cardCategoryWhite}>-------------------</p> */}
             </CardHeader>
             <CardBody>

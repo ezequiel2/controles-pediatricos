@@ -71,6 +71,12 @@ export default function TableList() {
     setShowEditarControl(!showEditarControl);
   }
 
+  const OnClickCargarCancelarControl = (e) => {
+    //setShowAgregarControl(!showAgregarControl);
+    alert('HOLA');
+    //console.log(e);
+  }
+
   return (
   <React.Fragment>
     {/* <Button>Desplegar</Button> */}
@@ -80,16 +86,13 @@ export default function TableList() {
         <Card>
         {/* //aca esta la mugre para arreglar */}
           <CardHeader color="primary" display='inline-block'>
-            {/* <div display='inline-block'> */}
               <h4 className={classes.cardTitleWhite}>Historial de Controles Pediatricos</h4> 
-              {/* <div>  */}
-                <Button color= 'primary' size='sm' className={classes.cardHeaderButton} onClick={OnClickAgregarControl}>Boton feo</Button>
-              {/* </div>  */}
-            {/* </div>        */}
+              <Button color= 'primary' size='sm' className={classes.cardHeaderButton} onClick={OnClickAgregarControl}>Boton feo</Button>
           </CardHeader> 
           {/* <Button onClick={OnClickAgregarControl}> Agregar control </Button>   */}
           {showAgregarControl ? (
-            <div><br/><PedControlForm /> </div>
+            <div><br/><PedControlForm
+               OnClickCargarCancelarControl = {OnClickCargarCancelarControl}/> </div>
           ) :null}               
           <CardBody>
             <Table
