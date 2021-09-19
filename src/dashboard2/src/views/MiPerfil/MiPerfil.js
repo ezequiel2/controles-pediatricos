@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -14,6 +14,7 @@ import CardBody from "../../components/Card/CardBody.js";
 import CardFooter from "../../components/Card/CardFooter.js";
 import UploadButton from '../../components/UploadButton/UploadButton';
 import Table from "../../components/Table/Table.js";
+import HijosForm from '../../components/HijosForm/HijosForm'
 
 import avatar from "../../assets/img/faces/marc.jpg";
 
@@ -27,6 +28,7 @@ const styles = {
   },
   cardTitleWhite: {
     color: "#FFFFFF",
+    display: 'inline-block',
     marginTop: "0px",
     minHeight: "auto",
     fontWeight: "300",
@@ -34,12 +36,20 @@ const styles = {
     marginBottom: "3px",
     textDecoration: "none",
   },
+  cardHeaderButton: {
+    float: 'right',
+    color: 'primary',
+  },
 };
 
 const useStyles = makeStyles(styles);
 
 export default function UserProfile() {
   const classes = useStyles();
+  const [showAgregarHijo, setShowAgregarHijo] = useState(false);
+  const OnClickAgregarHijo = () => {
+    setShowAgregarHijo(!showAgregarHijo);
+  }
   return (
     <div>
     <React.Fragment>
@@ -117,41 +127,7 @@ export default function UserProfile() {
                     }}
                   />
                 </GridItem>
-                {/* <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="Country"
-                    id="country"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                  />
-                </GridItem> */}
-                {/* <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="Postal Code"
-                    id="postal-code"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                  />
-                </GridItem> */}
               </GridContainer>
-              {/* <GridContainer>
-                <GridItem xs={12} sm={12} md={12}>
-                  <InputLabel style={{ color: "#AAAAAA" }}>About me</InputLabel>
-                  <CustomInput
-                    labelText="Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."
-                    id="about-me"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      multiline: true,
-                      rows: 5,
-                    }}
-                  />
-                </GridItem>
-              </GridContainer> */}
             </CardBody>
             <CardFooter>
               <Button color="primary">Actualizar Perfil</Button>
@@ -184,10 +160,11 @@ export default function UserProfile() {
         <Card>
           <CardHeader color="primary">
             <h4 className={classes.cardTitleWhite}>Mis Hij@s</h4>
-            {/* <p className={classes.cardCategoryWhite}>
-              Here is a subtitle for this table
-            </p> */}
+            <Button color= 'primary' size='sm' className={classes.cardHeaderButton} onClick={OnClickAgregarHijo}>Boton feo</Button>
           </CardHeader>
+          {showAgregarHijo ? (
+            <div><br/><HijosForm/> </div>
+          ) :null} 
           <CardBody>
             <Table
               tableHeaderColor="primary"
