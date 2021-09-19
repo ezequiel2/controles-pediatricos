@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
+import classNames from 'classnames'
 import InputLabel from "@material-ui/core/InputLabel";
 // core components
 import GridItem from "../../components/Grid/GridItem.js";
@@ -15,6 +16,9 @@ import CardFooter from "../../components/Card/CardFooter.js";
 import UploadButton from '../../components/UploadButton/UploadButton';
 import Table from "../../components/Table/Table.js";
 import HijosForm from '../../components/HijosForm/HijosForm'
+import { IconButton } from "@mui/material";
+import AddReactionIcon from '@mui/icons-material/AddReaction';
+import { white } from '@mui/material/colors';
 
 import avatar from "../../assets/img/faces/marc.jpg";
 
@@ -160,7 +164,16 @@ export default function UserProfile() {
         <Card>
           <CardHeader color="primary">
             <h4 className={classes.cardTitleWhite}>Mis Hij@s</h4>
-            <Button color= 'primary' size='sm' className={classes.cardHeaderButton} onClick={OnClickAgregarHijo}>Boton feo</Button>
+            {/* <Button color= 'primary' size='sm' className={classes.cardHeaderButton} onClick={OnClickAgregarHijo}>Nuevo Hijo</Button> */}
+            <IconButton 
+              className={classes.cardHeaderButton} 
+              onClick={OnClickAgregarHijo}>
+                <AddReactionIcon 
+                  className={classes.cardTitleWhite}
+                  //color='primary'
+                  //size='large'
+                  />
+            </IconButton>
           </CardHeader>
           {showAgregarHijo ? (
             <div><br/><HijosForm/> </div>
