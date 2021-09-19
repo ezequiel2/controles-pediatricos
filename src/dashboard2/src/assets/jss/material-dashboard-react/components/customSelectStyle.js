@@ -13,13 +13,14 @@ const customInputStyle = {
   //   },
   // },
   select: {
-    "&:hover:not($disabled):before,&:before": {
-      borderColor: grayColor[4] + " !important",
-      borderWidth: "1px !important",
-    },
-    "&:after": {
-      borderColor: primaryColor[0],
-    },
+    // "&:hover:not($disabled):before,&:before": {
+    //   borderColor: grayColor[4] + " !important",
+    //   borderWidth: "1px !important",
+    // },
+    // "&:after": {
+    //   borderColor: primaryColor[0],
+    // },
+    borderColor: primaryColor[0],
   },
   // underlineError: {
   //   "&:after": {

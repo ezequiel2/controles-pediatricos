@@ -69,7 +69,7 @@ export default function ControlPedForm(props) {
               <GridContainer>
                 <GridItem xs={12} sm={12} md={6}>
                   <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-                  <InputLabel id="demo-simple-select-standard-label">Hij@</InputLabel>
+                  {/* <InputLabel id="demo-simple-select-standard-label">Hij@</InputLabel> */}
                     <Select
                       labelId="demo-simple-select-standard-label"
                       id="demo-simple-select-standard"
@@ -83,11 +83,13 @@ export default function ControlPedForm(props) {
                       <MenuItem value={30}>Thirty</MenuItem>
                     </Select>
                   </FormControl>
-
-
+                </GridItem>
+                </GridContainer>
+                <GridContainer>
+                <GridItem GridItem xs={12} sm={12} md={6}>
                   <CustomInput
-                    labelText="Fecha"
-                    id='fecha'
+                    labelText="Nombre"
+                    id='nombre'
                     formControlProps={{
                       fullWidth: true,
                     }}
@@ -97,8 +99,8 @@ export default function ControlPedForm(props) {
               <GridContainer>
                 <GridItem xs={12} sm={12} md={3}>
                   <CustomInput
-                    labelText="Peso(Kg)"
-                    id="peso"
+                    labelText="Fecha de Nacimiento"
+                    id="fecha"
                     formControlProps={{
                       fullWidth: true,
                     }}
@@ -106,8 +108,8 @@ export default function ControlPedForm(props) {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={3}>
                   <CustomInput
-                    labelText="Altura(cm)"
-                    id="altura"
+                    labelText="Grupo Sanguineo"
+                    id="gruposanguineo"
                     formControlProps={{
                       fullWidth: true,
                     }}
@@ -115,8 +117,8 @@ export default function ControlPedForm(props) {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={3}>
                   <CustomInput
-                    labelText="Diametro cabeza"
-                    id="diametroCabeza"
+                    labelText="Factor"
+                    id="factor"
                     formControlProps={{
                       fullWidth: true,
                     }}
@@ -124,25 +126,35 @@ export default function ControlPedForm(props) {
                 </GridItem>
               </GridContainer>
               <GridContainer>
-                <GridItem xs={12} sm={12} md={3}>
+                <GridItem xs={12} sm={12} md={9}>
                   <CustomInput
-                    labelText="Medicamento Recetado"
-                    id="medicamentosRecetados"
+                    labelText="Alergias"
+                    id="alergias"
                     formControlProps={{
                       fullWidth: true,
                     }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
-                  <CustomInput
-                    labelText="Dosis"
-                    id="dosis"
-                    formControlProps={{
-                      fullWidth: true,
+                    inputProps={{
+                      multiline: true,
+                      rows: 3,
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
+                </GridContainer>
+                <GridContainer>
+                <GridItem xs={12} sm={12} md={9}>
+                  <CustomInput
+                    labelText="Enfermedades Cronicas"
+                    id="enfcronicas"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      multiline: true,
+                      rows: 5,
+                    }}
+                  />
+                </GridItem>
+                {/* <GridItem xs={12} sm={12} md={3}>
                   <CustomInput
                     labelText="Período"
                     id="periodo"
@@ -150,10 +162,10 @@ export default function ControlPedForm(props) {
                       fullWidth: true,
                     }}
                   />
-                </GridItem>
+                </GridItem> */}
               </GridContainer>
               <GridContainer>
-                <GridItem xs={12} sm={12} md={5}>
+                {/* <GridItem xs={12} sm={12} md={5}>
                   <CustomInput
                     labelText="Telefono"
                     id="telefono"
@@ -161,7 +173,7 @@ export default function ControlPedForm(props) {
                       fullWidth: true,
                     }}
                   />
-                </GridItem>
+                </GridItem> */}
                 {/* <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
                     labelText="Country"
@@ -196,7 +208,7 @@ export default function ControlPedForm(props) {
                     }}
                   />
                 </GridItem>
-              </GridContainer> */}´'
+              </GridContainer> */}
             </CardBody>
             <CardFooter className={classes.cardFooter}>
               <Button className={classes.formButton} color= 'primary' onClick={OnClickCargarCancelarControl}>Cargar</Button>
