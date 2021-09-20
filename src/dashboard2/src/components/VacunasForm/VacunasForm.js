@@ -53,7 +53,7 @@ export default function VacunasForm(props) {
   const OnClickOcultar = () => {
     setMostrar(!mostrar);
   }
-  const { OnClickCargarCancelarControl } = props;
+  const { OnClickCargarVacuna } = props;
 
   return (
     // <React.Fragment>
@@ -209,7 +209,7 @@ export default function VacunasForm(props) {
               </GridContainer> */}
             </CardBody>
             <CardFooter className={classes.cardFooter}>
-              <Button className={classes.formButton} color='primary' onClick={OnClickCargarCancelarControl}>Cargar</Button>
+              <Button className={classes.formButton} color='primary' onClick={OnClickCargarVacuna}>Cargar</Button>
               <Button className={classes.formButton} color='primary' onClick={OnClickOcultar}>Cancelar</Button>
             </CardFooter>
           </Card>

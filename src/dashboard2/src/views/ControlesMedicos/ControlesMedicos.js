@@ -8,7 +8,6 @@ import Table from "../../components/Table/Table.js";
 import Card from "../../components/Card/Card.js";
 import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
-import ControlPed from "../ControlPed/ControlPed.js";
 import reactDom from "react-dom";
 import Button from '../../components/CustomButtons/Button';
 import EditIconButton from "../../components/EditIconButton/EditIconButton.js";
@@ -88,7 +87,7 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-export default function TableList() {
+export default function ControlesMedicos() {
   const classes = useStyles();
   const [showAgregarControl, setShowAgregarControl] = useState(false);
   const [showEditarControl, setShowEditarControl] = useState(false);
@@ -110,7 +109,7 @@ export default function TableList() {
     <React.Fragment>
       {/* <Button>Desplegar</Button> */}
       {/* <ControlPed /> */}
-      <GridContainer>
+      <GridContainer autoFocus>
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             {/* //aca esta la mugre para arreglar */}
@@ -258,7 +257,7 @@ export default function TableList() {
       ) : null}
 
       {showEditarControl ? (
-        <div><PedControlForm autoFocus/> </div>
+        <div><PedControlForm /> </div>
       ) : null}
     </React.Fragment>
   );

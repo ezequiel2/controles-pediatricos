@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -54,23 +54,30 @@ export default function Vacunas() {
   const OnClickAgregarVacuna = () => {
     setShowAgregarVacuna(!showAgregarVacuna);
   }
+
+  const OnClickCargarVacuna = (e) => {
+    setShowAgregarVacuna(!showAgregarVacuna);
+    //alert('HOLA');
+    //console.log(e);
+  }
+
   return (
     <div>
-    <React.Fragment>
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={12}>
-          <Card>
-            <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Calendario de Vacunacion</h4>
-              {/* <p className={classes.cardCategoryWhite}>Completa tu perfil</p> */}
-            </CardHeader>
-            <CardBody>
-            <CardMedia
-              component="img"
-              sx={{ width: 151 }}
-              image= {image}
-            />
-              {/* <GridContainer> */}
+      <React.Fragment>
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={12}>
+            <Card>
+              <CardHeader color="primary">
+                <h4 className={classes.cardTitleWhite}>Calendario de Vacunacion</h4>
+                {/* <p className={classes.cardCategoryWhite}>Completa tu perfil</p> */}
+              </CardHeader>
+              <CardBody>
+                <CardMedia
+                  component="img"
+                  sx={{ width: 151 }}
+                  image={image}
+                />
+                {/* <GridContainer> */}
                 {/* <GridItem xs={12} sm={12} md={5}>
                   <CustomInput
                     labelText="DNI"
@@ -105,8 +112,8 @@ export default function Vacunas() {
                     }}
                   />
                 </GridItem> */}
-              {/* </GridContainer> */}
-              {/* <GridContainer>
+                {/* </GridContainer> */}
+                {/* <GridContainer>
                 <GridItem xs={12} sm={12} md={5}>
                   <CustomInput
                     labelText="Nombre"
@@ -154,8 +161,8 @@ export default function Vacunas() {
                     }}
                   />
                 </GridItem> */}
-              {/* </GridContainer> */}
-              {/* <GridContainer>
+                {/* </GridContainer> */}
+                {/* <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
                   <InputLabel style={{ color: "#AAAAAA" }}>About me</InputLabel>
                   <CustomInput
@@ -171,46 +178,43 @@ export default function Vacunas() {
                   />
                 </GridItem>
               </GridContainer> */}
-            </CardBody>
+              </CardBody>
             </Card>
             <br />
             <Card>
-            <CardHeader color="primary" display='inline-block'>
-              <h4 className={classes.cardTitleWhite}>Vacunas aplicadas</h4>
-              <IconButton
-                className={classes.cardHeaderButton}
-                onClick={OnClickAgregarVacuna}>
-                <AddToPhotosIcon
-                  className={classes.cardTitleWhite}
-                //color='primary'
-                //size='large'
+              <CardHeader color="primary" display='inline-block'>
+                <h4 className={classes.cardTitleWhite}>Vacunas aplicadas</h4>
+                <IconButton
+                  className={classes.cardHeaderButton}
+                  onClick={OnClickAgregarVacuna}>
+                  <AddToPhotosIcon
+                    className={classes.cardTitleWhite}
+                  //color='primary'
+                  //size='large'
+                  />
+                </IconButton>
+                {/* <Button color= 'primary' size='sm' className={classes.cardHeaderButton} onClick={OnClickAgregarControl}>Boton feo</Button> */}
+              </CardHeader>
+              <CardBody>
+                <Table
+                  tableHeaderColor="primary"
+                  tableHead={["Nombre", "Fecha", "Especialista", "Salary", "", ""]}
+                  tableData={[
+                    ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738"],
+                    ["Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789"],
+                    ["Sage Rodriguez", "Netherlands", "Baileux", "$56,142"],
+                  ]}
                 />
-              </IconButton>
-              {/* <Button color= 'primary' size='sm' className={classes.cardHeaderButton} onClick={OnClickAgregarControl}>Boton feo</Button> */}
-            </CardHeader>
-            {showAgregarVacuna ? (
-            <div><br/><VacunasForm/> </div>
-          ) :null} 
-            <CardBody>
-              <Table
-                tableHeaderColor="primary"
-                tableHead={["Nombre", "Fecha", "Especialista", "Salary", "", ""]}
-                tableData={[
-                  ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738"],
-                  ["Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789"],
-                  ["Sage Rodriguez", "Netherlands", "Baileux", "$56,142"],
-                ]}
-              />
-            </CardBody>
-            <CardFooter>
-              {/* <Button color="primary">Actualizar Perfil</Button> */}
-            </CardFooter>
-          </Card>
-        </GridItem>
-      <GridItem xs={12} sm={12} md={12}>
-        
-      </GridItem>
-      </GridContainer>
+              </CardBody>
+              <CardFooter>
+                {/* <Button color="primary">Actualizar Perfil</Button> */}
+              </CardFooter>
+            </Card>
+          </GridItem>
+        </GridContainer>
+        {showAgregarVacuna ? (
+          <div><br /><VacunasForm OnClickCargarVacuna={OnClickCargarVacuna}/> </div>
+        ) : null}
       </React.Fragment>
     </div>
   );
