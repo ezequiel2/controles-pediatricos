@@ -61,6 +61,12 @@ export default function Vacunas() {
     //console.log(e);
   }
 
+  const OnClickCancelarCargarVacuna = (e) => {
+    setShowAgregarVacuna(!showAgregarVacuna);
+    //alert('HOLA');
+    //console.log(e);
+  }
+
   return (
     <div>
       <React.Fragment>
@@ -213,7 +219,9 @@ export default function Vacunas() {
           </GridItem>
         </GridContainer>
         {showAgregarVacuna ? (
-          <div><br /><VacunasForm OnClickCargarVacuna={OnClickCargarVacuna}/> </div>
+          <div><br /><VacunasForm
+            OnClickCargarVacuna={OnClickCargarVacuna}
+            OnClickCancelarCargarVacuna={OnClickCancelarCargarVacuna} /> </div>
         ) : null}
       </React.Fragment>
     </div>
