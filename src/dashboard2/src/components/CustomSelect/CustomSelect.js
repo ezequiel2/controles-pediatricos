@@ -94,9 +94,9 @@ export default function CustomSelect(props) {
         // {...inputProps}
         // inputProps={newInputProps}
       >
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-        <MenuItem value={30}>Thirty</MenuItem>
+        <MenuItem value={10} className={classes.labelRoot + labelClasses} color='primary'>Ten</MenuItem>
+        <MenuItem value={20} className={classes.labelRoot + labelClasses}>Twenty</MenuItem>
+        <MenuItem value={30} className={classes.labelRoot + labelClasses}>Thirty</MenuItem>
       </Select>
       {/* {error ? (
         <Clear className={classes.feedback + " " + classes.labelRootError} />

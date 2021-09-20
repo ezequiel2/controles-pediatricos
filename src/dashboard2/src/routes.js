@@ -35,13 +35,13 @@ import Icons from "./views/Icons/Icons.js";
 import Vacunas from "./views/Vacunas/Vacunas.js";
 
 const dashboardRoutes = [
-  {
-    path: "/dashboard",
-    name: "Dashboard",
-    icon: Dashboard, 
-    component: DashboardPage,
-    layout: "/admin",
-  },
+  // {
+  //   path: "/dashboard",
+  //   name: "Dashboard",
+  //   icon: Dashboard, 
+  //   component: DashboardPage,
+  //   layout: "/admin",
+  // },
   {
     path: "/miperfil",
     name: "Mi perfil",
