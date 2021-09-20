@@ -73,14 +73,29 @@ const styles = {
   },
 };
 
+const tablaHijos = [
+
+  { nombre: 'Dakota Rice', fechaNacimiento: '12/06/1982', grupoSanguineo: 'AB', factor: '+' },
+  { nombre: 'Minerva Hooper', fechaNacimiento: '12/06/1982', grupoSanguineo: 'AB', factor: '+' },
+  { nombre: 'Dakota Rice', fechaNacimiento: '12/06/1982', grupoSanguineo: 'AB', factor: '+' },
+
+]
+
+
+
+
 const useStyles = makeStyles(styles);
 
 export default function UserProfile() {
   const classes = useStyles();
+
   const [showAgregarHijo, setShowAgregarHijo] = useState(false);
   const OnClickAgregarHijo = () => {
     setShowAgregarHijo(!showAgregarHijo);
   }
+
+  const [hijos, setHijos] = useState(tablaHijos);
+
   return (
     <div>
       <React.Fragment>
@@ -209,125 +224,23 @@ export default function UserProfile() {
                 <Table
                   tableHeaderColor="primary"
                   tableHead={["Nombre", "Fecha de Nacimiento", "Grupo Sanguineo", "Factor", "", "", ""]}
-                  tableData={[
-                    ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738",
-                      <IconButton
-                        className={classes.tableActionButton}
-                      //onClick={OnClickAgregarControl}
-                      >
-                        <RemoveRedEye
-                          className={
-                            classes.tableActionButtonIcon + " " + classes.edit
-                          }
-                        // className={classes.edit}
-                        //color='primary'
-                        //size='large'
-                        />
+                  tableData={
+                    hijos.map((hijo) => (
+                      [hijo.nombre, 
+                      hijo.fechaNacimiento,
+                      hijo.grupoSanguineo,
+                      hijo.factor,
+                      <IconButton className={classes.tableActionButton}>
+                        <RemoveRedEye className={classes.tableActionButtonIcon + " " + classes.edit} />
                       </IconButton>,
-                      <IconButton
-                        className={classes.tableActionButton}
-                      // onClick={OnClickAgregarControl}
-                      >
-                        <EditIcon
-                          className={
-                            classes.tableActionButtonIcon + " " + classes.edit
-                          }
-                        //color='primary'
-                        //size='large'
-                        />
+                      <IconButton className={classes.tableActionButton}>
+                        <EditIcon className={classes.tableActionButtonIcon + " " + classes.edit} />
                       </IconButton>,
-                      <IconButton
-                        className={classes.tableActionButton}
-                      //onClick={OnClickAgregarControl}
-                      >
-                        <CloseIcon
-                          className={
-                            classes.tableActionButtonIcon + " " + classes.close
-                          }
-                        //color='primary'
-                        //size='large'
-                        />
-                      </IconButton>],
-                    ["Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789",
-                      <IconButton
-                        className={classes.tableActionButton}
-                      //onClick={OnClickAgregarControl}
-                      >
-                        <RemoveRedEye
-                          className={
-                            classes.tableActionButtonIcon + " " + classes.edit
-                          }
-                        // className={classes.edit}
-                        //color='primary'
-                        //size='large'
-                        />
-                      </IconButton>,
-                      <IconButton
-                        className={classes.tableActionButton}
-                      //onClick={OnClickAgregarControl}
-                      >
-                        <EditIcon
-                          className={
-                            classes.tableActionButtonIcon + " " + classes.edit
-                          }
-                        //color='primary'
-                        //size='large'
-                        />
-                      </IconButton>,
-                      <IconButton
-                        className={classes.tableActionButton}
-                      //onClick={OnClickAgregarControl}
-                      >
-                        <CloseIcon
-                          className={
-                            classes.tableActionButtonIcon + " " + classes.close
-                          }
-                        //color='primary'
-                        //size='large'
-                        />
-                      </IconButton>],
-                    ["Sage Rodriguez", "Netherlands", "Baileux", "$56,142",
-                      <IconButton
-                        className={classes.tableActionButton}
-                      //onClick={OnClickAgregarControl}
-                      >
-                        <RemoveRedEye
-                          className={
-                            classes.tableActionButtonIcon + " " + classes.edit
-                          }
-                        // className={classes.edit}
-                        //color='primary'
-                        //size='large'
-                        />
-                      </IconButton>,
-                      <IconButton
-                        className={classes.tableActionButton}
-                      //onClick={OnClickAgregarControl}
-                      >
-                        <EditIcon
-                          className={
-                            classes.tableActionButtonIcon + " " + classes.edit
-                          }
-                        //color='primary'
-                        //size='large'
-                        />
-                      </IconButton>,
-                      <IconButton
-                        className={classes.tableActionButton}
-                      //onClick={OnClickAgregarControl}
-                      >
-                        <CloseIcon
-                          className={
-                            classes.tableActionButtonIcon + " " + classes.close
-                          }
-                        //color='primary'
-                        //size='large'
-                        />
-                      </IconButton>],
-                    // ["Philip Chaney", "Korea, South", "Overland Park", "$38,735"],
-                    // ["Doris Greene", "Malawi", "Feldkirchen in Kärnten", "$63,542"],
-                    // ["Mason Porter", "Chile", "Gloucester", "$78,615"],
-                  ]}
+                      <IconButton className={classes.tableActionButton}>
+                        <CloseIcon className={classes.tableActionButtonIcon + " " + classes.close} />
+                      </IconButton>
+                      ]))
+                  }
                 />
               </CardBody>
             </Card>
