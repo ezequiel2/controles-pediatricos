@@ -101,8 +101,8 @@ export default function TableList() {
   }
 
   const OnClickCargarCancelarControl = (e) => {
-    //setShowAgregarControl(!showAgregarControl);
-    alert('HOLA');
+    setShowAgregarControl(!showAgregarControl);
+    //alert('HOLA');
     //console.log(e);
   }
 
@@ -128,10 +128,10 @@ export default function TableList() {
               </IconButton>
             </CardHeader>
             {/* <Button onClick={OnClickAgregarControl}> Agregar control </Button>   */}
-            {showAgregarControl ? (
+            {/* {showAgregarControl ? (
               <div><br /><PedControlForm
                 OnClickCargarCancelarControl={OnClickCargarCancelarControl} /> </div>
-            ) : null}
+            ) : null} */}
             <CardBody>
               <Table
                 tableHeaderColor="primary"
@@ -252,10 +252,13 @@ export default function TableList() {
           </Card>
         </GridItem>
       </GridContainer>
-
+      {showAgregarControl ? (
+        <div><br /><PedControlForm
+                OnClickCargarCancelarControl={OnClickCargarCancelarControl} /> </div>
+      ) : null}
 
       {showEditarControl ? (
-        <div><PedControlForm /> </div>
+        <div><PedControlForm autoFocus/> </div>
       ) : null}
     </React.Fragment>
   );

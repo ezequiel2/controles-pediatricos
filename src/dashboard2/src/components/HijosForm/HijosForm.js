@@ -68,8 +68,8 @@ export default function ControlPedForm(props) {
             <CardBody>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={6}>
-                  <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-                  {/* <InputLabel id="demo-simple-select-standard-label">Hij@</InputLabel> */}
+                  {/* <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                  {/* <InputLabel id="demo-simple-select-standard-label">Hij@</InputLabel>
                     <Select
                       labelId="demo-simple-select-standard-label"
                       id="demo-simple-select-standard"
@@ -82,7 +82,7 @@ export default function ControlPedForm(props) {
                       <MenuItem value={20}>Twenty</MenuItem>
                       <MenuItem value={30}>Thirty</MenuItem>
                     </Select>
-                  </FormControl>
+                  </FormControl> */}
                 </GridItem>
                 </GridContainer>
                 <GridContainer>

@@ -15,6 +15,8 @@ import Table from "../../components/Table/Table.js";
 import { CardMedia } from "@material-ui/core";
 import calendario from '../../assets/img/CalendarVac2020.jpg'
 import VacunasForm from "../../components/VacunasForm/VacunasForm.js";
+import IconButton from "@material-ui/core/IconButton";
+import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
 
 
 
@@ -49,7 +51,7 @@ export default function Vacunas() {
   const classes = useStyles();
   const [image, setImage] = React.useState(calendario);
   const [showAgregarVacuna, setShowAgregarVacuna] = useState(false);
-  const OnClickAgregarControl = () => {
+  const OnClickAgregarVacuna = () => {
     setShowAgregarVacuna(!showAgregarVacuna);
   }
   return (
@@ -175,7 +177,16 @@ export default function Vacunas() {
             <Card>
             <CardHeader color="primary" display='inline-block'>
               <h4 className={classes.cardTitleWhite}>Vacunas aplicadas</h4>
-              <Button color= 'primary' size='sm' className={classes.cardHeaderButton} onClick={OnClickAgregarControl}>Boton feo</Button>
+              <IconButton
+                className={classes.cardHeaderButton}
+                onClick={OnClickAgregarVacuna}>
+                <AddToPhotosIcon
+                  className={classes.cardTitleWhite}
+                //color='primary'
+                //size='large'
+                />
+              </IconButton>
+              {/* <Button color= 'primary' size='sm' className={classes.cardHeaderButton} onClick={OnClickAgregarControl}>Boton feo</Button> */}
             </CardHeader>
             {showAgregarVacuna ? (
             <div><br/><VacunasForm/> </div>

@@ -18,7 +18,7 @@ import Search from "@material-ui/icons/Search";
 // core components
 import CustomInput from "../../components/CustomInput/CustomInput.js";
 import Button from "../../components/CustomButtons/Button.js";
-
+import { Link } from "react-router-dom";
 import styles from "../../assets/jss/material-dashboard-react/components/headerLinksStyle.js";
 
 const useStyles = makeStyles(styles);
@@ -192,6 +192,7 @@ export default function AdminNavbarLinks() {
             >
               <Paper>
                 <ClickAwayListener onClickAway={handleCloseProfile}>
+                <Link to='/'> 
                   <MenuList role="menu">
                     {/* <MenuItem
                       onClick={handleCloseProfile}
@@ -213,6 +214,7 @@ export default function AdminNavbarLinks() {
                       Logout
                     </MenuItem>
                   </MenuList>
+                  </Link>
                 </ClickAwayListener>
               </Paper>
             </Grow>

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -53,7 +53,7 @@ export default function VacunasForm(props) {
   const OnClickOcultar = () => {
     setMostrar(!mostrar);
   }
-  const {OnClickCargarCancelarControl} = props;
+  const { OnClickCargarCancelarControl } = props;
 
   return (
     // <React.Fragment>
@@ -68,8 +68,8 @@ export default function VacunasForm(props) {
             </CardHeader>
             <CardBody>
               <GridContainer>
-                <GridItem xs={12} sm={12} md={6}>
-                  <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                <GridItem xs={12} sm={12} md={3}>
+                  {/* <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
                   <InputLabel id="demo-simple-select-standard-label">Hij@</InputLabel>
                     <Select
                       labelId="demo-simple-select-standard-label"
@@ -83,7 +83,7 @@ export default function VacunasForm(props) {
                       <MenuItem value={20}>Twenty</MenuItem>
                       <MenuItem value={30}>Thirty</MenuItem>
                     </Select>
-                  </FormControl>
+                  </FormControl> */}
 
 
                   <CustomInput
@@ -94,11 +94,20 @@ export default function VacunasForm(props) {
                     }}
                   />
                 </GridItem>
+                <GridItem xs={12} sm={12} md={6}>
+                  <CustomInput
+                    labelText="Lugar de Aplicacion"
+                    id='lugar'
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                  />
+                </GridItem>
               </GridContainer>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={3}>
                   <CustomInput
-                    labelText="Peso(Kg)"
+                    labelText="COMBO VACUNA"
                     id="peso"
                     formControlProps={{
                       fullWidth: true,
@@ -107,14 +116,14 @@ export default function VacunasForm(props) {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={3}>
                   <CustomInput
-                    labelText="Altura(cm)"
+                    labelText="COMBO TIPO DOSIS"
                     id="altura"
                     formControlProps={{
                       fullWidth: true,
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
+                {/* <GridItem xs={12} sm={12} md={3}>
                   <CustomInput
                     labelText="Diametro cabeza"
                     id="diametroCabeza"
@@ -122,9 +131,9 @@ export default function VacunasForm(props) {
                       fullWidth: true,
                     }}
                   />
-                </GridItem>
+                </GridItem> */}
               </GridContainer>
-              <GridContainer>
+              {/* <GridContainer>
                 <GridItem xs={12} sm={12} md={3}>
                   <CustomInput
                     labelText="Medicamento Recetado"
@@ -143,7 +152,7 @@ export default function VacunasForm(props) {
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
+                {/* <GridItem xs={12} sm={12} md={3}>
                   <CustomInput
                     labelText="Período"
                     id="periodo"
@@ -152,8 +161,8 @@ export default function VacunasForm(props) {
                     }}
                   />
                 </GridItem>
-              </GridContainer>
-              <GridContainer>
+              </GridContainer> */}
+              {/* <GridContainer>
                 <GridItem xs={12} sm={12} md={5}>
                   <CustomInput
                     labelText="Telefono"
@@ -162,7 +171,7 @@ export default function VacunasForm(props) {
                       fullWidth: true,
                     }}
                   />
-                </GridItem>
+                </GridItem> */}
                 {/* <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
                     labelText="Country"
@@ -181,7 +190,7 @@ export default function VacunasForm(props) {
                     }}
                   />
                 </GridItem> */}
-              </GridContainer>
+              {/* </GridContainer> */}
               {/* <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
                   <InputLabel style={{ color: "#AAAAAA" }}>About me</InputLabel>
@@ -197,11 +206,11 @@ export default function VacunasForm(props) {
                     }}
                   />
                 </GridItem>
-              </GridContainer> */}´'
+              </GridContainer> */}
             </CardBody>
             <CardFooter className={classes.cardFooter}>
-              <Button className={classes.formButton} color= 'primary' onClick={OnClickCargarCancelarControl}>Cargar</Button>
-              <Button className={classes.formButton} color= 'primary' onClick={OnClickOcultar}>Cancelar</Button>
+              <Button className={classes.formButton} color='primary' onClick={OnClickCargarCancelarControl}>Cargar</Button>
+              <Button className={classes.formButton} color='primary' onClick={OnClickOcultar}>Cancelar</Button>
             </CardFooter>
           </Card>
         </GridItem>
@@ -228,9 +237,9 @@ export default function VacunasForm(props) {
           </Card>
         </GridItem> */}
       </GridContainer>
-    {/* ) : null}
+      {/* ) : null}
     </React.Fragment> */}
     </div>
   );
-  
+
 }
