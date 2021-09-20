@@ -81,9 +81,6 @@ const tablaHijos = [
 
 ]
 
-
-
-
 const useStyles = makeStyles(styles);
 
 export default function UserProfile() {
