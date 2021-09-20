@@ -90,6 +90,17 @@ export default function UserProfile() {
   const OnClickAgregarHijo = () => {
     setShowAgregarHijo(!showAgregarHijo);
   }
+  const OnClickCargarHijo = (e) => {
+    setShowAgregarHijo(!showAgregarHijo);
+    //alert('HOLA');
+    //console.log(e);
+  }
+
+  const OnClickCancelarCargarHijo = (e) => {
+    setShowAgregarHijo(!showAgregarHijo);
+    //alert('HOLA');
+    //console.log(e);
+  }
 
   const [hijos, setHijos] = useState(tablaHijos);
 
@@ -214,16 +225,13 @@ export default function UserProfile() {
                   />
                 </IconButton>
               </CardHeader>
-              {showAgregarHijo ? (
-                <div><br /><HijosForm /> </div>
-              ) : null}
               <CardBody>
                 <Table
                   tableHeaderColor="primary"
                   tableHead={["Nombre", "Fecha de Nacimiento", "Grupo Sanguineo", "Factor", "", "", ""]}
                   tableData={
                     hijos.map((hijo) => (
-                      [hijo.nombre, 
+                      [hijo.nombre,
                       hijo.fechaNacimiento,
                       hijo.grupoSanguineo,
                       hijo.factor,
@@ -243,6 +251,12 @@ export default function UserProfile() {
             </Card>
           </GridItem>
         </GridContainer>
+        {showAgregarHijo ? (
+          <div><br /><HijosForm
+            OnClickCargarHijo={OnClickCargarHijo}
+            OnClickCancelarCargarHijo={OnClickCancelarCargarHijo} />
+          </div>
+        ) : null}
       </React.Fragment>
     </div>
   );
