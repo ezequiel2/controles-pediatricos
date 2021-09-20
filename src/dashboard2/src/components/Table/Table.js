@@ -26,6 +26,7 @@ export default function CustomTable(props) {
                   <TableCell
                     className={classes.tableCell + " " + classes.tableHeadCell}
                     key={key}
+                    align="left"
                   >
                     {prop}
                   </TableCell>

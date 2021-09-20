@@ -84,6 +84,13 @@ const styles = {
 };
 
 
+const tablaControlesMed = [
+  { nombre: 'Dakota Rice', fecha: '12/06/2021', profesional: 'Abdul Jabbar'},
+  { nombre: 'Minerva Hooper', fecha: '12/07/2021', profesional: 'Cosme Fulanito'},
+  { nombre: 'Dakota Rice', fecha: '12/08/2021', profesional: 'Woodrow Wilson'},
+
+]
+
 
 const useStyles = makeStyles(styles);
 
@@ -104,6 +111,8 @@ export default function ControlesMedicos() {
     //alert('HOLA');
     //console.log(e);
   }
+
+  const [controlesMed, setControlesMed] = useState(tablaControlesMed);
 
   return (
     <React.Fragment>
@@ -135,117 +144,22 @@ export default function ControlesMedicos() {
               <Table
                 tableHeaderColor="primary"
                 tableHead={["Nombre", "Fecha", "Profesional", "", "", ""]}
-                tableData={[
-                  ["Dakota Rice", "Niger", "Oud-Turnhout",
-                    <IconButton
-                      className={classes.tableActionButton}
-                    //onClick={OnClickAgregarControl}
-                    >
-                      <RemoveRedEye
-                        className={
-                          classes.tableActionButtonIcon + " " + classes.edit
-                        }
-                      // className={classes.edit}
-                      //color='primary'
-                      //size='large'
-                      />
-                    </IconButton>,
-                    <IconButton
-                      className={classes.tableActionButton}
-                      onClick={OnClickAgregarControl}>
-                      <EditIcon
-                        className={
-                          classes.tableActionButtonIcon + " " + classes.edit
-                        }
-                      //color='primary'
-                      //size='large'
-                      />
-                    </IconButton>,
-                    <IconButton
-                      className={classes.tableActionButton}
-                    //onClick={OnClickAgregarControl}
-                    >
-                      <CloseIcon
-                        className={
-                          classes.tableActionButtonIcon + " " + classes.close
-                        }
-                      //color='primary'
-                      //size='large'
-                      />
-                    </IconButton>],
-                  ["Minerva Hooper", "Curaçao", "Sinaai-Waas",
-                    <IconButton
-                      className={classes.tableActionButton}
-                    //onClick={OnClickAgregarControl}
-                    >
-                      <RemoveRedEye
-                        className={
-                          classes.tableActionButtonIcon + " " + classes.edit
-                        }
-                      //color='primary'
-                      //size='large'
-                      />
-                    </IconButton>,
-                    <IconButton
-                      className={classes.tableActionButton}
-                      onClick={OnClickAgregarControl}>
-                      <EditIcon
-                        className={
-                          classes.tableActionButtonIcon + " " + classes.edit
-                        }
-                      //color='primary'
-                      //size='large'
-                      />
-                    </IconButton>,
-                    <IconButton
-                      className={classes.tableActionButton}
-                    //onClick={OnClickAgregarControl}
-                    >
-                      <CloseIcon
-                        className={
-                          classes.tableActionButtonIcon + " " + classes.close
-                        }
-                      //color='primary'
-                      //size='large'
-                      />
-                    </IconButton>],
-                  ["Sage Rodriguez", "Netherlands", "Baileux",
-                    <IconButton
-                      className={classes.tableActionButton}
-                    //onClick={OnClickAgregarControl}
-                    >
-                      <RemoveRedEye
-                        className={
-                          classes.tableActionButtonIcon + " " + classes.edit
-                        }
-                      //color='primary'
-                      //size='large'
-                      />
-                    </IconButton>,
-                    <IconButton
-                      className={classes.tableActionButton}
-                      onClick={OnClickAgregarControl}>
-                      <EditIcon
-                        className={
-                          classes.tableActionButtonIcon + " " + classes.edit
-                        }
-                      //color='primary'
-                      //size='large'
-                      />
-                    </IconButton>,
-                    <IconButton
-                      className={classes.tableActionButton}
-                    //onClick={OnClickAgregarControl}
-                    >
-                      <CloseIcon
-                        className={
-                          classes.tableActionButtonIcon + " " + classes.close
-                        }
-                      //color='primary'
-                      //size='large'
-                      />
-                    </IconButton>],
-                ]}
+                tableData={
+                  controlesMed.map((controlMed) => (
+                      [controlMed.nombre, 
+                      controlMed.fecha,
+                      controlMed.profesional,
+                      <IconButton className={classes.tableActionButton}>
+                        <RemoveRedEye className={classes.tableActionButtonIcon + " " + classes.edit} />
+                      </IconButton>,
+                      <IconButton className={classes.tableActionButton}>
+                        <EditIcon className={classes.tableActionButtonIcon + " " + classes.edit} />
+                      </IconButton>,
+                      <IconButton className={classes.tableActionButton}>
+                        <CloseIcon className={classes.tableActionButtonIcon + " " + classes.close} />
+                      </IconButton>
+                      ]))
+                }
               />
             </CardBody>
           </Card>

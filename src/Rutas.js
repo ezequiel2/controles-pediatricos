@@ -15,7 +15,7 @@ const Rutas = () => {
             <Route exact path='/sign-up' component={SignUp}/>
             <Route exact path='/forgot-password' component={ForgotPassword}/>
             <Route path="/admin" component={Admin} />
-            <Redirect from="/admin" to="/admin/dashboard" />
+            <Redirect from="/admin" to="/admin/miperfil" />
         </Switch>
     )
 }
