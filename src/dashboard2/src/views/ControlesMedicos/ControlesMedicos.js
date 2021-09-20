@@ -106,11 +106,18 @@ export default function ControlesMedicos() {
     setShowEditarControl(!showEditarControl);
   }
 
-  const OnClickCargarCancelarControl = (e) => {
+  const OnClickCargarControl = (e) => {
     setShowAgregarControl(!showAgregarControl);
     //alert('HOLA');
     //console.log(e);
   }
+
+  const OnClickCancelarCargarControl = (e) => {
+    setShowAgregarControl(!showAgregarControl);
+    //alert('HOLA');
+    //console.log(e);
+  }
+  
 
   const [controlesMed, setControlesMed] = useState(tablaControlesMed);
 
@@ -166,8 +173,9 @@ export default function ControlesMedicos() {
         </GridItem>
       </GridContainer>
       {showAgregarControl ? (
-        <div><br /><PedControlForm
-                OnClickCargarCancelarControl={OnClickCargarCancelarControl} /> </div>
+        <div><br /><PedControlForm 
+                OnClickCargarControl={OnClickCargarControl}
+                OnClickCancelarCargarControl = {OnClickCancelarCargarControl} /> </div>
       ) : null}
 
       {showEditarControl ? (

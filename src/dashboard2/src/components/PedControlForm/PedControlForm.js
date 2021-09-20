@@ -55,7 +55,7 @@ export default function ControlPedForm(props) {
   const OnClickOcultar = () => {
     setMostrar(!mostrar);
   }
-  const {OnClickCargarCancelarControl} = props;
+  const {OnClickCargarControl, OnClickCancelarCargarControl} = props;
 
   return (
     // <React.Fragment>
@@ -225,8 +225,8 @@ export default function ControlPedForm(props) {
             </CardBody>
             <CardFooter className={classes.cardFooter}>
               <br/>
-              <Button className={classes.formButton} color= 'primary' onClick={OnClickCargarCancelarControl}>Cargar</Button>
-              <Button className={classes.formButton} color= 'primary' onClick={OnClickOcultar}>Cancelar</Button>
+              <Button className={classes.formButton} color= 'primary' onClick={OnClickCargarControl}>Cargar</Button>
+              <Button className={classes.formButton} color= 'primary' onClick={OnClickCancelarCargarControl}>Cancelar</Button>
             </CardFooter>
           </Card>
         </GridItem>
