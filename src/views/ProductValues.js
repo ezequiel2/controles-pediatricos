@@ -58,21 +58,22 @@ function ProductValues(props) {
         <Grid container spacing={5}>
           <Grid item xs={12} md={4}>
             <div>
-              {/* <div className={classes.item}> */}
-              <img
-                className={classes.image}
-                src="/images/pediatrician.svg"
-                alt="pediatra"
-              />
-              {/* </div> */}
-              <Typography variant="h6" className={classes.title}>
-                Controles Pediatricos
-              </Typography>
-              <Typography variant="h5" align="center">
-                {'Te acompañamos en el cuidado de la salud de tu hij@ brindandote un '}
-                {'espacio para registrar los controles medicos y poder llevar la historia clinica '}
-                {'con vos todo el tiempo.'}
-              </Typography>
+              <div className={classes.item}>
+                <img
+                  className={classes.image}
+                  src="/images/pediatrician.svg"
+                  alt="pediatra"
+                />
+                {/* </div> */}
+                <Typography variant="h6" className={classes.title}>
+                  Controles Pediatricos
+                </Typography>
+                <Typography variant="h5" align="center">
+                  {'Te acompañamos en el cuidado de la salud de tu hij@ brindandote un '}
+                  {'espacio para registrar los controles medicos y poder llevar la historia clinica '}
+                  {'con vos todo el tiempo.'}
+                </Typography>
+              </div>
             </div>
           </Grid>
           <Grid item xs={12} md={4}>
@@ -83,7 +84,7 @@ function ProductValues(props) {
                 alt="graph"
               />
               <Typography variant="h6" className={classes.title}>
-              Calendario de Vacunacion
+                Calendario de Vacunacion
               </Typography>
               <Typography variant="h5" align="center">
                 {'Con nosotros te será mas fácil recordar aquellas fechas importantes para tus '}
