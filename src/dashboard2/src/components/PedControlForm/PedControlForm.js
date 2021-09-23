@@ -19,6 +19,7 @@ import Select from '@mui/material/Select';
 import avatar from "../../assets/img/faces/marc.jpg";
 import CustomSelect from '../CustomSelect/CustomSelect';
 import PruebaSelect from '../PruebaSelect';
+import { Input } from "@material-ui/core";
 
 const styles = {
   cardCategoryWhite: {
@@ -55,7 +56,9 @@ export default function ControlPedForm(props) {
   const OnClickOcultar = () => {
     setMostrar(!mostrar);
   }
-  const {OnClickCargarControl, OnClickCancelarCargarControl} = props;
+  
+  const {OnClickCargarControl, OnClickCancelarCargarControl, datos} = props;
+  const datos2 = props.datos;
 
   return (
     // <React.Fragment>
@@ -73,14 +76,14 @@ export default function ControlPedForm(props) {
                 <GridItem xs={12} sm={12} md={3}>
                   {/* <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}> */}
                   {/* <InputLabel id="demo-simple-select-standard-label">Hij@</InputLabel> */}
-                    <CustomSelect
+                    {/* <CustomSelect
                       labelText="Hijo"
                       id='Hijo'
                       formControlProps={{
                        fullWidth: true,
                      }}
                       
-                    />
+                    /> */}
                     <PruebaSelect/>
                   {/* </FormControl> */}
 
@@ -89,13 +92,18 @@ export default function ControlPedForm(props) {
               </GridContainer>
               <GridContainer>
                 <GridItem GridItem xs={12} sm={12} md={3}>
-                  <CustomInput
+                  {/* <CustomInput
                     labelText="Fecha"
                     id='fecha'
                     formControlProps={{
                       fullWidth: true,
                     }}
-                  />
+                    value={datos.fecha}                    
+                  ></CustomInput> */}
+                  <Input
+                    labelText="Fecha"
+                    id='fecha'
+                    value={datos2.fecha} />
                 </GridItem>
                 <GridItem GridItem xs={12} sm={12} md={4}>
                   <CustomInput
