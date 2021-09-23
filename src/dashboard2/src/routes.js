@@ -33,6 +33,7 @@ import ControlesMedicos from './views/ControlesMedicos/ControlesMedicos';
 import Typography from "./views/Typography/Typography.js";
 import Icons from "./views/Icons/Icons.js";
 import Vacunas from "./views/Vacunas/Vacunas.js";
+import Percentiles from "./views/Percentiles/Percentiles.js"
 
 const dashboardRoutes = [
   // {
@@ -70,7 +71,7 @@ const dashboardRoutes = [
     name: "Percentiles",
     //rtlName: "إخطارات",
     icon: Notifications,
-    component: Vacunas,
+    component: Percentiles,
     layout: "/admin",
   },
 ];
