@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
@@ -12,7 +12,7 @@ import reactDom from "react-dom";
 import Button from '../../components/CustomButtons/Button';
 import EditIconButton from "../../components/EditIconButton/EditIconButton.js";
 import DeleteIconButton from "../../components/DeleteIconButton/DeleteIconButton.js";
-import PedControlForm from "../../components/PedControlForm/PedControlForm.js";
+import PedControlForm2 from "../../components/PedControlForm2/PedControlForm2.js";
 import VisualIconButton from "../../components/VisualIconButton/VisualIconButton.js";
 import IconButton from "@material-ui/core/IconButton";
 import RemoveRedEye from "@material-ui/icons/RemoveRedEye";
@@ -91,6 +91,7 @@ const tablaControlesMed = [
 
 ]
 
+const datos = {nombre: 'Juan', fecha:'17/05/2021'};
 
 const useStyles = makeStyles(styles);
 
@@ -98,12 +99,17 @@ export default function ControlesMedicos() {
   const classes = useStyles();
   const [showAgregarControl, setShowAgregarControl] = useState(false);
   const [showEditarControl, setShowEditarControl] = useState(false);
+  //const formulario = useRef(null);
 
   const OnClickAgregarControl = () => {
     setShowAgregarControl(!showAgregarControl);
+    //formulario.current.scrollIntoView();
+    //this.PedControlForm.current.focus();
   }
   const OnClickEditarControl = () => {
-    setShowEditarControl(!showEditarControl);
+    //setShowEditarControl(!showEditarControl);
+    setShowAgregarControl(!showAgregarControl);
+    alert(datos.nombre)
   }
 
   const OnClickCargarControl = (e) => {
@@ -156,10 +162,10 @@ export default function ControlesMedicos() {
                       [controlMed.nombre, 
                       controlMed.fecha,
                       controlMed.profesional,
-                      <IconButton className={classes.tableActionButton}>
+                      <IconButton className={classes.tableActionButton} onClick={OnClickEditarControl}>
                         <RemoveRedEye className={classes.tableActionButtonIcon + " " + classes.edit} />
                       </IconButton>,
-                      <IconButton className={classes.tableActionButton}>
+                      <IconButton className={classes.tableActionButton} onClick={OnClickEditarControl}>
                         <EditIcon className={classes.tableActionButtonIcon + " " + classes.edit} />
                       </IconButton>,
                       <IconButton className={classes.tableActionButton}>
@@ -173,14 +179,17 @@ export default function ControlesMedicos() {
         </GridItem>
       </GridContainer>
       {showAgregarControl ? (
-        <div><br /><PedControlForm 
+        <div><br /><PedControlForm2 
                 OnClickCargarControl={OnClickCargarControl}
-                OnClickCancelarCargarControl = {OnClickCancelarCargarControl} /> </div>
+                OnClickCancelarCargarControl = {OnClickCancelarCargarControl}
+                datos /> </div>
       ) : null}
 
-      {showEditarControl ? (
-        <div><PedControlForm /> </div>
-      ) : null}
+       {showEditarControl ? (
+        <div ><PedControlForm2 OnClickCargarControl={""}
+                              OnClickCancelarCargarControl={""}
+                              datos={datos}/> </div>
+      ) : null} 
     </React.Fragment>
   );
 }
