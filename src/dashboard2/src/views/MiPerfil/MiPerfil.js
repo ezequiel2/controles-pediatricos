@@ -15,7 +15,7 @@ import CardBody from "../../components/Card/CardBody.js";
 import CardFooter from "../../components/Card/CardFooter.js";
 import UploadButton from '../../components/UploadButton/UploadButton';
 import Table from "../../components/Table/Table.js";
-import HijosForm from '../../components/HijosForm/HijosForm'
+import HijosForm2 from '../../components/HijosForm/HijosForm2'
 import AddReactionIcon from '@mui/icons-material/AddReaction';
 import IconButton from "@material-ui/core/IconButton";
 import RemoveRedEye from "@material-ui/icons/RemoveRedEye";
@@ -75,9 +75,9 @@ const styles = {
 
 const tablaHijos = [
 
-  { nombre: 'Dakota Rice', fechaNacimiento: '12/06/1982', grupoSanguineo: 'AB', factor: '+' },
-  { nombre: 'Minerva Hooper', fechaNacimiento: '12/06/1982', grupoSanguineo: 'AB', factor: '+' },
-  { nombre: 'Dakota Rice', fechaNacimiento: '12/06/1982', grupoSanguineo: 'AB', factor: '+' },
+  { nombre: 'Dakota Rice', fechaNacimiento: '12/06/2019', grupoSanguineo: 'AB', factor: '+' },
+  { nombre: 'Minerva Hooper', fechaNacimiento: '12/06/2017', grupoSanguineo: 'AB', factor: '+' },
+  { nombre: 'Dakota Rice', fechaNacimiento: '12/06/2021', grupoSanguineo: 'AB', factor: '+' },
 
 ]
 
@@ -86,23 +86,60 @@ const useStyles = makeStyles(styles);
 export default function UserProfile() {
   const classes = useStyles();
 
-  const [showAgregarHijo, setShowAgregarHijo] = useState(false);
-  const OnClickAgregarHijo = () => {
-    setShowAgregarHijo(!showAgregarHijo);
-  }
-  const OnClickCargarHijo = (e) => {
-    setShowAgregarHijo(!showAgregarHijo);
-    //alert('HOLA');
-    //console.log(e);
-  }
-
-  const OnClickCancelarCargarHijo = (e) => {
-    setShowAgregarHijo(!showAgregarHijo);
-    //alert('HOLA');
-    //console.log(e);
-  }
+  const [datosForm, setDatosForm] = useState({
+    hijo: 'Dakota Rice',
+    fechaNacimiento: '12/06/2019',
+    grupoSanguineo: 'AB',
+    factorSanguineo: '+',
+    alergias: 'Naranja',
+    enfermedadesCronicas: 'Diabetes',
+    observaciones: ''
+  })
+  
+  const [showMostrarForm, setMostrarForm] = useState(false);
+  const [tipoForm, setTipoForm] = useState('');
 
   const [hijos, setHijos] = useState(tablaHijos);
+
+  // const [showAgregarHijo, setShowAgregarHijo] = useState(false);
+  // const OnClickAgregarHijo = () => {
+  //   setShowAgregarHijo(!showAgregarHijo);
+  // }
+  // const OnClickCargarHijo = (e) => {
+  //   setShowAgregarHijo(!showAgregarHijo);
+  //   //alert('HOLA');
+  //   //console.log(e);
+  // }
+
+  // const OnClickCancelarCargarHijo = (e) => {
+  //   setShowAgregarHijo(!showAgregarHijo);
+  //   //alert('HOLA');
+  //   //console.log(e);
+  // }
+
+  const handleFormControles = (data) => {
+    const {hijo, fechaNacimiento, grupoSanguineo, factorSanguineo, alergias, enfermedadesCronicas, comentarios} = data;
+    setDatosForm(data);
+    //console.log(data)
+    console.log('Hola' + datosForm.grupoSanguineo)
+    MostrarForm();
+  }
+
+  const MostrarForm = () => {
+    setMostrarForm(!showMostrarForm);
+    setTipoForm('A')
+    //formulario.current.scrollIntoView();
+    //this.PedControlForm.current.focus();
+  }
+
+  const VisualizarForm = () => {
+    MostrarForm();
+    setTipoForm('V');
+  }
+
+  const EditarForm = () => {
+    setTipoForm('M')
+  }
 
   return (
     <div>
@@ -217,7 +254,7 @@ export default function UserProfile() {
                 {/* <Button color= 'primary' size='sm' className={classes.cardHeaderButton} onClick={OnClickAgregarHijo}>Nuevo Hijo</Button> */}
                 <IconButton
                   className={classes.cardHeaderButton}
-                  onClick={OnClickAgregarHijo}>
+                  onClick={MostrarForm}>
                   <AddReactionIcon
                     className={classes.cardTitleWhite}
                   //color='primary'
@@ -235,10 +272,10 @@ export default function UserProfile() {
                       hijo.fechaNacimiento,
                       hijo.grupoSanguineo,
                       hijo.factor,
-                      <IconButton className={classes.tableActionButton}>
+                      <IconButton className={classes.tableActionButton}  onClick={VisualizarForm}>
                         <RemoveRedEye className={classes.tableActionButtonIcon + " " + classes.edit} />
                       </IconButton>,
-                      <IconButton className={classes.tableActionButton}>
+                      <IconButton className={classes.tableActionButton} onClick={EditarForm}>
                         <EditIcon className={classes.tableActionButtonIcon + " " + classes.edit} />
                       </IconButton>,
                       <IconButton className={classes.tableActionButton}>
@@ -251,10 +288,15 @@ export default function UserProfile() {
             </Card>
           </GridItem>
         </GridContainer>
-        {showAgregarHijo ? (
-          <div><br /><HijosForm
-            OnClickCargarHijo={OnClickCargarHijo}
-            OnClickCancelarCargarHijo={OnClickCancelarCargarHijo} />
+        {showMostrarForm ? (
+          <div>
+            <br />
+            <HijosForm2
+              tipoForm={tipoForm}
+              handleFormControles={handleFormControles}
+              OnClickCancelar={MostrarForm}
+              // OnClickCancelarCargarControl={OnClickCancelarCargarControl}
+              datosForm={datosForm} />
           </div>
         ) : null}
       </React.Fragment>
