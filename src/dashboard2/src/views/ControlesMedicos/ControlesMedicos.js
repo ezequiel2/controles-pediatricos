@@ -12,7 +12,7 @@ import reactDom from "react-dom";
 import Button from '../../components/CustomButtons/Button';
 import EditIconButton from "../../components/EditIconButton/EditIconButton.js";
 import DeleteIconButton from "../../components/DeleteIconButton/DeleteIconButton.js";
-import PedControlForm2 from "../../components/PedControlForm2/PedControlForm2.js";
+import ControlPedForm3 from "../../components/PedControlForm2/PedControlForm3.js";
 import VisualIconButton from "../../components/VisualIconButton/VisualIconButton.js";
 import IconButton from "@material-ui/core/IconButton";
 import RemoveRedEye from "@material-ui/icons/RemoveRedEye";
@@ -85,45 +85,73 @@ const styles = {
 
 
 const tablaControlesMed = [
-  { nombre: 'Dakota Rice', fecha: '12/06/2021', profesional: 'Abdul Jabbar'},
-  { nombre: 'Minerva Hooper', fecha: '12/07/2021', profesional: 'Cosme Fulanito'},
-  { nombre: 'Dakota Rice', fecha: '12/08/2021', profesional: 'Woodrow Wilson'},
+  { nombre: 'Dakota Rice', fecha: '12/06/2021', profesional: 'Abdul Jabbar' },
+  { nombre: 'Minerva Hooper', fecha: '12/07/2021', profesional: 'Cosme Fulanito' },
+  { nombre: 'Dakota Rice', fecha: '12/08/2021', profesional: 'Woodrow Wilson' },
 
 ]
 
-const datos = {nombre: 'Juan', fecha:'17/05/2021'};
+//const datos = { nombre: 'Juan', fecha: '17/05/2021' };
 
 const useStyles = makeStyles(styles);
 
 export default function ControlesMedicos() {
   const classes = useStyles();
-  const [showAgregarControl, setShowAgregarControl] = useState(false);
+  const [showMostrarForm, setMostrarForm] = useState(false);
+  const [tipoForm, setTipoForm] = useState('');
   const [showEditarControl, setShowEditarControl] = useState(false);
-  //const formulario = useRef(null);
+  const [datosForm, setDatosForm] = useState({
+    hijo: '10', //fecha, profesional, peso, altura, diametro, medicamentos, estudios, observaciones
+    fecha: '',
+    profesional: 'Dr Pepe',
+    peso: '12',
+    altura: '120',
+    diametro: '10',
+    medicamentos: 'paracetamol',
+    estudios: '',
+    observaciones:''
+})
 
-  const OnClickAgregarControl = () => {
-    setShowAgregarControl(!showAgregarControl);
+  const MostrarForm = () => {
+    setMostrarForm(!showMostrarForm);
+    setTipoForm('A')
     //formulario.current.scrollIntoView();
     //this.PedControlForm.current.focus();
   }
-  const OnClickEditarControl = () => {
-    //setShowEditarControl(!showEditarControl);
-    setShowAgregarControl(!showAgregarControl);
-    alert(datos.nombre)
+
+  const VisualizarForm = () => {
+    MostrarForm();
+    setTipoForm('V');
   }
 
-  const OnClickCargarControl = (e) => {
-    setShowAgregarControl(!showAgregarControl);
-    //alert('HOLA');
-    //console.log(e);
+  const EditarForm = () => {
+    setTipoForm('M')
+  }
+  // const OnClickEditarControl = () => {
+  //   //setShowEditarControl(!showEditarControl);
+  //   setShowAgregarControl(!showAgregarControl);
+  // }
+
+  // const OnClickCargarControl = (e) => {
+  //   setShowAgregarControl(!showAgregarControl);
+  //   //alert('HOLA');
+  //   //console.log(e);
+  // }
+
+  // const OnClickCancelarCargarControl = (e) => {
+  //   setShowAgregarControl(!showAgregarControl);
+  //   //alert('HOLA');
+  //   //console.log(e);
+  // }
+
+  const handleFormControles = (data) => {
+    const {hijo, fecha, profesional, peso, altura, diametro, medicamentos, estudios, observaciones} = data;
+    setDatosForm(data);
+    //console.log(data)
+    console.log('Hola' + datosForm.profesional)
+    MostrarForm();
   }
 
-  const OnClickCancelarCargarControl = (e) => {
-    setShowAgregarControl(!showAgregarControl);
-    //alert('HOLA');
-    //console.log(e);
-  }
-  
 
   const [controlesMed, setControlesMed] = useState(tablaControlesMed);
 
@@ -140,7 +168,7 @@ export default function ControlesMedicos() {
               {/* <Button color= 'primary' size='sm' className={classes.cardHeaderButton} onClick={OnClickAgregarControl}>Boton feo</Button> */}
               <IconButton
                 className={classes.cardHeaderButton}
-                onClick={OnClickAgregarControl}>
+                onClick={MostrarForm}>
                 <AddToPhotosIcon
                   className={classes.cardTitleWhite}
                 //color='primary'
@@ -159,37 +187,38 @@ export default function ControlesMedicos() {
                 tableHead={["Nombre", "Fecha", "Profesional", "", "", ""]}
                 tableData={
                   controlesMed.map((controlMed) => (
-                      [controlMed.nombre, 
-                      controlMed.fecha,
-                      controlMed.profesional,
-                      <IconButton className={classes.tableActionButton} onClick={OnClickEditarControl}>
-                        <RemoveRedEye className={classes.tableActionButtonIcon + " " + classes.edit} />
-                      </IconButton>,
-                      <IconButton className={classes.tableActionButton} onClick={OnClickEditarControl}>
-                        <EditIcon className={classes.tableActionButtonIcon + " " + classes.edit} />
-                      </IconButton>,
-                      <IconButton className={classes.tableActionButton}>
-                        <CloseIcon className={classes.tableActionButtonIcon + " " + classes.close} />
-                      </IconButton>
-                      ]))
+                    [controlMed.nombre,
+                    controlMed.fecha,
+                    controlMed.profesional,
+                    <IconButton className={classes.tableActionButton} onClick={VisualizarForm}>
+                      <RemoveRedEye className={classes.tableActionButtonIcon + " " + classes.edit} />
+                    </IconButton>,
+                    <IconButton className={classes.tableActionButton} onClick={EditarForm}>
+                      <EditIcon className={classes.tableActionButtonIcon + " " + classes.edit} />
+                    </IconButton>,
+                    <IconButton className={classes.tableActionButton}>
+                      <CloseIcon className={classes.tableActionButtonIcon + " " + classes.close} />
+                    </IconButton>
+                    ]))
                 }
               />
             </CardBody>
           </Card>
         </GridItem>
       </GridContainer>
-      {showAgregarControl ? (
-        <div><br /><PedControlForm2 
-                OnClickCargarControl={OnClickCargarControl}
-                OnClickCancelarCargarControl = {OnClickCancelarCargarControl}
-                datos /> </div>
-      ) : null}
 
-       {showEditarControl ? (
-        <div ><PedControlForm2 OnClickCargarControl={""}
-                              OnClickCancelarCargarControl={""}
-                              datos={datos}/> </div>
-      ) : null} 
+      {showMostrarForm ? (
+        <div>
+          <br />
+          <p>{tipoForm}</p>
+          <ControlPedForm3 
+            tipoForm={tipoForm}
+            handleFormControles={handleFormControles}
+            OnClickCancelar={MostrarForm}
+            // OnClickCancelarCargarControl={OnClickCancelarCargarControl}
+            datosForm={datosForm}/>
+        </div>
+      ) : null}
     </React.Fragment>
   );
 }
