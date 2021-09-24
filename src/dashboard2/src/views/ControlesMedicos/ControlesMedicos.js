@@ -155,8 +155,8 @@ export default function ControlesMedicos() {
     setDatosForm(data);
     setProf(data.profesional)
     //console.log(data)
-    alert('Hola' + datosForm.profesional)
-    alert('Hola2' + prof)
+    // alert('Hola' + datosForm.profesional)
+    // alert('Hola2' + prof)
     
   }
 

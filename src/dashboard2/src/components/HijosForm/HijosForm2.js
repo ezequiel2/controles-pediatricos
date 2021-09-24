@@ -369,18 +369,19 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                   </GridContainer>
                   <br />
                   <GridContainer className={classes.cardFooter}>
-                    <Button
+                    {/* <Button
                       className={classes.formButton}
                       color='primary'
                       type="submit"
                     >
-                      {/* onClick={() => handleFormControles(result)} */}
+                      {/* onClick={() => handleFormControles(result)} }
                       Cargar
-                    </Button>
+                    </Button> */}
                     <Button
                       className={classes.formButton}
                       color='primary'
                       type="submit"
+                      onClick={OnClickCancelar}
                     >
                       Cancelar
                     </Button>

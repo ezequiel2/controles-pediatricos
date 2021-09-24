@@ -4,7 +4,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 //import Link from '@material-ui/core/Link';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Field, Form, FormSpy } from 'react-final-form';
 import Typography from '../components/Typography';
 import AppFooter from '../views/AppFooter';
@@ -33,7 +33,7 @@ function SignUp() {
   const [sent, setSent] = React.useState(false);
 
   const validate = (values) => {
-    const errors = required(['firstName', 'lastName', 'email', 'password'], values);
+    const errors = required(['firstName', 'lastName', 'dni', 'email', 'password'], values);
 
     if (!errors.email) {
       const emailError = email(values.email, values);
@@ -117,7 +117,7 @@ function SignUp() {
                 label="Telefono"
                 margin="normal"
                 name="telefono"
-                required
+                // required
               />
               <Field
                 fullWidth
