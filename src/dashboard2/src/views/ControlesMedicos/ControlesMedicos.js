@@ -97,20 +97,23 @@ const useStyles = makeStyles(styles);
 
 export default function ControlesMedicos() {
   const classes = useStyles();
+  const [prof, setProf] = useState();
   const [showMostrarForm, setMostrarForm] = useState(false);
   const [tipoForm, setTipoForm] = useState('');
   const [showEditarControl, setShowEditarControl] = useState(false);
   const [datosForm, setDatosForm] = useState({
-    hijo: '10', //fecha, profesional, peso, altura, diametro, medicamentos, estudios, observaciones
+    hijo: '', //fecha, profesional, peso, altura, diametro, medicamentos, estudios, observaciones
     fecha: '',
-    profesional: 'Dr Pepe',
-    peso: '12',
-    altura: '120',
-    diametro: '10',
-    medicamentos: 'paracetamol',
+    profesional: 'Dra Bombi',
+    peso: '',
+    altura: '',
+    diametro: '',
+    medicamentos: '',
     estudios: '',
     observaciones:''
 })
+
+// const [datosForm, setDatosForm] = useState();
 
   const MostrarForm = () => {
     setMostrarForm(!showMostrarForm);
@@ -125,7 +128,8 @@ export default function ControlesMedicos() {
   }
 
   const EditarForm = () => {
-    setTipoForm('M')
+    MostrarForm();
+    setTipoForm('M');
   }
   // const OnClickEditarControl = () => {
   //   //setShowEditarControl(!showEditarControl);
@@ -138,19 +142,24 @@ export default function ControlesMedicos() {
   //   //console.log(e);
   // }
 
-  // const OnClickCancelarCargarControl = (e) => {
-  //   setShowAgregarControl(!showAgregarControl);
+  // const OnClickCancelar = () => {
+  //   setMostrarForm(!showMostrarForm);
   //   //alert('HOLA');
   //   //console.log(e);
   // }
 
   const handleFormControles = (data) => {
     const {hijo, fecha, profesional, peso, altura, diametro, medicamentos, estudios, observaciones} = data;
-    setDatosForm(data);
-    //console.log(data)
-    console.log('Hola' + datosForm.profesional)
     MostrarForm();
+    //setDatosForm(data);
+    setDatosForm(data);
+    setProf(data.profesional)
+    //console.log(data)
+    alert('Hola' + datosForm.profesional)
+    alert('Hola2' + prof)
+    
   }
+
 
 
   const [controlesMed, setControlesMed] = useState(tablaControlesMed);
@@ -210,7 +219,7 @@ export default function ControlesMedicos() {
       {showMostrarForm ? (
         <div>
           <br />
-          <p>{tipoForm}</p>
+          {/* <p>{tipoForm}</p> */}
           <ControlPedForm3 
             tipoForm={tipoForm}
             handleFormControles={handleFormControles}
