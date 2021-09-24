@@ -15,6 +15,11 @@ import CardBody from "../Card/CardBody.js";
 import CardFooter from "../Card/CardFooter.js";
 import FormControl from '@mui/material/FormControl';
 import avatar from "../../assets/img/faces/marc.jpg";
+import {
+  primaryColor,
+  grayColor,
+  defaultFont,
+} from "../../assets/jss/material-dashboard-react";
 
 const styles = {
   cardCategoryWhite: {
@@ -41,6 +46,44 @@ const styles = {
     color: 'primary',
     marginRight: '10px',
   },
+  button: {
+    marginTop: "16px",
+    borderColor: primaryColor[0],
+    '&.Mui-focused fieldset': {
+        borderColor: primaryColor[0],
+    },
+},
+select: {
+    marginTop: "16px",
+    marginLeft: '15px',
+    width: "190px",
+    height: "38px",
+},
+selectLabel: {
+    //marginBotton: "0px",
+    marginLeft: '29px',
+},
+root: {
+    
+    marginTop: "16px",
+    '& label.Mui-focused': {
+        color: grayColor[0],
+    },
+    '& .MuiInput-underline:after': {
+        borderBottomColor: primaryColor[0],
+    },
+    '& .MuiOutlinedInput-root': {
+        '& fieldset': {
+            borderColor: grayColor[4],
+        },
+        '&:hover fieldset': {
+            borderColor: grayColor[4],
+        },
+        '&.Mui-focused fieldset': {
+            borderColor: primaryColor[0],
+        },
+    },
+},
 };
 
 const useStyles = makeStyles(styles);
@@ -74,7 +117,7 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                 </CardHeader>
                 <CardBody>
                   <form onSubmit={handleSubmit(onSubmit)}>
-                    <GridContainer>
+                    {/* <GridContainer>
                       <InputLabel>Hijo</InputLabel>
                       <Select
                         labelId="demo-simple-select-label"
@@ -88,51 +131,73 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                         <MenuItem value={20}>Twenty</MenuItem>
                         <MenuItem value={30}>Thirty</MenuItem>
                       </Select>
+                    </GridContainer> */}
+
+                    <GridContainer>
+                      <GridItem xs={12} sm={12} md={3}>
+                        <TextField
+                          //type='date'
+                          className={classes.root}
+                          size='small'
+                          id="standard-basic"
+                          label="Nombre"
+                          variant="outlined"
+                          // {...register("fecha", { required: true })}
+                          {...register("nombre")} />
+                      </GridItem>
+                      <GridItem xs={12} sm={12} md={3}>
+                        <TextField
+                          type='date'
+                          className={classes.root}
+                          size='small'
+                          id="standard-basic"
+                          //label="Fecha de Nacimiento"
+                          variant="outlined"
+                          {...register("fechaNacimiento")} />
+                      </GridItem>
                     </GridContainer>
                     <GridContainer>
                       <GridItem xs={12} sm={12} md={3}>
                         <TextField
-                          className={classes.button}
-                          id="standard-basic"
-                          label="Fecha de Nacimiento"
-                          variant="outlined"
-                          // {...register("fecha", { required: true })}
-                          {...register("fechaNacimiento")} />
-                      </GridItem>
-                      <GridItem xs={12} sm={12} md={3}>
-                        <TextField
-                          className={classes.button}
+                          className={classes.root}
+                          size='small'
                           id="standard-basic"
                           label="Grupo Sanguineo"
                           variant="outlined"
                           {...register("grupoSanguineo")} />
                       </GridItem>
-                    </GridContainer>
-                    <GridContainer>
                       <GridItem xs={12} sm={12} md={3}>
                         <TextField
-                          className={classes.button}
-                          id="standard-basic"
-                          label="Factor Sanguineo"
+                          className={classes.root}
+                          size='small'
+                          id="standard-basic"                          
                           variant="outlined"
+                          label="Factor Sanguineo"
                           {...register("factorSanguineo")} />
                       </GridItem>
-                      <GridItem xs={12} sm={12} md={3}>
+                    </GridContainer>
+                    <GridContainer>
+                      <GridItem xs={12} sm={12} md={9}>
                         <TextField
-                          className={classes.button}
-                          id="standard-basic"
+                          className={classes.root}
+                          size='small'
+                          id="standard-basic"                          
+                          variant="outlined"                          
+                          multiline='true'
                           label="Alergias"
-                          variant="outlined"
+                          rows='5'
+                          fullWidth='true'
                           {...register("alergias")} />
                       </GridItem>
                     </GridContainer>
                     <GridContainer>
                       <GridItem xs={12} sm={12} md={9}>
                         <TextField
-                          className={classes.button}
-                          id="standard-basic"
+                          className={classes.root}
+                          size='small'
+                          id="standard-basic"                          
+                          variant="outlined" 
                           label="Enfermedades Cronicas"
-                          variant="outlined"
                           multiline='true'
                           rows='5'
                           fullWidth='true'
@@ -142,25 +207,27 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                     <GridContainer>
                       <GridItem xs={12} sm={12} md={9}>
                         <TextField
-                          className={classes.button}
-                          id="standard-basic"
+                          className={classes.root}
+                          size='small'
+                          id="standard-basic"                          
+                          variant="outlined" 
                           label="Comentarios"
-                          variant="outlined"
                           multiline='true'
                           rows='5'
                           fullWidth='true'
                           {...register("comentarios")} />
                       </GridItem>
                     </GridContainer>
+                    <br />
                     <GridContainer className={classes.cardFooter}>
-                      <TextField
+                      <Button
                         className={classes.formButton}
                         color='primary'
                         type="submit"
                       >
                         {/* onClick={() => handleFormControles(result)} */}
                         Cargar
-                      </TextField>
+                      </Button>
                       <Button
                         className={classes.formButton}
                         color='primary'
@@ -187,7 +254,7 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                 </CardHeader>
                 <CardBody>
                   {/* <form onSubmit={handleSubmit(onSubmit)}> */}
-                  <GridContainer>
+                  {/* <GridContainer>
                     <InputLabel>Hijo</InputLabel>
                     <Select
                       labelId="demo-simple-select-label"
@@ -200,9 +267,9 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                     >
                       {/* <MenuItem value={10}>Ten</MenuItem>
                                                 <MenuItem value={20}>Twenty</MenuItem>
-                                                <MenuItem value={30}>Thirty</MenuItem> */}
+                                                <MenuItem value={30}>Thirty</MenuItem>
                     </Select>
-                  </GridContainer>
+                  </GridContainer> */}
                   <GridContainer>
                     <GridItem xs={12} sm={12} md={3}>
                       <TextField
