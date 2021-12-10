@@ -63,7 +63,7 @@ const SignIn = () => {
     return errors;
   };
 
-  const validarLogin = async function () {
+  const validarLogin = function () {
 
     let datos = {
       validEmail: validEmail,
@@ -73,7 +73,7 @@ const SignIn = () => {
     alert(datos.validEmail);
     alert(datos.password);
 
-    let getLogin = await login(datos);
+    let getLogin = login(datos);
 
     if (getLogin.rdo === 0) {
       alert("devolvi 0");
@@ -84,12 +84,12 @@ const SignIn = () => {
     }
   }
 
-  const loginUser = async () => {
+  const loginUser = () => {
 
     // alert(validEmail);
     // alert(password);
     if (validEmail !== "" && password !== "") {
-      await validarLogin();
+      validarLogin();
     } else {
       alert("Debe completar usuario y password");
     }

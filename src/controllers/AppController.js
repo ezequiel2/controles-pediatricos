@@ -1,4 +1,4 @@
-import urlWebServices from '../controllers/webServices';
+import {urlWebServices, api} from '../controllers/webServices';
 
 import axios, { AxiosInstance } from 'axios';
 
@@ -12,40 +12,45 @@ const TIME_OUT_REQUEST_MILLISECONDS = 150000;
 //     }
 // });
 
-const api = axios.create({
-    baseURL: 'http://localhost:8000/api/',
-    headers: {
-        'Content-Type': 'application/json',
-        'Connection': 'keep-alive'
-    },
-    withCredentials: false,
-    timeout: TIME_OUT_REQUEST_MILLISECONDS
-});
+// const api = axios.create({
+//     baseURL: 'http://localhost:8000/api/',
+//     headers: {
+//         'Content-Type': 'application/json',
+//         'Connection': 'keep-alive',
+//         'Cache-Control': 'no-cache, no-store, must-revalidate',
+//         'Pragma': 'no-cache',
+//         'Expires': '0'
+//     },
+//     withCredentials: false,
+//     timeout: TIME_OUT_REQUEST_MILLISECONDS
+// });
 
 export const login = async function (login) {
 
     //url webservices
     let url = urlWebServices.login;
-
-    url = url + 'marialaura@gmail.com';
+    //url = url + login.validEmail;
 
     //armo json con datos
     const formData = new URLSearchParams();
-    formData.append('email', login.validEmail);
+    formData.append('email', login.validEmail.toString());
     formData.append('password', login.password);
-    alert(formData);
-    alert(url);
+    // alert(formData.toString());
+    // alert(url);
     try {
-        api.get('usuarios/find/email/marialaura@gmail.com',{timeout:TIME_OUT_REQUEST_MILLISECONDS})
+        await api.get('http://localhost:8000/api/api/usuarios/find/email/ezequiel.grillo@gmail.com')
             .then(response => {
                 let rdo = response.status;
-                alert(response);
+                alert(rdo);
                 let data = response.data;
-                alert(response.data);
+                alert(JSON.stringify(response));
                 switch (rdo) {
                     case 200:
                         {
                             alert("estoy en 200");
+                            let result = []
+                            result[1] = JSON.stringify(data);
+                            alert(result[1]);
                             //guardo token
                             //localStorage.setItem("x", data.loginUser.token);
                             //guardo usuario logueado
@@ -115,11 +120,11 @@ export const login = async function (login) {
         //     alert("Error-HTTP: " + response.status);
         // }
 
-        alert("estoy aca fuera switch 1");
+        // alert("estoy aca fuera switch 1");
         // let rdo = response.status;
-        alert("estoy aca fuera switch 2");
+        // alert("estoy aca fuera switch 2");
         // let data = response.data;
-        alert("estoy aca fuera switch 3");
+        // alert("estoy aca fuera switch 3");
         // switch (rdo) {
         //     case 200:
         //         {
