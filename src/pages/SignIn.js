@@ -56,36 +56,31 @@ const SignIn = () => {
         errors.email = email(values.email, values);
       }
     }
-
     handleEmail(values);
     handlePassword(values);
 
     return errors;
   };
 
-  const validarLogin = function () {
-
+  const validarLogin = async function () {
     let datos = {
       validEmail: validEmail,
       password: password
     }
-
-    alert(datos.validEmail);
-    alert(datos.password);
-
-    let getLogin = login(datos);
-
+    // alert(datos.validEmail);
+    // alert(datos.password);
+    let getLogin = await login(datos);
+    // alert("getLogin");
+    // alert(getLogin);
     if (getLogin.rdo === 0) {
-      alert("devolvi 0");
+      // alert("devolvi 0");
       setUsuarioValido(true);
-    }
-    if (getLogin.rdo === 1) {
+    }else if (getLogin.rdo === 1) {
       alert(getLogin.mensaje)
     }
   }
 
   const loginUser = () => {
-
     // alert(validEmail);
     // alert(password);
     if (validEmail !== "" && password !== "") {
@@ -101,92 +96,91 @@ const SignIn = () => {
 
   const redirect = () => {
     if (usuarioValido) {
-      return <Redirect to='/admin' />
+      return <Redirect to='/admin/miperfil' />
     }
   }
 
   return (
-    <div>
-      {redirect()}
-      <React.Fragment>
-        <AppAppBar />
-        <AppForm>
-          <React.Fragment>
-            <Typography variant="h3" gutterBottom marked="center" align="center">
-              Ingresar
-            </Typography>
-            <Typography variant="body2" align="center">
-              {'No sos miembro todavia? '}
-              <Link to="/sign-up" align="center" underline="always">
-                Registrarse
-              </Link>
-            </Typography>
-          </React.Fragment>
-          <Form onSubmit={handleSubmit} subscription={{ submitting: true }} validate={validate}>
-            {({ handleSubmit2, submitting }) => (
-              <form onSubmit={handleSubmit2} className={classes.form} noValidate>
-                <Field
-                  autoComplete="email"
-                  autoFocus
-                  component={RFTextField}
-                  disabled={submitting || sent}
-                  fullWidth
-                  label="Email"
-                  margin="normal"
-                  name="email"
-                  required
-                  size="large"
-                  //onChange={handleEmail}
-                  model="validEmail"
-                />
-                <Field
-                  fullWidth
-                  size="large"
-                  component={RFTextField}
-                  disabled={submitting || sent}
-                  required
-                  name="password"
-                  autoComplete="current-password"
-                  label="Contraseña"
-                  type="password"
-                  margin="normal"
-                  //changeAction={handlePassword}
-                  model="password"
-                />
-                <FormSpy subscription={{ submitError: true }}>
-                  {({ submitError }) =>
-                    submitError ? (
-                      <FormFeedback className={classes.feedback} error>
-                        {submitError}
-                      </FormFeedback>
-                    ) : null
-                  }
-                </FormSpy>
-                <FormButton
-                  className={classes.button}
-                  disabled={submitting || sent}
-                  size="large"
-                  color="secondary"
-                  fullWidth
-                  // component={Link}
-                  //to='/user-profile'
-                  // to='/admin'
-                  onClick={loginUser}
-                >
-                  {submitting || sent ? 'Ingresando…' : 'Ingresar'}
-                </FormButton>
-              </form>
-            )}
-          </Form>
-          <Typography align="center">
-            <Link underline="always" to="/forgot-password">
-              Olvidaste la contraseña?
+    <React.Fragment>
+      <AppAppBar />
+      <AppForm>
+        <React.Fragment>
+          <Typography variant="h3" gutterBottom marked="center" align="center">
+            Ingresar
+          </Typography>
+          <Typography variant="body2" align="center">
+            {'No sos miembro todavia? '}
+            <Link to="/sign-up" align="center" underline="always">
+              Registrarse
             </Link>
           </Typography>
-        </AppForm>
-        {/* <AppFooter /> */}
-      </React.Fragment>
-    </div>
+        </React.Fragment>
+        <Form onSubmit={handleSubmit} subscription={{ submitting: true }} validate={validate}>
+          {({ handleSubmit2, submitting }) => (
+            <form onSubmit={handleSubmit2} className={classes.form} noValidate>
+              <Field
+                autoComplete="email"
+                autoFocus
+                component={RFTextField}
+                disabled={submitting || sent}
+                fullWidth
+                label="Email"
+                margin="normal"
+                name="email"
+                required
+                size="large"
+                //onChange={handleEmail}
+                model="validEmail"
+              />
+              <Field
+                fullWidth
+                size="large"
+                component={RFTextField}
+                disabled={submitting || sent}
+                required
+                name="password"
+                autoComplete="current-password"
+                label="Contraseña"
+                type="password"
+                margin="normal"
+                //changeAction={handlePassword}
+                model="password"
+              />
+              <FormSpy subscription={{ submitError: true }}>
+                {({ submitError }) =>
+                  submitError ? (
+                    <FormFeedback className={classes.feedback} error>
+                      {submitError}
+                    </FormFeedback>
+                  ) : null
+                }
+              </FormSpy>
+            </form>
+          )}
+        </Form>
+        <div>{redirect()}</div>
+        <FormButton
+          className={classes.button}
+          // disabled={submitting || sent}
+          size="large"
+          color="secondary"
+          fullWidth
+          // component={Link}
+          //to='/user-profile'
+          // to='/admin'
+          onClick={loginUser}
+        >
+          Ingresar
+        </FormButton>
+
+        <Typography align="center">
+          <Link underline="always" to="/forgot-password">
+            Olvidaste la contraseña?
+          </Link>
+        </Typography>
+      </AppForm>
+      {/* <AppFooter /> */}
+    </React.Fragment>
   );
 }
 

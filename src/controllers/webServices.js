@@ -4,7 +4,7 @@ const urlApi = "http://localhost:8000/";
 //const urlApi = "https://api-viernes.herokuapp.com/";
 console.log("url",urlApi);
 
-const TIME_OUT_REQUEST_MILLISECONDS = 150000;
+const TIME_OUT_REQUEST_MILLISECONDS = 50000;
 
 export const api = axios.create({
     baseURL: urlApi,

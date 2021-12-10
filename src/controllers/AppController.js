@@ -1,171 +1,134 @@
-import {urlWebServices, api} from '../controllers/webServices';
-
-import axios, { AxiosInstance } from 'axios';
-
-const TIME_OUT_REQUEST_MILLISECONDS = 150000;
-
-// const api = axios.create({
-//     baseURL: 'http://localhost:8000/api/',
-//     headers: {
-//         "Access-Control-Allow-Origin": '*',
-//         // "Access-Control-Allow-Methods": GET,POST,PUT,DELETE,
-//     }
-// });
-
-// const api = axios.create({
-//     baseURL: 'http://localhost:8000/api/',
-//     headers: {
-//         'Content-Type': 'application/json',
-//         'Connection': 'keep-alive',
-//         'Cache-Control': 'no-cache, no-store, must-revalidate',
-//         'Pragma': 'no-cache',
-//         'Expires': '0'
-//     },
-//     withCredentials: false,
-//     timeout: TIME_OUT_REQUEST_MILLISECONDS
-// });
+import { urlWebServices, api } from '../controllers/webServices';
 
 export const login = async function (login) {
 
     //url webservices
     let url = urlWebServices.login;
-    //url = url + login.validEmail;
 
     //armo json con datos
-    const formData = new URLSearchParams();
-    formData.append('email', login.validEmail.toString());
-    formData.append('password', login.password);
-    // alert(formData.toString());
-    // alert(url);
-    try {
-        await api.get('http://localhost:8000/api/api/usuarios/find/email/ezequiel.grillo@gmail.com')
-            .then(response => {
-                let rdo = response.status;
-                alert(rdo);
-                let data = response.data;
-                alert(JSON.stringify(response));
-                switch (rdo) {
-                    case 200:
-                        {
-                            alert("estoy en 200");
-                            let result = []
-                            result[1] = JSON.stringify(data);
-                            alert(result[1]);
-                            //guardo token
-                            //localStorage.setItem("x", data.loginUser.token);
-                            //guardo usuario logueado
-                            //let user = data.loginUser.user;
-                            //localStorage.setItem("nombre", user.name);
-                            //localStorage.setItem("email", user.email);
-                            //alert("estoy en 200");
-                            //console.log("aca estoy");
-                            return ({ rdo: 0, mensaje: "Ok" });//correcto
-                        }
-                    case 400:
-                        {
-                            //error mail
-                            return ({ rdo: 1, mensaje: "El mail ingresado no existe en nuestra base." });
-                        }
-                    case 203:
-                        {
-                            //error password
-                            return ({ rdo: 1, mensaje: "La contraseña no es correcta." });
-                        }
-                    default:
-                        {
-                            //otro error
-                            return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
-                        }
-                }
-                // alert("aca esta el res");
-                // alert(JSON.stringify(res));            
-                // return res;
-            })
-            .catch(error => alert(error));
-
-
-        // let response = await fetch(url, {
-        //     method: 'GET', // or 'PUT'
-        //     mode: "cors",
-        //     // headers:{
-        //     //     'Accept':'application/x-www-form-urlencoded',
-        //     //    // 'x-access-token': WebToken.webToken,
-        //     //     'Origin':'http://localhost:3000',
-        //     //     'Content-Type': 'application/x-www-form-urlencoded'},
-        //     // body: formData,
-        // });
-
-        // fetch(url)
-        //     .then(data => {
-        //         data.json();
-        //         return alert(data);
-        //     })
-        //     .then(respuesta => {
-        //         console.log(respuesta);
-        //         alert(respuesta)
-        //     })
-        //     .catch(err => alert("este es el error"));
-
-        // await fetch('http://localhost:8000/api/usuarios/find/email/marialaura@gmail.com')
-        //     .then(res => res.json())
-        //     .then(res => alert(res))
-        //     .catch(err => alert(err));
-
-        // let response = await fetch('http://localhost:8000/api/usuarios/find/email/marialaura@gmail.com');
-        // if (response.ok) { // si el HTTP-status es 200-299
-        //     // obtener cuerpo de la respuesta (método debajo)
-        //     let json = await response.json();
-        //     alert(json);
-        // } else {
-        //     alert("Error-HTTP: " + response.status);
-        // }
-
-        // alert("estoy aca fuera switch 1");
-        // let rdo = response.status;
-        // alert("estoy aca fuera switch 2");
-        // let data = response.data;
-        // alert("estoy aca fuera switch 3");
-        // switch (rdo) {
-        //     case 200:
-        //         {
-        //             //guardo token
-        //             localStorage.setItem("x", data.loginUser.token);
-        //             //guardo usuario logueado
-        //             let user = data.loginUser.user;
-        //             localStorage.setItem("nombre", user.name);
-        //             localStorage.setItem("email", user.email);
-        //             alert("estoy en 200");
-        //             console.log("aca estoy");
-        //             return ({ rdo: 0, mensaje: "Ok" });//correcto
-        //         }
-        //     case 400:
-        //         {
-        //             //error mail
-        //             return ({ rdo: 1, mensaje: "El mail ingresado no existe en nuestra base." });
-        //         }
-        //     case 203:
-        //         {
-        //             //error password
-        //             return ({ rdo: 1, mensaje: "La contraseña no es correcta." });
-        //         }
-        //     default:
-        //         {
-        //             //otro error
-        //             return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
-        //         }
-        // }
-    }
-    catch (error) {
-        alert("esto es error");
-        alert(error);
-        alert("esto es el status");
-        alert(error.status);
-        // alert(error.response.status)
-        // alert(error.response);
-        // alert(error.response.data);
-        // alert(error.response.status);
-        // alert(error.response.headers);
+    const formData = {
+        email: login.validEmail,
+        password: login.password,
     };
+
+    try {
+        let response = await api.post(url, formData);
+
+        let rdo = response.status;
+        // alert("rdo");
+        // alert(rdo);
+        switch (rdo) {
+            case 200:
+                {
+                    // alert("estoy en 200");
+                    // let result = []
+                    // result[1] = JSON.stringify(data);
+                    return ({ rdo: 0, mensaje: "Ok" }); //correcto
+                }
+            case 204:
+                {
+                    return ({ rdo: 1, mensaje: "El mail ingresado no existe en nuestra base." });
+                }
+            case 203:
+                {
+                    //error password
+                    return ({ rdo: 1, mensaje: "La contraseña no es correcta." });
+                }
+            case 207:
+                {
+                    //error password
+                    return ({ rdo: 1, mensaje: "Contraseña expirada." });
+                }
+            default:
+                {
+                    //otro error
+                    return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+                }
+        }
+        // alert("aca esta el res");
+        // alert(JSON.stringify(res));            
+        // return res;
+    } catch (error) {
+        return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+        // alert("esto es error");
+        // alert(error);
+        // alert("esto es el status");
+        // alert(error.status);
+    };
+
+
+
+
+
+
+
+
+
+    // await api.post(url,formData)
+    //         .then(response => {
+    //             let rdo = response.status;
+    //             alert("rdo");
+    //             alert(rdo);
+    //             let data = response.data;
+    //             // alert(JSON.stringify(response));
+    //             switch (rdo) {
+    //                 case 200:
+    //                     {
+    //                         alert("estoy en 200");
+    //                         let result = []
+    //                         result[1] = JSON.stringify(data);
+    //                         alert(result[1]);
+    //                         //guardo token
+    //                         //localStorage.setItem("x", data.loginUser.token);
+    //                         //guardo usuario logueado
+    //                         //let user = data.loginUser.user;
+    //                         //localStorage.setItem("nombre", user.name);
+    //                         //localStorage.setItem("email", user.email);
+    //                         //alert("estoy en 200");
+    //                         //console.log("aca estoy");
+    //                         return ({ rdo: 0, mensaje: "Ok" }); //correcto
+    //                     }
+    //                 case 400:
+    //                     {
+    //                         //error mail
+    //                         return ({ rdo: 1, mensaje: "El mail ingresado no existe en nuestra base." });
+    //                     }
+    //                 case 203:
+    //                     {
+    //                         //error password
+    //                         return ({ rdo: 1, mensaje: "La contraseña no es correcta." });
+    //                     }
+    //                 default:
+    //                     {
+    //                         //otro error
+    //                         return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+    //                     }
+    //             }
+    //             // alert("aca esta el res");
+    //             // alert(JSON.stringify(res));            
+    //             // return res;
+    //         })
+    //         .catch(error => alert(error));
+    // }
+    // catch (error) {
+    //     alert("esto es error");
+    //     alert(error);
+    //     alert("esto es el status");
+    //     alert(error.status);
+    //     // alert(error.response.status)
+    //     // alert(error.response);
+    //     // alert(error.response.data);
+    //     // alert(error.response.status);
+    //     // alert(error.response.headers);
+    // };
+
+
+
+
+
+
+
+
 }
 
 export const guardarImgUser = async function (message) {
