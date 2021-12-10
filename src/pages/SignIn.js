@@ -76,6 +76,7 @@ const SignIn = () => {
     let getLogin = await login(datos);
 
     if (getLogin.rdo === 0) {
+      alert("devolvi 0");
       setUsuarioValido(true);
     }
     if (getLogin.rdo === 1) {
@@ -83,12 +84,12 @@ const SignIn = () => {
     }
   }
 
-  const loginUser = () => {
+  const loginUser = async () => {
 
     // alert(validEmail);
     // alert(password);
     if (validEmail !== "" && password !== "") {
-      validarLogin();
+      await validarLogin();
     } else {
       alert("Debe completar usuario y password");
     }
@@ -106,7 +107,7 @@ const SignIn = () => {
 
   return (
     <div>
-      {/* {redirect()} */}
+      {redirect()}
       <React.Fragment>
         <AppAppBar />
         <AppForm>
@@ -167,10 +168,10 @@ const SignIn = () => {
                   size="large"
                   color="secondary"
                   fullWidth
-                  component={Link}
+                  // component={Link}
                   //to='/user-profile'
-                  to='/admin'
-                  //onClick={loginUser}
+                  // to='/admin'
+                  onClick={loginUser}
                 >
                   {submitting || sent ? 'Ingresando…' : 'Ingresar'}
                 </FormButton>
