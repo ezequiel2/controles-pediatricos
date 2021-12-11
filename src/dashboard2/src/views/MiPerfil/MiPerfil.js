@@ -29,6 +29,7 @@ import {
 } from '../../assets/jss/material-dashboard-react'
 
 import avatar from "../../assets/img/faces/marc.jpg";
+import {listarHijos} from '../../../../controllers/AppController';
 
 const styles = {
   cardCategoryWhite: {
@@ -99,7 +100,7 @@ export default function UserProfile() {
   const [showMostrarForm, setMostrarForm] = useState(false);
   const [tipoForm, setTipoForm] = useState('');
 
-  const [hijos, setHijos] = useState(tablaHijos);
+  const [hijos, setHijos] = useState();
 
   // const [showAgregarHijo, setShowAgregarHijo] = useState(false);
   // const OnClickAgregarHijo = () => {
@@ -140,6 +141,27 @@ export default function UserProfile() {
   const EditarForm = () => {
     setTipoForm('M')
   }
+
+  const cargarHijos = async function (dni) {
+
+      // let datos = {
+      //   validEmail: validEmail,
+      //   password: password
+      // }
+      // alert(datos.validEmail);
+      // alert(datos.password);
+      let getListarHijos = await listarHijos(dni);
+      // alert("getLogin");
+      // alert(getLogin);
+      if (getListarHijos.rdo === 0) {
+        // alert("devolvi 0");
+        setHijos(getListarHijos.listaHijos);//chequear que el nombre coincida con appcontroller
+      }else if (getListarHijos.rdo === 1) {
+        alert(getListarHijos.mensaje)
+      }
+    }
+
+
 
   return (
     <div>
@@ -263,6 +285,7 @@ export default function UserProfile() {
                 </IconButton>
               </CardHeader>
               <CardBody>
+                {cargarHijos}
                 <Table
                   tableHeaderColor="primary"
                   tableHead={["Nombre", "Fecha de Nacimiento", "Grupo Sanguineo", "Factor", "", "", ""]}
