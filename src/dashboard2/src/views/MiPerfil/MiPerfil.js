@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import classNames from 'classnames'
@@ -29,7 +29,8 @@ import {
 } from '../../assets/jss/material-dashboard-react'
 
 import avatar from "../../assets/img/faces/marc.jpg";
-import {listarHijos} from '../../../../controllers/AppController';
+import { listarHijos } from '../../../../controllers/AppController';
+import axios from 'axios';
 
 const styles = {
   cardCategoryWhite: {
@@ -74,11 +75,21 @@ const styles = {
   },
 };
 
+
+const urlApi = "http://localhost:8000/";
+
+const api = axios.create({
+  baseURL: urlApi,
+  headers: {
+    "Access-Control-Allow-Origin": '*',
+  },
+});
+
 const tablaHijos = [
 
-  { nombre: 'Dakota Rice', fechaNacimiento: '12/06/2019', grupoSanguineo: 'AB', factor: '+' },
-  { nombre: 'Minerva Hooper', fechaNacimiento: '12/06/2017', grupoSanguineo: 'AB', factor: '+' },
-  { nombre: 'Dakota Rice', fechaNacimiento: '12/06/2021', grupoSanguineo: 'AB', factor: '+' },
+  { nombre: 'Dakota Rice', fecha_nacimiento: '12/06/2019', grupo_sanguineo: 'AB', factor_sanguineo: '+' },
+  { nombre: 'Minerva Hooper', fecha_nacimiento: '12/06/2017', grupo_sanguineo: 'AB', factor_sanguineo: '+' },
+  { nombre: 'Dakota Rice', fecha_nacimiento: '12/06/2021', grupo_sanguineo: 'AB', factor_sanguineo: '+' },
 
 ]
 
@@ -87,20 +98,22 @@ const useStyles = makeStyles(styles);
 export default function UserProfile() {
   const classes = useStyles();
 
-  const [datosForm, setDatosForm] = useState({
-    hijo: 'Dakota Rice',
-    fechaNacimiento: '12/06/2019',
-    grupoSanguineo: 'AB',
-    factorSanguineo: '+',
-    alergias: 'Naranja',
-    enfermedadesCronicas: 'Diabetes',
-    observaciones: ''
-  })
-  
+  // const [datosForm, setDatosForm] = useState({
+  //   hijo: 'Dakota Rice',
+  //   fechaNacimiento: '12/06/2019',
+  //   grupoSanguineo: 'AB',
+  //   factorSanguineo: '+',
+  //   alergias: 'Naranja',
+  //   enfermedadesCronicas: 'Diabetes',
+  //   observaciones: ''
+  // })
+  const [datosForm, setDatosForm] = useState();
+
   const [showMostrarForm, setMostrarForm] = useState(false);
   const [tipoForm, setTipoForm] = useState('');
 
-  const [hijos, setHijos] = useState();
+  const [hijos, setHijos] = useState([]);
+  const [hijosStatus, setHijosStatus] = useState(false);
 
   // const [showAgregarHijo, setShowAgregarHijo] = useState(false);
   // const OnClickAgregarHijo = () => {
@@ -119,7 +132,7 @@ export default function UserProfile() {
   // }
 
   const handleFormControles = (data) => {
-    const {hijo, fechaNacimiento, grupoSanguineo, factorSanguineo, alergias, enfermedadesCronicas, comentarios} = data;
+    const { hijo, fechaNacimiento, grupoSanguineo, factorSanguineo, alergias, enfermedadesCronicas, comentarios } = data;
     setDatosForm(data);
     //console.log(data)
     console.log('Hola' + datosForm.grupoSanguineo)
@@ -133,7 +146,10 @@ export default function UserProfile() {
     //this.PedControlForm.current.focus();
   }
 
-  const VisualizarForm = () => {
+  const VisualizarForm = (hijo) => {
+    setDatosForm(hijo);
+    alert('estoy en visualizar');
+    alert(hijo.nombre);
     MostrarForm();
     setTipoForm('V');
   }
@@ -142,30 +158,46 @@ export default function UserProfile() {
     setTipoForm('M')
   }
 
-  const cargarHijos = async function (dni) {
+  useEffect(() => {
+    alert('en el useEffect')
+    cargarHijos('33419623');
+  }, []);
 
-      // let datos = {
-      //   validEmail: validEmail,
-      //   password: password
-      // }
-      // alert(datos.validEmail);
-      // alert(datos.password);
-      let getListarHijos = await listarHijos(dni);
-      // alert("getLogin");
-      // alert(getLogin);
-      if (getListarHijos.rdo === 0) {
-        // alert("devolvi 0");
-        setHijos(getListarHijos.listaHijos);//chequear que el nombre coincida con appcontroller
-      }else if (getListarHijos.rdo === 1) {
-        alert(getListarHijos.mensaje)
-      }
-    }
+
+  const cargarHijos = async (dni) => {
+
+    alert("estoy en cargarHijos");
+    // alert(dni);
+    // let getListarHijos = [];
+    // getListarHijos = await listarHijos(dni);
+    let getListarHijos = await api.get('api/hijos/list/dni-mapadre/33419623');
+
+    alert(JSON.stringify(getListarHijos));
+    setHijos(getListarHijos.data);
+    // alert("getLogin");
+    // alert(getLogin);
+    // if (getListarHijos.rdo === 0) {
+
+    //   alert("devolvi 0");
+    //   setHijosStatus(true);
+    //   alert(hijosStatus);
+    //   alert(JSON.stringify(getListarHijos.listaHijos));
+    //   alert(JSON.stringify(hijos));
+    //   // setHijos(getListarHijos.listaHijos);
+
+    //   // alert(hijos);
+
+    // } else if (getListarHijos.rdo === 1) {
+    //   alert(getListarHijos.mensaje)
+    // }
+  }
 
 
 
   return (
     <div>
       <React.Fragment>
+        {/* {cargarHijos('35330117')} */}
         <GridContainer>
           <GridItem xs={12} sm={12} md={8}>
             <Card>
@@ -285,28 +317,32 @@ export default function UserProfile() {
                 </IconButton>
               </CardHeader>
               <CardBody>
-                {cargarHijos}
-                <Table
-                  tableHeaderColor="primary"
-                  tableHead={["Nombre", "Fecha de Nacimiento", "Grupo Sanguineo", "Factor", "", "", ""]}
-                  tableData={
-                    hijos.map((hijo) => (
-                      [hijo.nombre,
-                      hijo.fechaNacimiento,
-                      hijo.grupoSanguineo,
-                      hijo.factor,
-                      <IconButton className={classes.tableActionButton}  onClick={VisualizarForm}>
-                        <RemoveRedEye className={classes.tableActionButtonIcon + " " + classes.edit} />
-                      </IconButton>,
-                      <IconButton className={classes.tableActionButton} onClick={EditarForm}>
-                        <EditIcon className={classes.tableActionButtonIcon + " " + classes.edit} />
-                      </IconButton>,
-                      <IconButton className={classes.tableActionButton}>
-                        <CloseIcon className={classes.tableActionButtonIcon + " " + classes.close} />
-                      </IconButton>
-                      ]))
-                  }
-                />
+                {
+                  hijos &&
+                  (
+                    <Table
+                      tableHeaderColor="primary"
+                      tableHead={["Nombre", "Fecha de Nacimiento", "Grupo Sanguineo", "Factor", "", "", ""]}
+                      tableData={
+                        hijos.map((hijo) => (
+                          [hijo.nombre,
+                          hijo.fecha_nacimiento,
+                          hijo.grupo_sanguineo,
+                          hijo.factor_sanguineo,
+                          <IconButton className={classes.tableActionButton} onClick={() => VisualizarForm(hijo)}>
+                            <RemoveRedEye className={classes.tableActionButtonIcon + " " + classes.edit} />
+                          </IconButton>,
+                          <IconButton className={classes.tableActionButton} onClick={EditarForm}>
+                            <EditIcon className={classes.tableActionButtonIcon + " " + classes.edit} />
+                          </IconButton>,
+                          <IconButton className={classes.tableActionButton}>
+                            <CloseIcon className={classes.tableActionButtonIcon + " " + classes.close} />
+                          </IconButton>
+                          ]))
+                      }
+                    />
+                  )
+                }
               </CardBody>
             </Card>
           </GridItem>

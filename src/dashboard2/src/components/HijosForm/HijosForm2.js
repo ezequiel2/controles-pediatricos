@@ -292,7 +292,7 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                         id="standard-basic"
                         //label="Fecha de Nacimiento"
                         variant="outlined"
-                        value={datosForm.fechaNacimiento}
+                        value={datosForm.fecha_nacimiento}
                         //{...register("fechaNacimiento")}
                          />
                     </GridItem>
@@ -305,7 +305,7 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                         id="standard-basic"
                         label="Grupo Sanguineo"
                         variant="outlined"
-                        value={datosForm.grupoSanguineo}
+                        value={datosForm.grupo_sanguineo}
                         //{...register("grupoSanguineo")}
                          />
                     </GridItem>
@@ -316,7 +316,7 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                         id="standard-basic"
                         variant="outlined"
                         label="Factor Sanguineo"
-                        value={datosForm.factorSanguineo}
+                        value={datosForm.factor_sanguineo}
                         //{...register("factorSanguineo")}
                          />
                     </GridItem>
@@ -348,7 +348,7 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                         multiline='true'
                         rows='5'
                         fullWidth='true'
-                        value={datosForm.enfermedadesCronicas}
+                        value={datosForm.enfermedades_cronicas}
                          />
                     </GridItem>
                   </GridContainer>

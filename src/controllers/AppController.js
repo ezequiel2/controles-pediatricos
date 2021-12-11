@@ -100,19 +100,29 @@ export const signup = async function (signup) {
 }
 
 
-export const listarHijos = async function(){
+export const listarHijos = async function (dniMapadre) {
 
     //url webservices
-    let url = urlWebServices.listarHijos;
-
-    //armo json con datos
-    const formData = {
-        dni: "",
-    };
+    let url = urlWebServices.listarHijos + dniMapadre;
 
     try {
-        let response = await api.post(url, formData);
-        
+        let response = await api.get(url);
+
+        let rdo = response.status;
+        // alert("rdo");
+        // alert(rdo);
+        switch (rdo) {
+            case 200:
+                {
+                    alert("estoy en 200");
+                    return ({ rdo: 0, listaHijos: response.data }); //correcto
+                }
+            default:
+                {
+                    //otro error
+                    return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+                }
+        }
     } catch (error) {
         return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
         // alert("esto es error");
