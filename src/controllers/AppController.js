@@ -57,6 +57,48 @@ export const login = async function (login) {
     };
 }
 
+export const signup = async function (signup) {
+
+    //url webservices
+    let url = urlWebServices.signup;
+
+    //armo json con datos
+    const formData = {
+        email: signup.validEmail,
+        password: signup.password,
+        dni: signup.dni,
+        nombre: signup.nombre,
+        apellido: signup.apellido,
+        telefono: signup.telefono,
+    };
+
+    alert(JSON.stringify(formData));
+
+    try {
+        let response = await api.put(url, formData);
+
+        alert(JSON.stringify(response));
+
+        let rdo = response.status;
+        alert("rdo");
+        alert(rdo);
+        switch (rdo) {
+            case 200:
+                {
+                    return ({ rdo: 0, mensaje: "Ok" }); //correcto
+                }
+            default:
+                {
+                    //otro error
+                    return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+                }
+        }
+
+    } catch (error) {
+        return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+    };
+}
+
 export const guardarImgUser = async function (message) {
     //url webservices
     let url = urlWebServices.guardarImgUser;

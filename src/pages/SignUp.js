@@ -4,7 +4,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 //import Link from '@material-ui/core/Link';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Field, Form, FormSpy } from 'react-final-form';
 import Typography from '../components/Typography';
 import AppFooter from '../views/AppFooter';
@@ -14,6 +14,9 @@ import { email, required } from '../form/validation';
 import RFTextField from '../form/RFTextField';
 import FormButton from '../form/FormButton';
 import FormFeedback from '../form/FormFeedback';
+
+//importo llamada a sign-up
+import { signup } from '../controllers/AppController';
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -32,8 +35,47 @@ function SignUp() {
   const classes = useStyles();
   const [sent, setSent] = React.useState(false);
 
+  const [nombre, setNombre] = React.useState('');
+  const [apellido, setApellido] = React.useState('');
+  const [dni, setDni] = React.useState('');
+  const [validEmail, setValidEmail] = React.useState('');
+  const [telefono, setTelefono] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  const [signUpValido, setSignUpValido] = React.useState(false);
+
+  const handleVariables = (values) => {
+    setValidEmail(values.email);
+    setPassword(values.password);
+    setNombre(values.firstName);
+    setApellido(values.lastName);
+    setDni(values.dni);
+    setTelefono(values.telefono);
+  }
+
+  // const handleEmail = (values) => {
+  //   setValidEmail(values.email);
+  // }
+  // const handlePassword = (values) => {
+  //   setPassword(values.password);
+  // }
+  // const handleNombre = (values) => {
+  //   setNombre(values.nombre);
+  // }
+  // const handleApellido = (values) => {
+  //   setApellido(values.apellido);
+  // }
+  // const handleDni = (values) => {
+  //   setDni(values.dni);
+  // }
+  // const handleTelefono = (values) => {
+  //   setTelefono(values.telefono);
+  // }
+
   const validate = (values) => {
-    const errors = required(['firstName', 'lastName', 'dni', 'email', 'password'], values);
+    const errors = required(
+      ['firstName', 'lastName', 'dni', 'email', 'telefono', 'password'],
+      values);
 
     if (!errors.email) {
       const emailError = email(values.email, values);
@@ -42,12 +84,57 @@ function SignUp() {
       }
     }
 
+    handleVariables(values);
+    // handleEmail(values);
+    // handlePassword(values);
+    // handleNombre(values);
+    // handleApellido(values);
+    // handleDni(values);
+    // handleTelefono(values);
+
     return errors;
   };
 
   const handleSubmit = () => {
     setSent(true);
   };
+
+  const validarSignup = async function () {
+
+    let datos = {
+      validEmail: validEmail,
+      password: password,
+      dni: dni,
+      nombre: nombre,
+      apellido: apellido,
+      telefono: telefono,
+    }
+
+    alert(JSON.stringify(datos));
+    let getSignup = await signup(datos);
+
+    if (getSignup.rdo === 0) {
+      setSignUpValido(true);
+    } else if (getSignup.rdo === 1) {
+      alert(getSignup.mensaje)
+    }
+  }
+
+
+
+  const signupUser = () => {
+    if (validEmail !== "" && password !== "") {
+      validarSignup();
+    } else {
+      alert("Debe completar usuario y password");
+    }
+  };
+
+  const redirect = () => {
+    if (signUpValido) {
+      return <Redirect to='/admin/miperfil' />
+    }
+  }
 
   return (
     <React.Fragment>
@@ -117,7 +204,6 @@ function SignUp() {
                 label="Telefono"
                 margin="normal"
                 name="telefono"
-                // required
               />
               <Field
                 fullWidth
@@ -139,17 +225,19 @@ function SignUp() {
                   ) : null
                 }
               </FormSpy>
-              <FormButton
-                className={classes.button}
-                disabled={submitting || sent}
-                color="secondary"
-                fullWidth
-              >
-                {submitting || sent ? 'Registrandote...' : 'Registrate'}
-              </FormButton>
             </form>
           )}
         </Form>
+        <div>{redirect()}</div>
+        <FormButton
+          className={classes.button}
+          // disabled={submitting || sent}
+          color="secondary"
+          fullWidth
+          onClick={signupUser}
+        >
+          Registrate
+        </FormButton>
       </AppForm>
       {/* <AppFooter /> */}
     </React.Fragment>

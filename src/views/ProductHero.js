@@ -41,7 +41,7 @@ function ProductHero(props) {
         Nos preocupamos por la salud de tus hijos
       </Typography>
       <Typography color="inherit" align="center" variant="h5" className={classes.h5}>
-        Nos preocupamos por la salud de tus hijos
+        {/* Nos preocupamos por la salud de tus hijos */}
       </Typography>
       <Link to='/sign-up' style={{ color: 'inherit', textDecoration: 'inherit'}}>
           <Button

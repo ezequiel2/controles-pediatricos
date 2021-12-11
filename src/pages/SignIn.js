@@ -1,11 +1,10 @@
 import withRoot from '../withRoot';
-import { Redirect } from "react-router-dom";
 // --- Post bootstrap -----
 import React from 'react';
 import { Field, Form, FormSpy } from 'react-final-form';
 import { makeStyles } from '@material-ui/core/styles';
 //import Link from '@material-ui/core/Link';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Typography from '../components/Typography';
 import AppFooter from '../views/AppFooter'
 import AppAppBar from '../views/AppAppBar';
@@ -111,7 +110,7 @@ const SignIn = () => {
           <Typography variant="body2" align="center">
             {'No sos miembro todavia? '}
             <Link to="/sign-up" align="center" underline="always">
-              Registrarse
+              Registrate
             </Link>
           </Typography>
         </React.Fragment>

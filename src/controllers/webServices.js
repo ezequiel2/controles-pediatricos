@@ -21,6 +21,8 @@ export const api = axios.create({
 
 export const urlWebServices = {
     login:urlApi +"api/usuarios/sign-in/",
+    signup: urlApi +"api/usuarios/create",
+    //
     uploadFileImg: urlApi + "utils/uploadImg",
     guardarImgUser: urlApi + "api/users/guardarImgUser",
     getImgUser: urlApi + "api/users/imgUserByMail",

@@ -85,7 +85,7 @@ const AppAppBar = (props) => {
                 variant="h6"
                 underline="none"
                 className={clsx(classes.rightLink, classes.linkSecondary)}>
-                Registrarse
+                Registrate
               </Typography>
             </Link>
           </div>
