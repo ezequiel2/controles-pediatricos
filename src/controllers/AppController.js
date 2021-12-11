@@ -72,16 +72,16 @@ export const signup = async function (signup) {
         telefono: signup.telefono,
     };
 
-    alert(JSON.stringify(formData));
+    // alert(JSON.stringify(formData));
 
     try {
         let response = await api.put(url, formData);
 
-        alert(JSON.stringify(response));
+        // alert(JSON.stringify(response));
 
         let rdo = response.status;
-        alert("rdo");
-        alert(rdo);
+        // alert("rdo");
+        // alert(rdo);
         switch (rdo) {
             case 200:
                 {
@@ -98,6 +98,10 @@ export const signup = async function (signup) {
         return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
     };
 }
+
+
+
+
 
 export const guardarImgUser = async function (message) {
     //url webservices

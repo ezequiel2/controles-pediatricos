@@ -110,7 +110,7 @@ function SignUp() {
       telefono: telefono,
     }
 
-    alert(JSON.stringify(datos));
+    // alert(JSON.stringify(datos));
     let getSignup = await signup(datos);
 
     if (getSignup.rdo === 0) {
