@@ -1,8 +1,6 @@
-import axios, { AxiosInstance } from 'axios';
+import axios from 'axios';
 
 const urlApi = "http://localhost:8000/";
-//const urlApi = "https://api-viernes.herokuapp.com/";
-console.log("url",urlApi);
 
 const TIME_OUT_REQUEST_MILLISECONDS = 50000;
 
@@ -20,8 +18,9 @@ export const api = axios.create({
 });
 
 export const urlWebServices = {
-    login:urlApi +"api/usuarios/sign-in/",
-    signup: urlApi +"api/usuarios/create",
+    login:urlApi + "api/usuarios/sign-in/",
+    signup: urlApi + "api/usuarios/create",
+    listarHijos: urlApi + "api/hijos/list/dni-mapadre/",
     //
     uploadFileImg: urlApi + "utils/uploadImg",
     guardarImgUser: urlApi + "api/users/guardarImgUser",

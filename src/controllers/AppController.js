@@ -100,7 +100,28 @@ export const signup = async function (signup) {
 }
 
 
+export const listarHijos = async function(){
 
+    //url webservices
+    let url = urlWebServices.listarHijos;
+
+    //armo json con datos
+    const formData = {
+        dni: "",
+    };
+
+    try {
+        let response = await api.post(url, formData);
+        
+    } catch (error) {
+        return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+        // alert("esto es error");
+        // alert(error);
+        // alert("esto es el status");
+        // alert(error.status);
+    };
+
+}
 
 
 export const guardarImgUser = async function (message) {
