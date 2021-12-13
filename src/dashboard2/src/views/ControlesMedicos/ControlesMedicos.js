@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
@@ -25,6 +25,8 @@ import {
   dangerColor,
   grayColor,
 } from '../../assets/jss/material-dashboard-react'
+
+import { listarControles } from '../../../../controllers/AppController';
 
 
 
@@ -110,26 +112,33 @@ export default function ControlesMedicos() {
     diametro: '',
     medicamentos: '',
     estudios: '',
-    observaciones:''
-})
+    observaciones: ''
+  })
 
-// const [datosForm, setDatosForm] = useState();
+  // const [datosForm, setDatosForm] = useState();
 
   const MostrarForm = () => {
     setMostrarForm(!showMostrarForm);
-    setTipoForm('A')
+    //setTipoForm('A')
     //formulario.current.scrollIntoView();
     //this.PedControlForm.current.focus();
   }
 
-  const VisualizarForm = () => {
+  const AltaForm = () => {
+    setTipoForm('A')
     MostrarForm();
-    setTipoForm('V');
   }
 
-  const EditarForm = () => {
+  const VisualizarForm = (controlMed) => {
+    setDatosForm(controlMed);
+    setTipoForm('V');
     MostrarForm();
+  }
+
+  const EditarForm = (controlMed) => {
+    setDatosForm(controlMed);
     setTipoForm('M');
+    MostrarForm();
   }
   // const OnClickEditarControl = () => {
   //   //setShowEditarControl(!showEditarControl);
@@ -149,20 +158,44 @@ export default function ControlesMedicos() {
   // }
 
   const handleFormControles = (data) => {
-    const {hijo, fecha, profesional, peso, altura, diametro, medicamentos, estudios, observaciones} = data;
-    MostrarForm();
+    //const { hijo, fecha, profesional, peso, altura, diametro, medicamentos, estudios, observaciones } = data;
+    //MostrarForm();
     //setDatosForm(data);
-    setDatosForm(data);
-    setProf(data.profesional)
+    //setDatosForm(data);
+    //setProf(data.profesional)
     //console.log(data)
     // alert('Hola' + datosForm.profesional)
     // alert('Hola2' + prof)
-    
+    cargarControles('35330117');
+    MostrarForm();
+
   }
 
 
 
-  const [controlesMed, setControlesMed] = useState(tablaControlesMed);
+  const [controlesMed, setControlesMed] = useState([]);
+
+  useEffect(() => {
+    //alert('en el useEffect')
+    cargarControles('35330117');
+  }, []);
+
+  const cargarControles = async (dni) => {
+
+    let getListarControles = await listarControles(dni);
+    // let getListarHijos = await api.get('api/hijos/list/dni-mapadre/33419623');
+
+    // alert(JSON.stringify(getListarControles));
+    // setHijos(getListarHijos.data);
+    // alert("getLogin");
+    // alert(getLogin);
+    if (getListarControles.rdo === 0) {
+      setControlesMed(getListarControles.listaControles);
+
+    } else if (getListarControles.rdo === 1) {
+      alert(getListarControles.mensaje)
+    }
+  }
 
   return (
     <React.Fragment>
@@ -191,26 +224,31 @@ export default function ControlesMedicos() {
                 OnClickCargarCancelarControl={OnClickCargarCancelarControl} /> </div>
             ) : null} */}
             <CardBody>
-              <Table
-                tableHeaderColor="primary"
-                tableHead={["Nombre", "Fecha", "Profesional", "", "", ""]}
-                tableData={
-                  controlesMed.map((controlMed) => (
-                    [controlMed.nombre,
-                    controlMed.fecha,
-                    controlMed.profesional,
-                    <IconButton className={classes.tableActionButton} onClick={VisualizarForm}>
-                      <RemoveRedEye className={classes.tableActionButtonIcon + " " + classes.edit} />
-                    </IconButton>,
-                    <IconButton className={classes.tableActionButton} onClick={EditarForm}>
-                      <EditIcon className={classes.tableActionButtonIcon + " " + classes.edit} />
-                    </IconButton>,
-                    <IconButton className={classes.tableActionButton}>
-                      <CloseIcon className={classes.tableActionButtonIcon + " " + classes.close} />
-                    </IconButton>
-                    ]))
-                }
-              />
+              {
+                controlesMed &&
+                (
+                  <Table
+                    tableHeaderColor="primary"
+                    tableHead={["Nombre", "Fecha", "Profesional", "", "", ""]}
+                    tableData={
+                      controlesMed.map((controlMed) => (
+                        [controlMed.nombre_hijo,
+                        controlMed.fecha_control_ped,
+                        controlMed.profesional,
+                        <IconButton className={classes.tableActionButton} onClick={() => VisualizarForm(controlMed)}>
+                          <RemoveRedEye className={classes.tableActionButtonIcon + " " + classes.edit} />
+                        </IconButton>,
+                        <IconButton className={classes.tableActionButton} onClick={() => EditarForm(controlMed)}>
+                          <EditIcon className={classes.tableActionButtonIcon + " " + classes.edit} />
+                        </IconButton>,
+                        <IconButton className={classes.tableActionButton}>
+                          <CloseIcon className={classes.tableActionButtonIcon + " " + classes.close} />
+                        </IconButton>
+                        ]))
+                    }
+                  />
+                )
+              }
             </CardBody>
           </Card>
         </GridItem>
@@ -220,12 +258,12 @@ export default function ControlesMedicos() {
         <div>
           <br />
           {/* <p>{tipoForm}</p> */}
-          <ControlPedForm3 
+          <ControlPedForm3
             tipoForm={tipoForm}
             handleFormControles={handleFormControles}
             OnClickCancelar={MostrarForm}
             // OnClickCancelarCargarControl={OnClickCancelarCargarControl}
-            datosForm={datosForm}/>
+            datosForm={datosForm} />
         </div>
       ) : null}
     </React.Fragment>

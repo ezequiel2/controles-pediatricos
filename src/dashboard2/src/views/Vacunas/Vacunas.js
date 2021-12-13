@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -27,7 +27,7 @@ import {
   grayColor,
 } from '../../assets/jss/material-dashboard-react'
 
-
+import { listarVacunas } from '../../../../controllers/AppController';
 
 const styles = {
   cardCategoryWhite: {
@@ -94,7 +94,29 @@ export default function Vacunas() {
     //console.log(e);
   }
 
-  const [vacunas, setVacunas] = useState(tablaVacunas);
+  const [vacunas, setVacunas] = useState([]);
+
+  useEffect(() => {
+    //alert('en el useEffect')
+    cargarVacunas('35330117');
+  }, []);
+
+  const cargarVacunas = async (dni) => {
+
+    let getListarVacunas = await listarVacunas(dni);
+    // let getListarHijos = await api.get('api/hijos/list/dni-mapadre/33419623');
+
+    // alert(JSON.stringify(getListarVacunas));
+    // setHijos(getListarHijos.data);
+    // alert("getLogin");
+    // alert(getLogin);
+    if (getListarVacunas.rdo === 0) {
+      setVacunas(getListarVacunas.listaVacunas);
+
+    } else if (getListarVacunas.rdo === 1) {
+      alert(getListarVacunas.mensaje)
+    }
+  }
   
   const OnClickCancelarCargarVacuna = (e) => {
     setShowAgregarVacuna(!showAgregarVacuna);
@@ -236,16 +258,19 @@ export default function Vacunas() {
                 </IconButton>
                 {/* <Button color= 'primary' size='sm' className={classes.cardHeaderButton} onClick={OnClickAgregarControl}>Boton feo</Button> */}
               </CardHeader>
+              {
+                vacunas &&
+                (
               <CardBody>
                 <Table
                   tableHeaderColor="primary"
                   tableHead={["Nombre", "Fecha", "Vacuna", "Lugar", "Dosis", "", ""]}
                   tableData={
                     vacunas.map((vacuna) => (
-                      [vacuna.nombre, 
-                      vacuna.fecha,
+                      [vacuna.nombre_hijo, 
+                      vacuna.fecha_aplicacion,
                       vacuna.vacuna,
-                      vacuna.lugar,
+                      vacuna.lugar_aplicacion,
                       vacuna.dosis,
                       <IconButton className={classes.tableActionButton}>
                         <RemoveRedEye className={classes.tableActionButtonIcon + " " + classes.edit} />
@@ -266,6 +291,8 @@ export default function Vacunas() {
                   // ]}
                 />
               </CardBody>
+                )
+              }
               <CardFooter>
                 {/* <Button color="primary">Actualizar Perfil</Button> */}
               </CardFooter>
