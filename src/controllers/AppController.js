@@ -1,16 +1,5 @@
 import { urlWebServices, api } from '../controllers/webServices';
 
-function replaceJSX(str, find, replace) {
-    let parts = str.split(find);
-    let result;
-    for(let i = 0, result = []; i < parts.length; i++) {
-        result.push(parts[i]);
-        result.push(replace);
-    }
-    return result;
-}
-
-
 export const login = async function (login) {
 
     //url webservices
@@ -34,7 +23,7 @@ export const login = async function (login) {
                     // alert("estoy en 200");
                     // let result = []
                     // result[1] = JSON.stringify(data);
-                    return ({ rdo: 0, mensaje: "Ok" }); //correcto
+                    return ({ rdo: 0, user: response.data }); //correcto
                 }
             case 204:
                 {
@@ -349,6 +338,18 @@ export const listarVacunas = async function (dniMapadre) {
         // alert(error.status);
     };
 
+}
+
+export const altaVacuna = async function(vacuna){
+
+}
+
+export const modificarVacuna = async function(vacuna){
+    
+}
+
+export const bajaVacuna = async function(vacuna){
+    
 }
 
 export const guardarImgUser = async function (message) {

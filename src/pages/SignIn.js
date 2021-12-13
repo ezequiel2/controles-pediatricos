@@ -1,6 +1,6 @@
 import withRoot from '../withRoot';
 // --- Post bootstrap -----
-import React from 'react';
+import React, { useState, useEffect, useContext } from "react";
 import { Field, Form, FormSpy } from 'react-final-form';
 import { makeStyles } from '@material-ui/core/styles';
 //import Link from '@material-ui/core/Link';
@@ -17,6 +17,9 @@ import FormFeedback from '../form/FormFeedback';
 //importo llamada a log-in
 import { login } from '../controllers/AppController';
 
+//importo useContext
+import useUser from '../contexts/hooks/useUser';
+
 const useStyles = makeStyles((theme) => ({
   form: {
     marginTop: theme.spacing(6),
@@ -32,10 +35,14 @@ const useStyles = makeStyles((theme) => ({
 
 const SignIn = () => {
   const classes = useStyles();
-  const [sent, setSent] = React.useState(false);
-  const [validEmail, setValidEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [usuarioValido, setUsuarioValido] = React.useState(false);
+  const [sent, setSent] = useState(false);
+  const [validEmail, setValidEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [usuarioValido, setUsuarioValido] = useState(false);
+
+  const [usuarioLogin, setUsuarioLogin] = useState();
+
+  const { user, changeUser } = useUser();
 
   const handleEmail = (values) => {
     setValidEmail(values.email);
@@ -45,6 +52,16 @@ const SignIn = () => {
     setPassword(values.password);
   }
 
+  // useEffect(() => {
+  //   alert("estoy en useEffect")
+  //   if (usuarioValido)
+  //     changeUser(usuarioLogin);
+  // });
+
+  // useEffect(() => {
+  //   cargarHijos('33419623');
+  //   cargarPerfilMapadre('33419623');
+  // }, []);
 
   const validate = (values) => {
     const errors = required(['email', 'password'], values);
@@ -66,15 +83,13 @@ const SignIn = () => {
       validEmail: validEmail,
       password: password
     }
-    // alert(datos.validEmail);
-    // alert(datos.password);
     let getLogin = await login(datos);
-    // alert("getLogin");
-    // alert(getLogin);
     if (getLogin.rdo === 0) {
-      // alert("devolvi 0");
-      setUsuarioValido(true);
-    }else if (getLogin.rdo === 1) {
+      // setUsuarioValido(true);
+      setUsuarioLogin(getLogin.user);
+      // changeUser(usuarioLogin);
+
+    } else if (getLogin.rdo === 1) {
       alert(getLogin.mensaje)
     }
   }
@@ -94,7 +109,9 @@ const SignIn = () => {
   };
 
   const redirect = () => {
-    if (usuarioValido) {
+    if (usuarioLogin) {
+      alert(JSON.stringify(usuarioLogin))
+      changeUser(usuarioLogin);
       return <Redirect to='/admin/miperfil' />
     }
   }

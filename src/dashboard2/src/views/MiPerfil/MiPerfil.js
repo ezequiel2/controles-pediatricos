@@ -32,6 +32,9 @@ import {
 import avatar from "../../assets/img/faces/marc.jpg";
 import { listarHijos, getPerfilMapadre } from '../../../../controllers/AppController';
 
+//importo Context
+import useUser from "../../../../contexts/hooks/useUser";
+
 const styles = {
   cardCategoryWhite: {
     color: "rgba(255,255,255,.62)",
@@ -98,7 +101,6 @@ const styles = {
   },
 };
 
-
 const useStyles = makeStyles(styles);
 
 export default function UserProfile() {
@@ -112,6 +114,8 @@ export default function UserProfile() {
   const [hijos, setHijos] = useState([]);
   const [mapadre, setMapadre] = useState([]);
   const [hijosStatus, setHijosStatus] = useState(false);
+
+  const {user, changeUser} = useUser();
 
   // const [showAgregarHijo, setShowAgregarHijo] = useState(false);
   // const OnClickAgregarHijo = () => {
@@ -160,7 +164,7 @@ export default function UserProfile() {
 
   const BajaForm = (hijo) => {
     setDatosForm(hijo);
-    setTipoForm('B'); 
+    setTipoForm('B');
     MostrarForm();
   }
 
@@ -289,16 +293,10 @@ export default function UserProfile() {
                 </a>
               </CardAvatar>
               <CardBody profile>
-                {/* <h6 className={classes.cardCategory}>CEO / CO-FOUNDER</h6> */}
-                <h4 className={classes.cardTitle}>{mapadre.nombre + ' ' + mapadre.apellido}</h4>
-                {/* <p className={classes.description}>
-                Don{"'"}t be scared of the truth because we need to restart the
-                human foundation in truth And I love you like Kanye loves Kanye
-                I love Rick Owens’ bed design but the back is...
-              </p>
-              <Button color="primary" round>
-                Follow
-              </Button> */}
+                  <h4 className={classes.cardTitle}>
+                    {/* {currentUser => { return currentUser.nombre + ' ' + currentUser.apellido }} */}
+                    {user.nombre + ' ' + user.apellido}
+                  </h4>
                 <UploadButton round />
               </CardBody>
             </Card>
