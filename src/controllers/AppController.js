@@ -221,14 +221,11 @@ export const altaHijo = async function (hijo) {
 }
 
 export const modificarHijo = async function (hijo) {
-
     //url webservices
-    let url = urlWebServices.modificarHijo;
+    let url = urlWebServices.modificarHijo1 + hijo.dni_mapadre + urlWebServices.modificarHijo2 + hijo.nombre;
 
-    url = replaceJSX(url,":dni_mapadre", hijo.dni_mapadre)
-    url = replaceJSX(url, ":nombre", hijo.nombre)
-
-    alert(url);
+    alert("url en appController");
+    alert(JSON.stringify(url));
 
     const formData = {
         fecha_nacimiento: hijo.fecha_nacimiento,
@@ -262,6 +259,97 @@ export const modificarHijo = async function (hijo) {
     };
 }
 
+export const bajaHijo = async function (hijo) {
+
+    alert(JSON.stringify(hijo));
+    //url webservices
+    let url = urlWebServices.bajaHijo1 + hijo.dni_mapadre + urlWebServices.bajaHijo2 + hijo.nombre;
+
+    alert(url);
+
+    try {
+        let response = await api.delete(url);
+
+        let rdo = response.status;
+        switch (rdo) {
+            case 200:
+                {
+                    return ({ rdo: 0, mensaje: "Ok" }); //correcto
+                }
+            default:
+                {
+                    //otro error
+                    return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+                }
+        }
+    } catch (error) {
+        return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+    };
+}
+
+export const listarControles = async function (dniMapadre) {
+
+    //url webservices
+    let url = urlWebServices.listarControles + dniMapadre;
+
+    try {
+        let response = await api.get(url);
+
+        let rdo = response.status;
+        // alert("rdo");
+        // alert(rdo);
+        switch (rdo) {
+            case 200:
+                {
+                    return ({ rdo: 0, listaControles: response.data }); //correcto
+                }
+            default:
+                {
+                    //otro error
+                    return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+                }
+        }
+    } catch (error) {
+        return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+        // alert("esto es error");
+        // alert(error);
+        // alert("esto es el status");
+        // alert(error.status);
+    };
+
+}
+
+export const listarVacunas = async function (dniMapadre) {
+
+    //url webservices
+    let url = urlWebServices.listarVacunas + dniMapadre;
+
+    try {
+        let response = await api.get(url);
+
+        let rdo = response.status;
+        // alert("rdo");
+        // alert(rdo);
+        switch (rdo) {
+            case 200:
+                {
+                    return ({ rdo: 0, listaVacunas: response.data }); //correcto
+                }
+            default:
+                {
+                    //otro error
+                    return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+                }
+        }
+    } catch (error) {
+        return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+        // alert("esto es error");
+        // alert(error);
+        // alert("esto es el status");
+        // alert(error.status);
+    };
+
+}
 
 export const guardarImgUser = async function (message) {
     //url webservices

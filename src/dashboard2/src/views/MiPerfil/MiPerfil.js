@@ -158,22 +158,21 @@ export default function UserProfile() {
     MostrarForm();
   }
 
+  const BajaForm = (hijo) => {
+    setDatosForm(hijo);
+    setTipoForm('B'); 
+    MostrarForm();
+  }
+
   useEffect(() => {
-    alert('en el useEffect')
     cargarHijos('33419623');
     cargarPerfilMapadre('33419623');
   }, []);
 
 
   const cargarHijos = async (dni) => {
-
     let getListarHijos = await listarHijos(dni);
-    // let getListarHijos = await api.get('api/hijos/list/dni-mapadre/33419623');
 
-    // alert(JSON.stringify(getListarHijos));
-    // setHijos(getListarHijos.data);
-    // alert("getLogin");
-    // alert(getLogin);
     if (getListarHijos.rdo === 0) {
       setHijos(getListarHijos.listaHijos);
 
@@ -184,15 +183,9 @@ export default function UserProfile() {
 
   const cargarPerfilMapadre = async (dni) => {
     let getPerfil = await getPerfilMapadre(dni);
-    // let getListarHijos = await api.get('api/hijos/list/dni-mapadre/33419623');
 
-    alert(JSON.stringify(getPerfil.perfil));
-    // setHijos(getListarHijos.data);
-    // alert("getLogin");
-    // alert(getLogin);
     if (getPerfil.rdo === 0) {
       setMapadre(getPerfil.perfil);
-      alert(JSON.stringify(mapadre));
 
     } else if (getPerfil.rdo === 1) {
       alert(getPerfil.mensaje)
@@ -223,7 +216,7 @@ export default function UserProfile() {
                         focused: true,
                       }}
                       inputProps={{
-                        disabled: true,
+                        readOnly: true,
                         shrink: true,
                       }}
                       value={mapadre.dni}
@@ -238,7 +231,7 @@ export default function UserProfile() {
                         focused: true,
                       }}
                       inputProps={{
-                        disabled: true,
+                        readOnly: true,
                         focused: true,
                       }}
                       value={mapadre.email}
@@ -344,7 +337,7 @@ export default function UserProfile() {
                           <IconButton className={classes.tableActionButton} onClick={() => EditarForm(hijo)}>
                             <EditIcon className={classes.tableActionButtonIcon + " " + classes.edit} />
                           </IconButton>,
-                          <IconButton className={classes.tableActionButton}>
+                          <IconButton className={classes.tableActionButton} onClick={() => BajaForm(hijo)}>
                             <CloseIcon className={classes.tableActionButtonIcon + " " + classes.close} />
                           </IconButton>
                           ]))

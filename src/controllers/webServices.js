@@ -18,13 +18,29 @@ export const api = axios.create({
 });
 
 export const urlWebServices = {
-    login:urlApi + "api/usuarios/sign-in/",
+    
+    //landing-page
+    login: urlApi + "api/usuarios/sign-in/",
     signup: urlApi + "api/usuarios/create",
+
+    //Perfil
     perfilMapadre: urlApi + 'api/usuarios/find/dni/',
+
+    //Hijos
     listarHijos: urlApi + "api/hijos/list/dni-mapadre/",
     altaHijo: urlApi + "api/hijos/create",
-    modificarHijo: urlApi + "/api/hijos/actualizar/dni-mapadre/:dni_mapadre/nombre-hijo/:nombre",
-    //
+    modificarHijo1: urlApi + "api/hijos/actualizar/dni-mapadre/",
+    modificarHijo2: "/nombre-hijo/",
+    bajaHijo1: urlApi + "api/hijos/eliminar/dni-mapadre/",
+    bajaHijo2: "/nombre-hijo/",
+
+    //ControlesPediatricos
+    listarControles: urlApi + 'api/controles-pediatricos/list/dni-mapadre/',
+
+    //Vacunas
+    listarVacunas: urlApi + 'api/vacunas/list/dni-mapadre/',
+
+    //Imagenes
     uploadFileImg: urlApi + "utils/uploadImg",
     guardarImgUser: urlApi + "api/users/guardarImgUser",
     getImgUser: urlApi + "api/users/imgUserByMail",
