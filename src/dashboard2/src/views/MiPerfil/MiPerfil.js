@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import classNames from 'classnames'
 import InputLabel from "@material-ui/core/InputLabel";
+import { TextField } from "@material-ui/core";
 // core components
 import GridItem from "../../components/Grid/GridItem.js";
 import GridContainer from "../../components/Grid/GridContainer.js";
@@ -23,8 +24,10 @@ import EditIcon from '@mui/icons-material/Edit';
 import CloseIcon from "@material-ui/icons/Close";
 import {
   primaryColor,
-  dangerColor,
-} from '../../assets/jss/material-dashboard-react'
+  grayColor,
+  defaultFont,
+  dangerColor
+} from "../../assets/jss/material-dashboard-react";
 
 import avatar from "../../assets/img/faces/marc.jpg";
 import { listarHijos, getPerfilMapadre } from '../../../../controllers/AppController';
@@ -69,6 +72,29 @@ const styles = {
   tableActionButtonIcon: {
     width: "17px",
     height: "17px",
+  },
+  root: {
+    marginTop: "16px",
+    '& label.Mui-focused': {
+      color: grayColor[0],
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: primaryColor[0],
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: grayColor[4],
+      },
+      '&:hover fieldset': {
+        borderColor: grayColor[4],
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: primaryColor[0],
+      },
+      "&.MuiInputBase-root.Mui-disabled": {
+        color: "rgba(0, 0, 0, 0.8)" // (default alpha is 0.38)
+      }
+    },
   },
 };
 
@@ -194,10 +220,11 @@ export default function UserProfile() {
                       id='dni'
                       formControlProps={{
                         fullWidth: true,
+                        focused: true,
                       }}
                       inputProps={{
                         disabled: true,
-                        outlined: true,
+                        shrink: true,
                       }}
                       value={mapadre.dni}
                     />
@@ -208,9 +235,11 @@ export default function UserProfile() {
                       id="email"
                       formControlProps={{
                         fullWidth: true,
+                        focused: true,
                       }}
                       inputProps={{
                         disabled: true,
+                        focused: true,
                       }}
                       value={mapadre.email}
                     />
@@ -223,6 +252,7 @@ export default function UserProfile() {
                       id="nombre"
                       formControlProps={{
                         fullWidth: true,
+                        focused: true,
                       }}
                       value={mapadre.nombre}
                     />
@@ -233,6 +263,7 @@ export default function UserProfile() {
                       id="apellido"
                       formControlProps={{
                         fullWidth: true,
+                        focused: true,
                       }}
                       value={mapadre.apellido}
                     />
@@ -245,6 +276,7 @@ export default function UserProfile() {
                       id="telefono"
                       formControlProps={{
                         fullWidth: true,
+                        focused: true,
                       }}
                       value={mapadre.telefono}
                     />
@@ -265,7 +297,7 @@ export default function UserProfile() {
               </CardAvatar>
               <CardBody profile>
                 {/* <h6 className={classes.cardCategory}>CEO / CO-FOUNDER</h6> */}
-                <h4 className={classes.cardTitle}>Ezequiel Grillo</h4>
+                <h4 className={classes.cardTitle}>{mapadre.nombre + ' ' + mapadre.apellido}</h4>
                 {/* <p className={classes.description}>
                 Don{"'"}t be scared of the truth because we need to restart the
                 human foundation in truth And I love you like Kanye loves Kanye
