@@ -53,25 +53,6 @@ function SignUp() {
     setTelefono(values.telefono);
   }
 
-  // const handleEmail = (values) => {
-  //   setValidEmail(values.email);
-  // }
-  // const handlePassword = (values) => {
-  //   setPassword(values.password);
-  // }
-  // const handleNombre = (values) => {
-  //   setNombre(values.nombre);
-  // }
-  // const handleApellido = (values) => {
-  //   setApellido(values.apellido);
-  // }
-  // const handleDni = (values) => {
-  //   setDni(values.dni);
-  // }
-  // const handleTelefono = (values) => {
-  //   setTelefono(values.telefono);
-  // }
-
   const validate = (values) => {
     const errors = required(
       ['firstName', 'lastName', 'dni', 'email', 'telefono', 'password'],
@@ -85,12 +66,6 @@ function SignUp() {
     }
 
     handleVariables(values);
-    // handleEmail(values);
-    // handlePassword(values);
-    // handleNombre(values);
-    // handleApellido(values);
-    // handleDni(values);
-    // handleTelefono(values);
 
     return errors;
   };
@@ -119,7 +94,6 @@ function SignUp() {
       alert(getSignup.mensaje)
     }
   }
-
 
 
   const signupUser = () => {

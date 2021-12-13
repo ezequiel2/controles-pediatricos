@@ -22,15 +22,12 @@ import RemoveRedEye from "@material-ui/icons/RemoveRedEye";
 import EditIcon from '@mui/icons-material/Edit';
 import CloseIcon from "@material-ui/icons/Close";
 import {
-  defaultFont,
   primaryColor,
   dangerColor,
-  grayColor,
 } from '../../assets/jss/material-dashboard-react'
 
 import avatar from "../../assets/img/faces/marc.jpg";
 import { listarHijos } from '../../../../controllers/AppController';
-import axios from 'axios';
 
 const styles = {
   cardCategoryWhite: {
@@ -76,23 +73,6 @@ const styles = {
 };
 
 
-const urlApi = "http://localhost:8000/";
-
-const api = axios.create({
-  baseURL: urlApi,
-  headers: {
-    "Access-Control-Allow-Origin": '*',
-  },
-});
-
-const tablaHijos = [
-
-  { nombre: 'Dakota Rice', fecha_nacimiento: '12/06/2019', grupo_sanguineo: 'AB', factor_sanguineo: '+' },
-  { nombre: 'Minerva Hooper', fecha_nacimiento: '12/06/2017', grupo_sanguineo: 'AB', factor_sanguineo: '+' },
-  { nombre: 'Dakota Rice', fecha_nacimiento: '12/06/2021', grupo_sanguineo: 'AB', factor_sanguineo: '+' },
-
-]
-
 const useStyles = makeStyles(styles);
 
 export default function UserProfile() {
@@ -131,31 +111,33 @@ export default function UserProfile() {
   //   //console.log(e);
   // }
 
-  const handleFormControles = (data) => {
-    const { hijo, fechaNacimiento, grupoSanguineo, factorSanguineo, alergias, enfermedadesCronicas, comentarios } = data;
-    setDatosForm(data);
-    //console.log(data)
-    console.log('Hola' + datosForm.grupoSanguineo)
+  const handleFormControles = () => {
+    cargarHijos('33419623');
     MostrarForm();
   }
 
   const MostrarForm = () => {
     setMostrarForm(!showMostrarForm);
-    setTipoForm('A')
+    // setTipoForm('A')
     //formulario.current.scrollIntoView();
     //this.PedControlForm.current.focus();
   }
 
-  const VisualizarForm = (hijo) => {
-    setDatosForm(hijo);
-    alert('estoy en visualizar');
-    alert(hijo.nombre);
+  const AltaForm = () => {
+    setTipoForm('A')
     MostrarForm();
-    setTipoForm('V');
   }
 
-  const EditarForm = () => {
+  const VisualizarForm = (hijo) => {
+    setDatosForm(hijo);
+    setTipoForm('V');
+    MostrarForm();
+  }
+
+  const EditarForm = (hijo) => {
+    setDatosForm(hijo);
     setTipoForm('M')
+    MostrarForm();
   }
 
   useEffect(() => {
@@ -166,32 +148,20 @@ export default function UserProfile() {
 
   const cargarHijos = async (dni) => {
 
-    alert("estoy en cargarHijos");
-    // alert(dni);
-    // let getListarHijos = [];
-    // getListarHijos = await listarHijos(dni);
-    let getListarHijos = await api.get('api/hijos/list/dni-mapadre/33419623');
+    let getListarHijos = await listarHijos(dni);
+    // let getListarHijos = await api.get('api/hijos/list/dni-mapadre/33419623');
 
-    alert(JSON.stringify(getListarHijos));
-    setHijos(getListarHijos.data);
+    // alert(JSON.stringify(getListarHijos));
+    // setHijos(getListarHijos.data);
     // alert("getLogin");
     // alert(getLogin);
-    // if (getListarHijos.rdo === 0) {
+    if (getListarHijos.rdo === 0) {
+      setHijos(getListarHijos.listaHijos);
 
-    //   alert("devolvi 0");
-    //   setHijosStatus(true);
-    //   alert(hijosStatus);
-    //   alert(JSON.stringify(getListarHijos.listaHijos));
-    //   alert(JSON.stringify(hijos));
-    //   // setHijos(getListarHijos.listaHijos);
-
-    //   // alert(hijos);
-
-    // } else if (getListarHijos.rdo === 1) {
-    //   alert(getListarHijos.mensaje)
-    // }
+    } else if (getListarHijos.rdo === 1) {
+      alert(getListarHijos.mensaje)
+    }
   }
-
 
 
   return (
@@ -220,15 +190,6 @@ export default function UserProfile() {
                       }}
                     />
                   </GridItem>
-                  {/* <GridItem xs={12} sm={12} md={3}>
-                  <CustomInput
-                    labelText="Username"
-                    id="username"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                  />
-                </GridItem> */}
                   <GridItem xs={12} sm={12} md={5}>
                     <CustomInput
                       labelText="Email"
@@ -308,7 +269,7 @@ export default function UserProfile() {
                 {/* <Button color= 'primary' size='sm' className={classes.cardHeaderButton} onClick={OnClickAgregarHijo}>Nuevo Hijo</Button> */}
                 <IconButton
                   className={classes.cardHeaderButton}
-                  onClick={MostrarForm}>
+                  onClick={AltaForm}>
                   <AddReactionIcon
                     className={classes.cardTitleWhite}
                   //color='primary'
@@ -332,7 +293,7 @@ export default function UserProfile() {
                           <IconButton className={classes.tableActionButton} onClick={() => VisualizarForm(hijo)}>
                             <RemoveRedEye className={classes.tableActionButtonIcon + " " + classes.edit} />
                           </IconButton>,
-                          <IconButton className={classes.tableActionButton} onClick={EditarForm}>
+                          <IconButton className={classes.tableActionButton} onClick={() => EditarForm(hijo)}>
                             <EditIcon className={classes.tableActionButtonIcon + " " + classes.edit} />
                           </IconButton>,
                           <IconButton className={classes.tableActionButton}>

@@ -1,5 +1,16 @@
 import { urlWebServices, api } from '../controllers/webServices';
 
+function replaceJSX(str, find, replace) {
+    let parts = str.split(find);
+    let result;
+    for(let i = 0, result = []; i < parts.length; i++) {
+        result.push(parts[i]);
+        result.push(replace);
+    }
+    return result;
+}
+
+
 export const login = async function (login) {
 
     //url webservices
@@ -99,7 +110,6 @@ export const signup = async function (signup) {
     };
 }
 
-
 export const listarHijos = async function (dniMapadre) {
 
     //url webservices
@@ -114,7 +124,6 @@ export const listarHijos = async function (dniMapadre) {
         switch (rdo) {
             case 200:
                 {
-                    alert("estoy en 200");
                     return ({ rdo: 0, listaHijos: response.data }); //correcto
                 }
             default:
@@ -131,6 +140,89 @@ export const listarHijos = async function (dniMapadre) {
         // alert(error.status);
     };
 
+}
+
+export const altaHijo = async function (hijo) {
+
+    //url webservices
+    let url = urlWebServices.altaHijo;
+
+    const formData = {
+        dni_mapadre: hijo.dni_mapadre,
+        nombre: hijo.nombre,
+        fecha_nacimiento: hijo.fecha_nacimiento,
+        grupo_sanguineo: hijo.grupo_sanguineo,
+        factor_sanguineo: hijo.factor_sanguineo,
+        alergias: hijo.alergias,
+        enfermedades_cronicas: hijo.enfermedades_cronicas,
+        comentarios: hijo.comentarios
+    };
+
+    alert("estoy en altaHijo");
+    alert(JSON.stringify(formData));
+
+    try {
+        let response = await api.put(url, formData);
+
+        let rdo = response.status;
+        // alert("rdo");
+        // alert(rdo);
+        switch (rdo) {
+            case 200:
+                {
+                    return ({ rdo: 0, mensaje: "Ok" }); //correcto
+                }
+            default:
+                {
+                    //otro error
+                    return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+                }
+        }
+    } catch (error) {
+        return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+    };
+}
+
+export const modificarHijo = async function (hijo) {
+
+    //url webservices
+    let url = urlWebServices.modificarHijo;
+
+    url = replaceJSX(url,":dni_mapadre", hijo.dni_mapadre)
+    url = replaceJSX(url, ":nombre", hijo.nombre)
+
+    alert(url);
+
+    const formData = {
+        fecha_nacimiento: hijo.fecha_nacimiento,
+        grupo_sanguineo: hijo.grupo_sanguineo,
+        factor_sanguineo: hijo.factor_sanguineo,
+        alergias: hijo.alergias,
+        enfermedades_cronicas: hijo.enfermedades_cronicas,
+        comentarios: hijo.comentarios
+    };
+
+    alert("estoy en modifHijo");
+    alert(JSON.stringify(formData));
+
+    try {
+        let response = await api.post(url, formData);
+
+        let rdo = response.status;
+        switch (rdo) {
+            case 200:
+                {
+                    return ({ rdo: 0, mensaje: "Ok" }); //correcto
+                }
+            default:
+                {
+                    //otro error
+                    return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+                }
+        }
+    } catch (error) {
+        return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+    };
 }
 
 

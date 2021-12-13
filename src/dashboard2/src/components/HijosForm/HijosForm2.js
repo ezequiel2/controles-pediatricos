@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import { useForm } from "react-hook-form";
@@ -20,6 +20,8 @@ import {
   grayColor,
   defaultFont,
 } from "../../assets/jss/material-dashboard-react";
+
+import { altaHijo, modificarHijo } from '../../../../controllers/AppController';
 
 const styles = {
   cardCategoryWhite: {
@@ -82,6 +84,9 @@ const styles = {
       '&.Mui-focused fieldset': {
         borderColor: primaryColor[0],
       },
+      "&.MuiInputBase-root.Mui-disabled": {
+        color: "rgba(0, 0, 0, 0.8)" // (default alpha is 0.38)
+      }
     },
   },
 };
@@ -99,14 +104,58 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
     setHijo(event.target.value);
   };
 
-  const onSubmit = (data) => {
-    //setResult(JSON.stringify(data));
-    handleFormControles(data);
+  const onSubmitAlta = async (data) => {
+    alert(JSON.stringify(data));
+
+    //aca hay que ponerle el input del dni_mapadre
+    let dni_mapadre = '33419623';
+    const res = { ...data, dni_mapadre }
+
+    let getHijo = await altaHijo(res);
+
+    if (getHijo.rdo === 0) {
+      handleFormControles();
+    } else if (getHijo.rdo === 1) {
+      alert(getHijo.mensaje)
+    }
+  }
+
+  const onSubmitModificacion = async (data) => {
+    alert(JSON.stringify(data));
+
+    //aca hay que ponerle el input del dni_mapadre
+    let dni_mapadre = '33419623';
+    const res = { ...data, dni_mapadre }
+
+    let getHijo = await modificarHijo(res);
+
+    if (getHijo.rdo === 0) {
+      handleFormControles();
+    } else if (getHijo.rdo === 1) {
+      alert(getHijo.mensaje)
+    }
+  }
+
+  const onSubmitBaja = async (data) => {
+    alert(JSON.stringify(data));
+
+    //aca hay que ponerle el input del dni_mapadre
+    let dni_mapadre = '33419623';
+    const res = { ...data, dni_mapadre }
+
+    let getHijo = await altaHijo(res);
+
+    if (getHijo.rdo === 0) {
+      handleFormControles();
+    } else if (getHijo.rdo === 1) {
+      alert(getHijo.mensaje)
+    }
   }
 
   return (
     <Fragment>
-
+      {alert(tipoForm)}
+      {/* Alta */}
       {tipoForm === 'A' &&
         <div>
           <GridContainer>
@@ -116,44 +165,32 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                   <h4 className={classes.cardTitleWhite}>Completa la informacion de tu hij@</h4>
                 </CardHeader>
                 <CardBody>
-                  <form onSubmit={handleSubmit(onSubmit)}>
-                    {/* <GridContainer>
-                      <InputLabel>Hijo</InputLabel>
-                      <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        label="Hijo"
-                        onChange={handleChangeSelect}
-                        variant="outlined"
-                        {...register("hijo")}
-                      >
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
-                      </Select>
-                    </GridContainer> */}
-
+                  <form onSubmit={handleSubmit(onSubmitAlta)}>
                     <GridContainer>
                       <GridItem xs={12} sm={12} md={3}>
                         <TextField
-                          //type='date'
                           className={classes.root}
                           size='small'
                           id="standard-basic"
                           label="Nombre"
                           variant="outlined"
-                          // {...register("fecha", { required: true })}
-                          {...register("nombre")} />
+                          name="nombre"
+                          required
+                          {...register("nombre")}
+                        />
                       </GridItem>
                       <GridItem xs={12} sm={12} md={3}>
                         <TextField
                           type='date'
                           className={classes.root}
+                          InputLabelProps={{ shrink: true }}
                           size='small'
                           id="standard-basic"
-                          //label="Fecha de Nacimiento"
+                          name="fecha_nacimiento"
+                          label="Fecha Nacimiento"
                           variant="outlined"
-                          {...register("fechaNacimiento")} />
+                          {...register("fecha_nacimiento")}
+                        />
                       </GridItem>
                     </GridContainer>
                     <GridContainer>
@@ -164,7 +201,8 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                           id="standard-basic"
                           label="Grupo Sanguineo"
                           variant="outlined"
-                          {...register("grupoSanguineo")} />
+                          name="grupo_sanguineo"
+                          {...register("grupo_sanguineo")} />
                       </GridItem>
                       <GridItem xs={12} sm={12} md={3}>
                         <TextField
@@ -173,7 +211,8 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                           id="standard-basic"
                           variant="outlined"
                           label="Factor Sanguineo"
-                          {...register("factorSanguineo")} />
+                          name="factor_sanguineo"
+                          {...register("factor_sanguineo")} />
                       </GridItem>
                     </GridContainer>
                     <GridContainer>
@@ -187,6 +226,7 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                           label="Alergias"
                           rows='5'
                           fullWidth='true'
+                          name="alergias"
                           {...register("alergias")} />
                       </GridItem>
                     </GridContainer>
@@ -201,7 +241,8 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                           multiline='true'
                           rows='5'
                           fullWidth='true'
-                          {...register("enfermedadesCronicas")} />
+                          name="enfermedades_cronicas"
+                          {...register("enfermedades_cronicas")} />
                       </GridItem>
                     </GridContainer>
                     <GridContainer>
@@ -215,6 +256,7 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                           multiline='true'
                           rows='5'
                           fullWidth='true'
+                          name="comentarios"
                           {...register("comentarios")} />
                       </GridItem>
                     </GridContainer>
@@ -225,13 +267,12 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                         color='primary'
                         type="submit"
                       >
-                        {/* onClick={() => handleFormControles(result)} */}
                         Cargar
                       </Button>
                       <Button
                         className={classes.formButton}
                         color='primary'
-                        type="submit"
+                        onClick={OnClickCancelar}
                       >
                         Cancelar
                       </Button>
@@ -244,6 +285,8 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
           </GridContainer>
         </div>
       }
+
+      {/* Visualizar */}
       {tipoForm === 'V' &&
         <div>
           <GridContainer>
@@ -253,23 +296,6 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                   <h4 className={classes.cardTitleWhite}>Completa la informacion de tu hij@</h4>
                 </CardHeader>
                 <CardBody>
-                  {/* <form onSubmit={handleSubmit(onSubmit)}> */}
-                  {/* <GridContainer>
-                    <InputLabel>Hijo</InputLabel>
-                    <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      label="Hij@"
-                      onChange={handleChangeSelect}
-                      variant="outlined"
-                      value={datosForm.hijo}
-                    // {...register("hijo")}
-                    >
-                      {/* <MenuItem value={10}>Ten</MenuItem>
-                                                <MenuItem value={20}>Twenty</MenuItem>
-                                                <MenuItem value={30}>Thirty</MenuItem>
-                    </Select>
-                  </GridContainer> */}
                   <GridContainer>
                     <GridItem xs={12} sm={12} md={3}>
                       <TextField
@@ -279,22 +305,25 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                         id="standard-basic"
                         label="Nombre"
                         variant="outlined"
+                        disabled
                         value={datosForm.nombre}
-                        // {...register("fecha", { required: true })}
-                        //{...register("nombre")} 
-                        />
+                      // {...register("fecha", { required: true })}
+                      //{...register("nombre")} 
+                      />
                     </GridItem>
                     <GridItem xs={12} sm={12} md={3}>
                       <TextField
                         type='date'
                         className={classes.root}
+                        InputLabelProps={{ shrink: true }}
                         size='small'
                         id="standard-basic"
-                        //label="Fecha de Nacimiento"
+                        disabled
+                        label="Fecha de Nacimiento"
                         variant="outlined"
                         value={datosForm.fecha_nacimiento}
-                        //{...register("fechaNacimiento")}
-                         />
+                      //{...register("fechaNacimiento")}
+                      />
                     </GridItem>
                   </GridContainer>
                   <GridContainer>
@@ -303,11 +332,12 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                         className={classes.root}
                         size='small'
                         id="standard-basic"
+                        disabled
                         label="Grupo Sanguineo"
                         variant="outlined"
                         value={datosForm.grupo_sanguineo}
-                        //{...register("grupoSanguineo")}
-                         />
+                      //{...register("grupoSanguineo")}
+                      />
                     </GridItem>
                     <GridItem xs={12} sm={12} md={3}>
                       <TextField
@@ -315,10 +345,11 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                         size='small'
                         id="standard-basic"
                         variant="outlined"
+                        disabled
                         label="Factor Sanguineo"
                         value={datosForm.factor_sanguineo}
-                        //{...register("factorSanguineo")}
-                         />
+                      //{...register("factorSanguineo")}
+                      />
                     </GridItem>
                   </GridContainer>
                   <GridContainer>
@@ -331,10 +362,11 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                         multiline='true'
                         label="Alergias"
                         rows='5'
+                        disabled
                         fullWidth='true'
                         value={datosForm.alergias}
-                        //{...register("alergias")}
-                         />
+                      //{...register("alergias")}
+                      />
                     </GridItem>
                   </GridContainer>
                   <GridContainer>
@@ -344,12 +376,13 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                         size='small'
                         id="standard-basic"
                         variant="outlined"
+                        disabled
                         label="Enfermedades Cronicas"
                         multiline='true'
                         rows='5'
                         fullWidth='true'
                         value={datosForm.enfermedades_cronicas}
-                         />
+                      />
                     </GridItem>
                   </GridContainer>
                   <GridContainer>
@@ -361,26 +394,19 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                         variant="outlined"
                         label="Comentarios"
                         multiline='true'
+                        disabled
                         rows='5'
                         fullWidth='true'
                         value={datosForm.comentarios}
-                        />                        
+                      />
                     </GridItem>
                   </GridContainer>
                   <br />
                   <GridContainer className={classes.cardFooter}>
-                    {/* <Button
-                      className={classes.formButton}
-                      color='primary'
-                      type="submit"
-                    >
-                      {/* onClick={() => handleFormControles(result)} }
-                      Cargar
-                    </Button> */}
                     <Button
                       className={classes.formButton}
                       color='primary'
-                      type="submit"
+                      // type="submit"
                       onClick={OnClickCancelar}
                     >
                       Cancelar
@@ -393,8 +419,144 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
         </div>
       }
 
+      {/* Modificar */}
       {tipoForm === 'M' &&
-        <p>'Soy un Modificacion'</p>
+        <div>
+          <GridContainer>
+            <GridItem xs={12} sm={12} md={10}>
+              <Card>
+                <CardHeader color="primary">
+                  <h4 className={classes.cardTitleWhite}>Completa la informacion de tu hij@</h4>
+                </CardHeader>
+                <CardBody>
+                  <form onSubmit={handleSubmit(onSubmitModificacion)}>
+                    <GridContainer>
+                      <GridItem xs={12} sm={12} md={3}>
+                        <TextField
+                          //type='date'
+                          className={classes.root}
+                          size='small'
+                          id="standard-basic"
+                          label="Nombre"
+                          variant="outlined"
+                          name="nombre"
+                          disabled
+                          value={datosForm.nombre}
+                        />
+                      </GridItem>
+                      <GridItem xs={12} sm={12} md={3}>
+                        <TextField
+                          type='date'
+                          className={classes.root}
+                          InputLabelProps={{ shrink: true }}
+                          size='small'
+                          id="standard-basic"
+                          label="Fecha de Nacimiento"
+                          name="fecha_nacimiento"
+                          variant="outlined"
+                          value={datosForm.fecha_nacimiento}
+                        //{...register("fechaNacimiento")}
+                        />
+                      </GridItem>
+                    </GridContainer>
+                    <GridContainer>
+                      <GridItem xs={12} sm={12} md={3}>
+                        <TextField
+                          className={classes.root}
+                          size='small'
+                          id="standard-basic"
+                          label="Grupo Sanguineo"
+                          name="grupo_sanguineo"
+                          variant="outlined"
+                          value={datosForm.grupo_sanguineo}
+                        //{...register("grupoSanguineo")}
+                        />
+                      </GridItem>
+                      <GridItem xs={12} sm={12} md={3}>
+                        <TextField
+                          className={classes.root}
+                          size='small'
+                          id="standard-basic"
+                          variant="outlined"
+                          name="factor_sanguineo"
+                          label="Factor Sanguineo"
+                          value={datosForm.factor_sanguineo}
+                        //{...register("factorSanguineo")}
+                        />
+                      </GridItem>
+                    </GridContainer>
+                    <GridContainer>
+                      <GridItem xs={12} sm={12} md={9}>
+                        <TextField
+                          className={classes.root}
+                          size='small'
+                          id="standard-basic"
+                          variant="outlined"
+                          multiline='true'
+                          label="Alergias"
+                          rows='5'
+                          fullWidth='true'
+                          name="alergias"
+                          value={datosForm.alergias}
+                        />
+                      </GridItem>
+                    </GridContainer>
+                    <GridContainer>
+                      <GridItem xs={12} sm={12} md={9}>
+                        <TextField
+                          className={classes.root}
+                          size='small'
+                          id="standard-basic"
+                          variant="outlined"
+                          label="Enfermedades Cronicas"
+                          multiline='true'
+                          rows='5'
+                          fullWidth='true'
+                          name="enfermedades_cronicas"
+                          value={datosForm.enfermedades_cronicas}
+                        />
+                      </GridItem>
+                    </GridContainer>
+                    <GridContainer>
+                      <GridItem xs={12} sm={12} md={9}>
+                        <TextField
+                          className={classes.root}
+                          size='small'
+                          id="standard-basic"
+                          variant="outlined"
+                          label="Comentarios"
+                          multiline='true'
+                          rows='5'
+                          fullWidth='true'
+                          name="comentarios"
+                          value={datosForm.comentarios}
+                        />
+                      </GridItem>
+                    </GridContainer>
+                    <br />
+                    <GridContainer className={classes.cardFooter}>
+                      <Button
+                        className={classes.formButton}
+                        color='primary'
+                        type="submit"
+                      >
+                        Modificar
+                      </Button>
+                      <Button
+                        className={classes.formButton}
+                        color='primary'
+                        // type="submit"
+                        onClick={OnClickCancelar}
+                      >
+                        Cancelar
+                      </Button>
+                    </GridContainer>
+                  </form>
+                </CardBody>
+              </Card>
+            </GridItem>
+          </GridContainer>
+        </div>
       }
     </Fragment>
 

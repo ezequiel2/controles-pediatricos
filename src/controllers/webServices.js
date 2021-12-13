@@ -21,9 +21,11 @@ export const urlWebServices = {
     login:urlApi + "api/usuarios/sign-in/",
     signup: urlApi + "api/usuarios/create",
     listarHijos: urlApi + "api/hijos/list/dni-mapadre/",
+    altaHijo: urlApi + "api/hijos/create",
+    modificarHijo: urlApi + "/api/hijos/actualizar/dni-mapadre/:dni_mapadre/nombre-hijo/:nombre",
     //
     uploadFileImg: urlApi + "utils/uploadImg",
     guardarImgUser: urlApi + "api/users/guardarImgUser",
     getImgUser: urlApi + "api/users/imgUserByMail",
-    uploadFileImg: urlApi + "api/users/uploadImg",
+    uploadFileImg2: urlApi + "api/users/uploadImg",
 };
