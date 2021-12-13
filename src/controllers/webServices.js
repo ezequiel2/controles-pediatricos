@@ -20,6 +20,7 @@ export const api = axios.create({
 export const urlWebServices = {
     login:urlApi + "api/usuarios/sign-in/",
     signup: urlApi + "api/usuarios/create",
+    perfilMapadre: urlApi + 'api/usuarios/find/dni/',
     listarHijos: urlApi + "api/hijos/list/dni-mapadre/",
     altaHijo: urlApi + "api/hijos/create",
     modificarHijo: urlApi + "/api/hijos/actualizar/dni-mapadre/:dni_mapadre/nombre-hijo/:nombre",

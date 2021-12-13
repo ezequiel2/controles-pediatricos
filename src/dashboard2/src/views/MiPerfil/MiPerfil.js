@@ -27,7 +27,7 @@ import {
 } from '../../assets/jss/material-dashboard-react'
 
 import avatar from "../../assets/img/faces/marc.jpg";
-import { listarHijos } from '../../../../controllers/AppController';
+import { listarHijos, getPerfilMapadre } from '../../../../controllers/AppController';
 
 const styles = {
   cardCategoryWhite: {
@@ -78,21 +78,13 @@ const useStyles = makeStyles(styles);
 export default function UserProfile() {
   const classes = useStyles();
 
-  // const [datosForm, setDatosForm] = useState({
-  //   hijo: 'Dakota Rice',
-  //   fechaNacimiento: '12/06/2019',
-  //   grupoSanguineo: 'AB',
-  //   factorSanguineo: '+',
-  //   alergias: 'Naranja',
-  //   enfermedadesCronicas: 'Diabetes',
-  //   observaciones: ''
-  // })
   const [datosForm, setDatosForm] = useState();
 
   const [showMostrarForm, setMostrarForm] = useState(false);
   const [tipoForm, setTipoForm] = useState('');
 
   const [hijos, setHijos] = useState([]);
+  const [mapadre, setMapadre] = useState([]);
   const [hijosStatus, setHijosStatus] = useState(false);
 
   // const [showAgregarHijo, setShowAgregarHijo] = useState(false);
@@ -143,6 +135,7 @@ export default function UserProfile() {
   useEffect(() => {
     alert('en el useEffect')
     cargarHijos('33419623');
+    cargarPerfilMapadre('33419623');
   }, []);
 
 
@@ -160,6 +153,23 @@ export default function UserProfile() {
 
     } else if (getListarHijos.rdo === 1) {
       alert(getListarHijos.mensaje)
+    }
+  }
+
+  const cargarPerfilMapadre = async (dni) => {
+    let getPerfil = await getPerfilMapadre(dni);
+    // let getListarHijos = await api.get('api/hijos/list/dni-mapadre/33419623');
+
+    alert(JSON.stringify(getPerfil.perfil));
+    // setHijos(getListarHijos.data);
+    // alert("getLogin");
+    // alert(getLogin);
+    if (getPerfil.rdo === 0) {
+      setMapadre(getPerfil.perfil);
+      alert(JSON.stringify(mapadre));
+
+    } else if (getPerfil.rdo === 1) {
+      alert(getPerfil.mensaje)
     }
   }
 
@@ -187,7 +197,9 @@ export default function UserProfile() {
                       }}
                       inputProps={{
                         disabled: true,
+                        outlined: true,
                       }}
+                      value={mapadre.dni}
                     />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={5}>
@@ -200,6 +212,7 @@ export default function UserProfile() {
                       inputProps={{
                         disabled: true,
                       }}
+                      value={mapadre.email}
                     />
                   </GridItem>
                 </GridContainer>
@@ -211,6 +224,7 @@ export default function UserProfile() {
                       formControlProps={{
                         fullWidth: true,
                       }}
+                      value={mapadre.nombre}
                     />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={5}>
@@ -220,6 +234,7 @@ export default function UserProfile() {
                       formControlProps={{
                         fullWidth: true,
                       }}
+                      value={mapadre.apellido}
                     />
                   </GridItem>
                 </GridContainer>
@@ -231,6 +246,7 @@ export default function UserProfile() {
                       formControlProps={{
                         fullWidth: true,
                       }}
+                      value={mapadre.telefono}
                     />
                   </GridItem>
                 </GridContainer>

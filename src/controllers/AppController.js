@@ -110,6 +110,43 @@ export const signup = async function (signup) {
     };
 }
 
+export const getPerfilMapadre = async function (dni) {
+    
+    //url webservices
+    let url = urlWebServices.perfilMapadre + dni;
+
+    try {
+        let response = await api.get(url);
+
+        let rdo = response.status;
+        // alert("rdo");
+        // alert(rdo);
+        switch (rdo) {
+            case 200:
+                {
+                    // alert("estoy en 200");
+                    // let result = []
+                    // result[1] = JSON.stringify(data);
+                    return ({ rdo: 0, perfil: response.data }); //correcto
+                }
+            default:
+                {
+                    //otro error
+                    return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+                }
+        }
+        // alert("aca esta el res");
+        // alert(JSON.stringify(res));            
+        // return res;
+    } catch (error) {
+        return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+        // alert("esto es error");
+        // alert(error);
+        // alert("esto es el status");
+        // alert(error.status);
+    };
+}
+
 export const listarHijos = async function (dniMapadre) {
 
     //url webservices

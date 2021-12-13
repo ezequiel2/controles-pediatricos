@@ -7,7 +7,6 @@ import Grid from '@material-ui/core/Grid';
 import { Link, Redirect } from 'react-router-dom';
 import { Field, Form, FormSpy } from 'react-final-form';
 import Typography from '../components/Typography';
-import AppFooter from '../views/AppFooter';
 import AppAppBar from '../views/AppAppBar';
 import AppForm from '../views/AppForm';
 import { email, required } from '../form/validation';
