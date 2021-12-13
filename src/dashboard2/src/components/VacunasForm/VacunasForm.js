@@ -17,6 +17,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import avatar from "../../assets/img/faces/marc.jpg";
+import { altaVacuna, modificarVacuna, bajaVacuna } from '../../../../controllers/AppController';
 
 const styles = {
   cardCategoryWhite: {
@@ -47,25 +48,128 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-export default function VacunasForm(props) {
+export default function VacunasForm({ tipoForm, handleFormControles, OnClickCancelar, datosForm }) {
   const classes = useStyles();
   const [mostrar, setMostrar] = useState(true);
   const OnClickOcultar = () => {
     setMostrar(!mostrar);
   }
-  const { OnClickCargarVacuna, OnClickCancelarCargarVacuna } = props;
+  //const { OnClickCargarVacuna, OnClickCancelarCargarVacuna } = props;
+
+  const handleSubmit = () =>{
+
+  }
+
+  const onSubmitAlta = async (data) => {
+    // alert(JSON.stringify(data));
+  
+    //aca hay que ponerle el input del dni_mapadre
+    let dni_mapadre = '33419623';
+    const res = { ...data, dni_mapadre }
+  
+    let getVacuna = await altaVacuna(res);
+  
+    if (getVacuna.rdo === 0) {
+      handleFormControles();
+    } else if (getVacuna.rdo === 1) {
+      alert(getVacuna.mensaje)
+    }
+  }
 
   return (
-    // <React.Fragment>
-    // {mostrar ? (
-    <div>
-      <GridContainer>
+    <React.Fragment>
+      {/* Alta */}
+      {tipoForm === 'A' &&
+        <div>
+          <GridContainer>
+            <GridItem xs={12} sm={12} md={10}>
+              <Card>
+                <CardHeader color="primary">
+                  <h4 className={classes.cardTitleWhite}>Completa los datos de la aplicacion</h4>
+                  {/* <p className={classes.cardCategoryWhite}>-------------------</p> */}
+                </CardHeader>
+                <CardBody>
+                  <form onSubmit={handleSubmit(onSubmitAlta)}>
+                    <GridContainer>
+                      <GridItem xs={12} sm={12} md={3}>
+                        <CustomInput
+                          labelText="Fecha"
+                          id='fecha'
+                          formControlProps={{
+                            fullWidth: true,
+                          }}
+                        />
+                      </GridItem>
+                      <GridItem xs={12} sm={12} md={6}>
+                        <CustomInput
+                          labelText="Lugar de Aplicacion"
+                          id='lugar'
+                          formControlProps={{
+                            fullWidth: true,
+                          }}
+                        />
+                      </GridItem>
+                    </GridContainer>
+                    <GridContainer>
+                      <GridItem xs={12} sm={12} md={3}>
+                        <CustomInput
+                          labelText="COMBO VACUNA"
+                          id="peso"
+                          formControlProps={{
+                            fullWidth: true,
+                          }}
+                        />
+                      </GridItem>
+                      <GridItem xs={12} sm={12} md={3}>
+                        <CustomInput
+                          labelText="COMBO TIPO DOSIS"
+                          id="altura"
+                          formControlProps={{
+                            fullWidth: true,
+                          }}
+                        />
+                      </GridItem>
+                    </GridContainer>
+                  </form>
+                </CardBody>
+                <CardFooter className={classes.cardFooter}>
+                  {/* <Button className={classes.formButton} color='primary' onClick={OnClickCargarVacuna}>Cargar</Button> */}
+                  {/* <Button className={classes.formButton} color='primary' onClick={OnClickCancelarCargarVacuna}>Cancelar</Button> */}
+                </CardFooter>
+              </Card>
+            </GridItem>
+          </GridContainer>
+        </div>
+      }
+
+      {/* Visualizar */}
+      {tipoForm === 'V' &&
+        <div>
+        </div>
+      }
+
+      {/* Modificar */}
+      {tipoForm === 'M' &&
+        <div>
+        </div>
+      }
+
+      {/* Baja */}
+      {tipoForm === 'B' &&
+        <div>
+        </div>
+      }
+     
+
+
+
+     {/* <GridContainer>
         <GridItem xs={12} sm={12} md={10}>
           <Card>
             <CardHeader color="primary">
               <h4 className={classes.cardTitleWhite}>Completa los datos de la aplicacion</h4>
               {/* <p className={classes.cardCategoryWhite}>-------------------</p> */}
-            </CardHeader>
+            {/* </CardHeader>
             <CardBody>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={3}>
@@ -86,7 +190,7 @@ export default function VacunasForm(props) {
                   </FormControl> */}
 
 
-                  <CustomInput
+                  {/* <CustomInput>
                     labelText="Fecha"
                     id='fecha'
                     formControlProps={{
@@ -132,7 +236,7 @@ export default function VacunasForm(props) {
                     }}
                   />
                 </GridItem> */}
-              </GridContainer>
+              {/* </GridContainer> */}
               {/* <GridContainer>
                 <GridItem xs={12} sm={12} md={3}>
                   <CustomInput
@@ -172,7 +276,7 @@ export default function VacunasForm(props) {
                     }}
                   />
                 </GridItem> */}
-                {/* <GridItem xs={12} sm={12} md={4}>
+              {/* <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
                     labelText="Country"
                     id="country"
@@ -181,7 +285,7 @@ export default function VacunasForm(props) {
                     }}
                   />
                 </GridItem> */}
-                {/* <GridItem xs={12} sm={12} md={4}>
+              {/* <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
                     labelText="Postal Code"
                     id="postal-code"
@@ -207,7 +311,7 @@ export default function VacunasForm(props) {
                   />
                 </GridItem>
               </GridContainer> */}
-            </CardBody>
+            {/* </CardBody>
             <CardFooter className={classes.cardFooter}>
               <Button className={classes.formButton} color='primary' onClick={OnClickCargarVacuna}>Cargar</Button>
               <Button className={classes.formButton} color='primary' onClick={OnClickCancelarCargarVacuna}>Cancelar</Button>
@@ -235,11 +339,12 @@ export default function VacunasForm(props) {
               <UploadButton color="primary" round/>
             </CardBody>
           </Card>
-        </GridItem> */}
+        </GridItem> 
       </GridContainer>
       {/* ) : null}
-    </React.Fragment> */}
-    </div>
+    </React.Fragment>
+    </div > */}
+    </React.Fragment>
   );
 
 }

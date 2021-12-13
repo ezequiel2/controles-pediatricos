@@ -39,6 +39,9 @@ export const urlWebServices = {
 
     //Vacunas
     listarVacunas: urlApi + 'api/vacunas/list/dni-mapadre/',
+    altaVacuna: urlApi + 'api/vacunas/create',
+    modificarVacuna: urlApi + 'api/vacunas/actualizar/id-vacuna/',
+    bajaVacuna: urlApi + 'api/vacunas/eliminar/id-vacuna/',
 
     //Imagenes
     uploadFileImg: urlApi + "utils/uploadImg",

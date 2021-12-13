@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "../Card/Card.js";
@@ -6,6 +6,7 @@ import CardHeader from "../Card/CardHeader.js";
 import CardBody from "../Card/CardHeader.js";
 import GridItem from "../Grid/GridItem.js";
 import GridContainer from "../Grid/GridContainer.js";
+import CustomInput from "../CustomInput/CustomInput.js";
 import { TextField, InputLabel, Select, MenuItem, Box, FormControl } from "@material-ui/core";
 import Button from "../CustomButtons/Button.js";
 import {
@@ -114,13 +115,35 @@ export default function ControlPedForm3({ tipoForm, handleFormControles, OnClick
 
     }
 
-    const [prof, setProf] = useState();
+    const [prof, setProf] = useState(datosForm.profesional);
+    const [prueba, setPrueba] = useState("PRUEBAAA");
 
-    const updateProfesional = (e) => {
-        setProf()
+    
+//   const getProfile = async () => {
+//     try{
+//       let res = await api.get(`/usuarios/${usuario.id}`);
+//       console.log(res);
+//       let user = res.data;
+//       setNombre(user.nombre);
+//       setApellido(user.apellido);
+//       setUsername(user.username);
+//       return user;
+//     }catch(err){
+//       console.log(err);
+//     }
+//   }
 
-    }
 
+    // const modifPerfil = (e) =>{
+    //     //alert("modifPeril")
+    //     //alert(datosForm.profesional)
+    //      setProf(datosForm.profesional)
+    // }
+
+    // useEffect(()=> {
+    //     //alert("useEffect modifPeril")
+    //     modifPerfil();
+    //   });
 
     return (
         <Fragment>
@@ -470,11 +493,11 @@ export default function ControlPedForm3({ tipoForm, handleFormControles, OnClick
                         </GridItem>
                     </GridContainer>
                 </div>
-            }
+            } 
 
             {tipoForm === 'M' &&
                 <div>
-                    {() => { setData(datosForm) }}
+                    {/* {() => { setData(datosForm) }} */}
                     <GridContainer>
                         <GridItem xs={12} sm={12} md={10}>
                             <Card>
@@ -531,12 +554,29 @@ export default function ControlPedForm3({ tipoForm, handleFormControles, OnClick
                                                     size='small'
                                                     id="standard-basic"
                                                     label="Profesional"
-                                                    variant="outlined"                                                    
-                                                    value={datosForm.profesional}
-                                                    //onChange={updateProfesional((e.target.value)) => ()}
-                                                    {...register("profesional")}
+                                                    variant="outlined"
+                                                    value={prof}
+                                                    onChange={(e) => setProf(e.target.value)}
+                                                //onChange={(e) => setProf(e.target.value)}
+                                                // inputProps={{
+                                                //     value: datosForm.profesional,
+                                                //     onChange: (e) => setProf(e.target.value)
+                                                // }}
+                                                //onChange: (e) => setUsername(e.target.value)
+                                                //{...register("profesional")}
 
                                                 />
+                                                {/* <CustomInput
+                                                    labelText="Profesional"
+                                                    id="profesional"
+                                                    formControlProps={{
+                                                        fullWidth: true,
+                                                    }}
+                                                    inputProps={{
+                                                        value:  prof,
+                                                        onChange: (e) => setProf(e.target.value)
+                                                    }}>
+                                                </CustomInput> */}
                                             </GridItem>
                                         </GridContainer>
                                         <GridContainer>

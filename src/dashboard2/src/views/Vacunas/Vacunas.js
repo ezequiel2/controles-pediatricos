@@ -84,6 +84,8 @@ export default function Vacunas() {
   const classes = useStyles();
   const [image, setImage] = React.useState(calendario);
   const [showAgregarVacuna, setShowAgregarVacuna] = useState(false);
+  const [tipoForm, setTipoForm] = useState('');
+  const [datosForm, setDatosForm] = useState();
   const OnClickAgregarVacuna = () => {
     setShowAgregarVacuna(!showAgregarVacuna);
   }
@@ -122,6 +124,36 @@ export default function Vacunas() {
     setShowAgregarVacuna(!showAgregarVacuna);
     //alert('HOLA');
     //console.log(e);
+  }
+
+  const MostrarForm = () => {
+    setShowAgregarVacuna(!showAgregarVacuna);
+    // setTipoForm('A')
+    //formulario.current.scrollIntoView();
+    //this.PedControlForm.current.focus();
+  }
+
+  const AltaForm = () => {
+    setTipoForm('A')
+    MostrarForm();
+  }
+
+  const VisualizarForm = (vacuna) => {
+    setDatosForm(vacuna);
+    setTipoForm('V');
+    MostrarForm();
+  }
+
+  const EditarForm = (vacuna) => {
+    setDatosForm(vacuna);
+    setTipoForm('M')
+    MostrarForm();
+  }
+
+  const BajaForm = (vacuna) => {
+    setDatosForm(vacuna);
+    setTipoForm('B'); 
+    MostrarForm();
   }
 
   return (
