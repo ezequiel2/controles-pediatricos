@@ -84,17 +84,19 @@ export default function Vacunas() {
   const classes = useStyles();
   const [image, setImage] = React.useState(calendario);
   const [showAgregarVacuna, setShowAgregarVacuna] = useState(false);
+  const [showMostrarForm, setMostrarForm] = useState(false);
   const [tipoForm, setTipoForm] = useState('');
   const [datosForm, setDatosForm] = useState();
-  const OnClickAgregarVacuna = () => {
-    setShowAgregarVacuna(!showAgregarVacuna);
-  }
 
-  const OnClickCargarVacuna = (e) => {
-    setShowAgregarVacuna(!showAgregarVacuna);
-    //alert('HOLA');
-    //console.log(e);
-  }
+  // const OnClickAgregarVacuna = () => {
+  //   setShowAgregarVacuna(!showAgregarVacuna);
+  // }
+
+  // const OnClickCargarVacuna = (e) => {
+  //   setShowAgregarVacuna(!showAgregarVacuna);
+  //   //alert('HOLA');
+  //   //console.log(e);
+  // }
 
   const [vacunas, setVacunas] = useState([]);
 
@@ -120,14 +122,14 @@ export default function Vacunas() {
     }
   }
   
-  const OnClickCancelarCargarVacuna = (e) => {
-    setShowAgregarVacuna(!showAgregarVacuna);
-    //alert('HOLA');
-    //console.log(e);
-  }
+  // const OnClickCancelarCargarVacuna = (e) => {
+  //   setShowAgregarVacuna(!showAgregarVacuna);
+  //   //alert('HOLA');
+  //   //console.log(e);
+  // }
 
   const MostrarForm = () => {
-    setShowAgregarVacuna(!showAgregarVacuna);
+    setMostrarForm(!showMostrarForm);
     // setTipoForm('A')
     //formulario.current.scrollIntoView();
     //this.PedControlForm.current.focus();
@@ -154,6 +156,20 @@ export default function Vacunas() {
     setDatosForm(vacuna);
     setTipoForm('B'); 
     MostrarForm();
+  }
+
+  const handleFormControles = (data) => {
+    //const { hijo, fecha, profesional, peso, altura, diametro, medicamentos, estudios, observaciones } = data;
+    //MostrarForm();
+    //setDatosForm(data);
+    //setDatosForm(data);
+    //setProf(data.profesional)
+    //console.log(data)
+    // alert('Hola' + datosForm.profesional)
+    // alert('Hola2' + prof)
+    cargarVacunas('35330117');
+    MostrarForm();
+
   }
 
   return (
@@ -281,7 +297,7 @@ export default function Vacunas() {
                 <h4 className={classes.cardTitleWhite}>Vacunas aplicadas</h4>
                 <IconButton
                   className={classes.cardHeaderButton}
-                  onClick={OnClickAgregarVacuna}>
+                  onClick={AltaForm}>
                   <AddToPhotosIcon
                     className={classes.cardTitleWhite}
                   //color='primary'
@@ -331,10 +347,10 @@ export default function Vacunas() {
             </Card>
           </GridItem>
         </GridContainer>
-        {showAgregarVacuna ? (
+        {showMostrarForm ? (
           <div><br /><VacunasForm
-            OnClickCargarVacuna={OnClickCargarVacuna}
-            OnClickCancelarCargarVacuna={OnClickCancelarCargarVacuna} /> </div>
+            OnClickCargarVacuna={handleFormControles}
+            OnClickCancelarCargarVacuna={showMostrarForm} /> </div>
         ) : null}
       </React.Fragment>
     </div>

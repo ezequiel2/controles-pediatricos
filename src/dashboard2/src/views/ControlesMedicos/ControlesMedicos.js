@@ -210,7 +210,7 @@ export default function ControlesMedicos() {
               {/* <Button color= 'primary' size='sm' className={classes.cardHeaderButton} onClick={OnClickAgregarControl}>Boton feo</Button> */}
               <IconButton
                 className={classes.cardHeaderButton}
-                onClick={MostrarForm}>
+                onClick={AltaForm}>
                 <AddToPhotosIcon
                   className={classes.cardTitleWhite}
                 //color='primary'

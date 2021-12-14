@@ -15,6 +15,8 @@ import {
     defaultFont,
 } from "../../assets/jss/material-dashboard-react";
 
+import { altaControl, modificarControl, bajaControl } from "../../../../controllers/AppController.js"; 
+
 
 const styles = {
     cardCategoryWhite: {
@@ -116,22 +118,30 @@ export default function ControlPedForm3({ tipoForm, handleFormControles, OnClick
     }
 
     const [prof, setProf] = useState(datosForm.profesional);
+    const [fecControl, setFecControl] = useState(datosForm.fecha_control_ped);
+    const [peso, setPeso] = useState(datosForm.peso);
+    const [altura, setAltura] = useState(datosForm.altura);
+    const [diametro, setDiametro] = useState(datosForm.diametro_cabeza);
+    const [estudios, setEstudios] = useState(datosForm.estudios_realizados);
+    const [medicamentos, setMedicamentos] = useState(datosForm.medicamentos_recetados);
+    const [observaciones, setObservaciones] = useState(datosForm.observaciones);
+
     const [prueba, setPrueba] = useState("PRUEBAAA");
 
-    
-//   const getProfile = async () => {
-//     try{
-//       let res = await api.get(`/usuarios/${usuario.id}`);
-//       console.log(res);
-//       let user = res.data;
-//       setNombre(user.nombre);
-//       setApellido(user.apellido);
-//       setUsername(user.username);
-//       return user;
-//     }catch(err){
-//       console.log(err);
-//     }
-//   }
+
+    //   const getProfile = async () => {
+    //     try{
+    //       let res = await api.get(`/usuarios/${usuario.id}`);
+    //       console.log(res);
+    //       let user = res.data;
+    //       setNombre(user.nombre);
+    //       setApellido(user.apellido);
+    //       setUsername(user.username);
+    //       return user;
+    //     }catch(err){
+    //       console.log(err);
+    //     }
+    //   }
 
 
     // const modifPerfil = (e) =>{
@@ -355,7 +365,7 @@ export default function ControlPedForm3({ tipoForm, handleFormControles, OnClick
                                                 className={classes.root}
                                                 size='small'
                                                 id="standard-basic"
-                                                label="Fecha"
+                                                label="Fecha del Control"
                                                 variant="outlined"
                                                 // {...register("fecha", { required: true })}
                                                 //{...register("fecha")}
@@ -493,7 +503,7 @@ export default function ControlPedForm3({ tipoForm, handleFormControles, OnClick
                         </GridItem>
                     </GridContainer>
                 </div>
-            } 
+            }
 
             {tipoForm === 'M' &&
                 <div>
@@ -541,10 +551,12 @@ export default function ControlPedForm3({ tipoForm, handleFormControles, OnClick
                                                     InputLabelProps={{ shrink: true }}
                                                     size='small'
                                                     id="standard-basic"
-                                                    label="Fecha de Nacimiento"
-                                                    name="fecha_nacimiento"
+                                                    label="Fecha del Control"
+                                                    name="fecha_control"
                                                     variant="outlined"
-                                                    value={datosForm.fecha_control_ped}
+                                                    value={fecControl}
+                                                    onChange={(e) => setFecControl(e.target.value)}
+                                                    //value={datosForm.fecha_control_ped}
                                                 //{...register("fechaNacimiento")}
                                                 />
                                             </GridItem>
@@ -589,7 +601,9 @@ export default function ControlPedForm3({ tipoForm, handleFormControles, OnClick
                                                     label="Peso"
                                                     //variant="standard"
                                                     {...register("peso")}
-                                                    value={datosForm.peso}
+                                                    value={peso}
+                                                    onChange={(e) => setPeso(e.target.value)}
+                                                    //value={datosForm.peso}
                                                 // InputLabelProps={{
                                                 //     shrink: true,
                                                 // }}
@@ -604,7 +618,9 @@ export default function ControlPedForm3({ tipoForm, handleFormControles, OnClick
                                                     label="Altura"
                                                     variant="outlined"
                                                     {...register("altura")}
-                                                    value={datosForm.altura}
+                                                    value={altura}
+                                                    onChange={(e) => setAltura(e.target.value)}
+                                                    //value={datosForm.altura}
                                                 />
                                             </GridItem>
                                             <GridItem xs={12} sm={12} md={3}>
@@ -631,7 +647,9 @@ export default function ControlPedForm3({ tipoForm, handleFormControles, OnClick
                                                     rows='5'
                                                     fullWidth='true'
                                                     {...register("medicamentos")}
-                                                    value={datosForm.medicamentos_recetados}
+                                                    value={medicamentos}
+                                                    onChange={(e) => setMedicamentos(e.target.value)}
+                                                    //value={datosForm.medicamentos_recetados}
                                                 />
                                             </GridItem>
                                         </GridContainer>
@@ -647,7 +665,9 @@ export default function ControlPedForm3({ tipoForm, handleFormControles, OnClick
                                                     rows='5'
                                                     fullWidth='true'
                                                     {...register("estudios")}
-                                                    value={datosForm.estudios_realizados}
+                                                    value={estudios}
+                                                    onChange={(e) => setEstudios(e.target.value)}
+                                                    //value={datosForm.estudios_realizados}
                                                 />
                                             </GridItem>
                                         </GridContainer>
@@ -663,7 +683,10 @@ export default function ControlPedForm3({ tipoForm, handleFormControles, OnClick
                                                     rows='5'
                                                     fullWidth='true'
                                                     {...register("observaciones")}
-                                                    value={datosForm.observaciones} />
+                                                    value={observaciones}
+                                                    onChange={(e) => setObservaciones(e.target.value)}
+                                                    //value={datosForm.observaciones}
+                                                    />
 
                                             </GridItem>
                                         </GridContainer>
