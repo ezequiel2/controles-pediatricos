@@ -141,7 +141,7 @@ export const modificarPerfilMapadre = async function (mapadre) {
     let url = urlWebServices.modificarPerfilMapadre + mapadre.dni_mapadre
 
     const formData = {
-        nombre: mapadre.nombre, 
+        nombre: mapadre.nombre,
         apellido: mapadre.apellido,
         telefono: mapadre.telefono,
         imagen_perfil: mapadre.imagen_perfil
@@ -334,6 +334,109 @@ export const listarControles = async function (dniMapadre) {
 
 }
 
+export const altaControl = async function (control) {
+
+    let url = urlWebServices.altaControl;
+
+    const formData = {
+        dni_mapadre: control.dni_mapadre,
+        nombre_hijo: control.nombre_hijo,
+        fecha_control_ped: control.fecha_control_ped,
+        profesional: control.profesional,
+        peso: control.peso,
+        altura: control.alergias,
+        diametro_cabeza: control.diametro_cabeza,
+        medicamentos_recetados: control.medicamentos_recetados,
+        estudios_realizados: control.estudios_realizados,
+        observaciones: control.observaciones
+    };
+
+    try {
+        let response = await api.put(url, formData);
+
+        let rdo = response.status;
+        // alert("rdo");
+        // alert(rdo);
+        switch (rdo) {
+            case 200:
+                {
+                    return ({ rdo: 0, mensaje: "Ok" }); //correcto
+                }
+            default:
+                {
+                    //otro error
+                    return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+                }
+        }
+    } catch (error) {
+        return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+    };
+}
+
+export const modificarControl = async function (control) {
+
+    let url = urlWebServices.modificarControl + control.id_control_ped;
+
+    const formData = {
+        fecha_control_ped: control.fecha_control_ped,
+        profesional: control.profesional,
+        peso: control.peso,
+        altura: control.alergias,
+        diametro_cabeza: control.diametro_cabeza,
+        medicamentos_recetados: control.medicamentos_recetados,
+        estudios_realizados: control.estudios_realizados,
+        observaciones: control.observaciones
+    };
+
+    alert("estoy en modifControl");
+    alert(JSON.stringify(formData));
+
+    try {
+        let response = await api.post(url, formData);
+
+        let rdo = response.status;
+        switch (rdo) {
+            case 200:
+                {
+                    return ({ rdo: 0, mensaje: "Ok" }); //correcto
+                }
+            default:
+                {
+                    //otro error
+                    return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+                }
+        }
+    } catch (error) {
+        return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+    };
+
+}
+
+export const bajaControl = async function (control) {
+
+    let url = urlWebServices.bajaControl + control.id_control_ped;
+
+    try {
+        let response = await api.delete(url);
+
+        let rdo = response.status;
+        switch (rdo) {
+            case 200:
+                {
+                    return ({ rdo: 0, mensaje: "Ok" }); //correcto
+                }
+            default:
+                {
+                    //otro error
+                    return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+                }
+        }
+    } catch (error) {
+        return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+    };
+
+}
+
 export const listarVacunas = async function (dniMapadre) {
 
     //url webservices
@@ -366,15 +469,100 @@ export const listarVacunas = async function (dniMapadre) {
 
 }
 
+
+
 export const altaVacuna = async function (vacuna) {
 
+    let url = urlWebServices.altaVacuna;
+
+    const formData = {
+        dni_mapadre: vacuna.dni_mapadre,
+        nombre_hijo: vacuna.nombre_hijo,
+        lugar_aplicacion: vacuna.lugar_aplicacion,
+        fecha_aplicacion: vacuna.fecha_aplicacion,
+        vacuna: vacuna.vacuna,
+        dosis: vacuna.dosis,
+    };
+
+    // alert("estoy en altaHijo");
+    // alert(JSON.stringify(formData));
+
+    try {
+        let response = await api.put(url, formData);
+
+        let rdo = response.status;
+        // alert("rdo");
+        // alert(rdo);
+        switch (rdo) {
+            case 200:
+                {
+                    return ({ rdo: 0, mensaje: "Ok" }); //correcto
+                }
+            default:
+                {
+                    //otro error
+                    return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+                }
+        }
+    } catch (error) {
+        return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+    };
 }
 
 export const modificarVacuna = async function (vacuna) {
 
+    let url = urlWebServices.modificarVacuna + vacuna.id_vacuna;
+
+    const formData = {
+        lugar_aplicacion: vacuna.lugar_aplicacion,
+        fecha_aplicacion: vacuna.fecha_aplicacion,
+        vacuna: vacuna.vacuna,
+        dosis: vacuna.dosis,
+    };
+
+    try {
+        let response = await api.post(url, formData);
+
+        let rdo = response.status;
+        switch (rdo) {
+            case 200:
+                {
+                    return ({ rdo: 0, mensaje: "Ok" }); //correcto
+                }
+            default:
+                {
+                    //otro error
+                    return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+                }
+        }
+    } catch (error) {
+        return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+    };
+
 }
 
 export const bajaVacuna = async function (vacuna) {
+
+    let url = urlWebServices.bajaVacuna + vacuna.id_vacuna;
+
+    try {
+        let response = await api.delete(url);
+
+        let rdo = response.status;
+        switch (rdo) {
+            case 200:
+                {
+                    return ({ rdo: 0, mensaje: "Ok" }); //correcto
+                }
+            default:
+                {
+                    //otro error
+                    return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+                }
+        }
+    } catch (error) {
+        return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+    };
 
 }
 

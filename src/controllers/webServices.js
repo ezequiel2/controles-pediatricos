@@ -37,6 +37,9 @@ export const urlWebServices = {
 
     //ControlesPediatricos
     listarControles: urlApi + 'api/controles-pediatricos/list/dni-mapadre/',
+    altaControl: urlApi + 'api/controles-pediatricos/create',
+    modificarControl: urlApi + 'api/controles-pediatricos/actualizar/id-controlPed/',
+    bajaControl: urlApi + 'api/controles-pediatricos/eliminar/id-controlPed/',
 
     //Vacunas
     listarVacunas: urlApi + 'api/vacunas/list/dni-mapadre/',
