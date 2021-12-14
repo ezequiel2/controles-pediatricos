@@ -204,11 +204,30 @@ export default function UserProfile() {
     let modifPerfil = await modificarPerfilMapadre(req);
 
     if (modifPerfil.rdo === 0) {
-      changeUser(modifPerfil.perfil);
-
+      // alert(JSON.stringify(modifPerfil.perfil));
+      setearNewUser();
+      
     } else if (modifPerfil.rdo === 1) {
       alert(modifPerfil.mensaje)
     }
+  }
+
+  const setearNewUser = () => {
+    let nombre = nombreModif;
+    let apellido = apellidoModif;
+    let telefono = telModif;
+    let dni = user.dni;
+    let email = user.email;
+
+    let newUser = {
+      dni,
+      email,
+      nombre,
+      apellido,
+      telefono
+    }
+
+    changeUser(newUser);
   }
 
 

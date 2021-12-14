@@ -122,7 +122,6 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
 
   const [selectedGrupoSangOption, setSelectedGrupoSangOption] = useState(null);
   const [selectedFactorSangOption, setSelectedFactorSangOption] = useState(null);
-
   const [fecNacModif, setFecNacModif] = useState(null);
   const [alergiasModif, setAlergiasModif] = useState(null);
   const [enfCronModif, setEnfCronModif] = useState(null);
