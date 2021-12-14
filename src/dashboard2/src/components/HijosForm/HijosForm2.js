@@ -5,7 +5,8 @@ import { useForm } from "react-hook-form";
 // core components
 import GridItem from "../Grid/GridItem.js";
 import GridContainer from "../Grid/GridContainer.js";
-import { TextField, InputLabel, Select, MenuItem } from "@material-ui/core";
+import { TextField, InputLabel, MenuItem, Box } from "@material-ui/core";
+import Select from 'react-select';
 import CustomInput from "../CustomInput/CustomInput.js";
 import Button from "../CustomButtons/Button.js";
 import Card from "../Card/Card.js";
@@ -18,10 +19,12 @@ import avatar from "../../assets/img/faces/marc.jpg";
 import {
   primaryColor,
   grayColor,
-  defaultFont,
 } from "../../assets/jss/material-dashboard-react";
 
 import { altaHijo, modificarHijo, bajaHijo } from '../../../../controllers/AppController';
+
+//importo Context
+import useUser from "../../../../contexts/hooks/useUser";
 
 const styles = {
   cardCategoryWhite: {
@@ -103,16 +106,35 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
   const { register, handleSubmit } = useForm();
   const [result, setResult] = useState("");
 
+  const { user, changeUser } = useUser();
+
+  const grupoSanguineoOptions = [
+    { value: 'A', label: 'A' },
+    { value: 'B', label: 'B' },
+    { value: 'AB', label: 'AB' },
+    { value: '0', label: '0' }
+  ]
+
+  const factorSanguineoOptions = [
+    { value: '+', label: '+' },
+    { value: '-', label: '-' }
+  ]
+
+  const [selectedGrupoSangOption, setSelectedGrupoSangOption] = useState(null);
+  const [selectedFactorSangOption, setSelectedFactorSangOption] = useState(null);
+
   const handleChangeSelect = (event) => {
     setHijo(event.target.value);
   };
 
   const onSubmitAlta = async (data) => {
-    // alert(JSON.stringify(data));
 
-    //aca hay que ponerle el input del dni_mapadre
-    let dni_mapadre = '33419623';
-    const res = { ...data, dni_mapadre }
+    let dni_mapadre = user.dni;
+    let grupo_sanguineo = selectedGrupoSangOption.value;
+    let factor_sanguineo = selectedFactorSangOption.value;
+    const res = { ...data, dni_mapadre, grupo_sanguineo, factor_sanguineo }
+
+    // alert(JSON.stringify(data));
 
     let getHijo = await altaHijo(res);
 
@@ -127,7 +149,7 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
     // alert(JSON.stringify(datosForm));
 
     //aca hay que ponerle el input del dni_mapadre
-    let dni_mapadre = '33419623';
+    let dni_mapadre = user.dni;
     const res = { ...data, dni_mapadre }
 
     let getHijo = await modificarHijo(res);
@@ -140,10 +162,10 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
   }
 
   const onSubmitBaja = async (data) => {
-    alert(JSON.stringify(data));
+    // alert(JSON.stringify(data));
 
     //aca hay que ponerle el input del dni_mapadre
-    let dni_mapadre = '33419623';
+    let dni_mapadre = user.dni;
     const res = { ...data, dni_mapadre }
 
     let getHijo = await bajaHijo(res);
@@ -197,24 +219,34 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                     </GridContainer>
                     <GridContainer>
                       <GridItem xs={12} sm={12} md={3}>
-                        <TextField
-                          className={classes.root}
-                          size='small'
-                          id="standard-basic"
-                          label="Grupo Sanguineo"
-                          variant="outlined"
-                          name="grupo_sanguineo"
-                          {...register("grupo_sanguineo")} />
+                        <InputLabel className={classes.selectLabel}>
+                          Grupo Sanguineo
+                        </InputLabel>
+                        <Select
+                          className="basic-single"
+                          classNamePrefix="select"
+                          name="color"
+                          options={grupoSanguineoOptions}
+                          styles={{
+                            menu: provided => ({ ...provided, zIndex: 9999 })
+                          }}
+                          onChange={setSelectedGrupoSangOption}
+                        />
                       </GridItem>
                       <GridItem xs={12} sm={12} md={3}>
-                        <TextField
-                          className={classes.root}
-                          size='small'
-                          id="standard-basic"
-                          variant="outlined"
-                          label="Factor Sanguineo"
-                          name="factor_sanguineo"
-                          {...register("factor_sanguineo")} />
+                        <InputLabel className={classes.selectLabel}>
+                          Factor Sanguineo
+                        </InputLabel>
+                        <Select
+                          className="basic-single"
+                          classNamePrefix="select"
+                          name="color"
+                          options={factorSanguineoOptions}
+                          styles={{
+                            menu: provided => ({ ...provided, zIndex: 9999 })
+                          }}
+                          onChange={setSelectedFactorSangOption}
+                        />
                       </GridItem>
                     </GridContainer>
                     <GridContainer>

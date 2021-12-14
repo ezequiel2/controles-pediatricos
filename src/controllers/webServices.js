@@ -25,6 +25,7 @@ export const urlWebServices = {
 
     //Perfil
     perfilMapadre: urlApi + 'api/usuarios/find/dni/',
+    modificarPerfilMapadre: urlApi + 'api/usuarios/actualizar/dni/',
 
     //Hijos
     listarHijos: urlApi + "api/hijos/list/dni-mapadre/",

@@ -17,6 +17,9 @@ import FormFeedback from '../form/FormFeedback';
 //importo llamada a sign-up
 import { signup } from '../controllers/AppController';
 
+//importo useContext
+import useUser from '../contexts/hooks/useUser';
+
 const useStyles = makeStyles((theme) => ({
   form: {
     marginTop: theme.spacing(6),
@@ -41,7 +44,10 @@ function SignUp() {
   const [telefono, setTelefono] = React.useState('');
   const [password, setPassword] = React.useState('');
 
-  const [signUpValido, setSignUpValido] = React.useState(false);
+  // const [signUpValido, setSignUpValido] = React.useState(false);
+  const [usuarioSignup, setUsuarioSignup] = React.useState();
+  const { user, changeUser } = useUser();
+
 
   const handleVariables = (values) => {
     setValidEmail(values.email);
@@ -88,7 +94,9 @@ function SignUp() {
     let getSignup = await signup(datos);
 
     if (getSignup.rdo === 0) {
-      setSignUpValido(true);
+      // setSignUpValido(true);
+      setUsuarioSignup(getSignup.user);
+
     } else if (getSignup.rdo === 1) {
       alert(getSignup.mensaje)
     }
@@ -104,7 +112,8 @@ function SignUp() {
   };
 
   const redirect = () => {
-    if (signUpValido) {
+    if (usuarioSignup) {
+      changeUser(usuarioSignup);
       return <Redirect to='/admin/miperfil' />
     }
   }

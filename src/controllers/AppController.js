@@ -85,7 +85,7 @@ export const signup = async function (signup) {
         switch (rdo) {
             case 200:
                 {
-                    return ({ rdo: 0, mensaje: "Ok" }); //correcto
+                    return ({ rdo: 0, user: response.data }); //correcto
                 }
             default:
                 {
@@ -100,7 +100,7 @@ export const signup = async function (signup) {
 }
 
 export const getPerfilMapadre = async function (dni) {
-    
+
     //url webservices
     let url = urlWebServices.perfilMapadre + dni;
 
@@ -133,6 +133,39 @@ export const getPerfilMapadre = async function (dni) {
         // alert(error);
         // alert("esto es el status");
         // alert(error.status);
+    };
+}
+
+export const modificarPerfilMapadre = async function (mapadre) {
+    //url webservices
+    let url = urlWebServices.modificarPerfilMapadre + mapadre.dni
+
+    const formData = {
+        fecha_nacimiento: mapadre.fecha_nacimiento,
+        grupo_sanguineo: mapadre.grupo_sanguineo,
+        factor_sanguineo: mapadre.factor_sanguineo,
+        alergias: mapadre.alergias,
+        enfermedades_cronicas: mapadre.enfermedades_cronicas,
+        comentarios: mapadre.comentarios
+    };
+
+    try {
+        let response = await api.post(url, formData);
+
+        let rdo = response.status;
+        switch (rdo) {
+            case 200:
+                {
+                    return ({ rdo: 0, perfil: response.data }); //correcto
+                }
+            default:
+                {
+                    //otro error
+                    return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+                }
+        }
+    } catch (error) {
+        return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
     };
 }
 
@@ -184,8 +217,8 @@ export const altaHijo = async function (hijo) {
         comentarios: hijo.comentarios
     };
 
-    alert("estoy en altaHijo");
-    alert(JSON.stringify(formData));
+    // alert("estoy en altaHijo");
+    // alert(JSON.stringify(formData));
 
     try {
         let response = await api.put(url, formData);
@@ -212,9 +245,6 @@ export const altaHijo = async function (hijo) {
 export const modificarHijo = async function (hijo) {
     //url webservices
     let url = urlWebServices.modificarHijo1 + hijo.dni_mapadre + urlWebServices.modificarHijo2 + hijo.nombre;
-
-    alert("url en appController");
-    alert(JSON.stringify(url));
 
     const formData = {
         fecha_nacimiento: hijo.fecha_nacimiento,
@@ -249,12 +279,8 @@ export const modificarHijo = async function (hijo) {
 }
 
 export const bajaHijo = async function (hijo) {
-
-    alert(JSON.stringify(hijo));
     //url webservices
     let url = urlWebServices.bajaHijo1 + hijo.dni_mapadre + urlWebServices.bajaHijo2 + hijo.nombre;
-
-    alert(url);
 
     try {
         let response = await api.delete(url);
@@ -340,16 +366,16 @@ export const listarVacunas = async function (dniMapadre) {
 
 }
 
-export const altaVacuna = async function(vacuna){
+export const altaVacuna = async function (vacuna) {
 
 }
 
-export const modificarVacuna = async function(vacuna){
-    
+export const modificarVacuna = async function (vacuna) {
+
 }
 
-export const bajaVacuna = async function(vacuna){
-    
+export const bajaVacuna = async function (vacuna) {
+
 }
 
 export const guardarImgUser = async function (message) {

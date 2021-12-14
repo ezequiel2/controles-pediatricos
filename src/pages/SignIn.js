@@ -38,10 +38,9 @@ const SignIn = () => {
   const [sent, setSent] = useState(false);
   const [validEmail, setValidEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [usuarioValido, setUsuarioValido] = useState(false);
+  // const [usuarioValido, setUsuarioValido] = useState(false);
 
   const [usuarioLogin, setUsuarioLogin] = useState();
-
   const { user, changeUser } = useUser();
 
   const handleEmail = (values) => {
@@ -51,17 +50,6 @@ const SignIn = () => {
     //alert(values.password);
     setPassword(values.password);
   }
-
-  // useEffect(() => {
-  //   alert("estoy en useEffect")
-  //   if (usuarioValido)
-  //     changeUser(usuarioLogin);
-  // });
-
-  // useEffect(() => {
-  //   cargarHijos('33419623');
-  //   cargarPerfilMapadre('33419623');
-  // }, []);
 
   const validate = (values) => {
     const errors = required(['email', 'password'], values);
@@ -85,9 +73,7 @@ const SignIn = () => {
     }
     let getLogin = await login(datos);
     if (getLogin.rdo === 0) {
-      // setUsuarioValido(true);
       setUsuarioLogin(getLogin.user);
-      // changeUser(usuarioLogin);
 
     } else if (getLogin.rdo === 1) {
       alert(getLogin.mensaje)
@@ -110,7 +96,6 @@ const SignIn = () => {
 
   const redirect = () => {
     if (usuarioLogin) {
-      alert(JSON.stringify(usuarioLogin))
       changeUser(usuarioLogin);
       return <Redirect to='/admin/miperfil' />
     }
