@@ -138,16 +138,16 @@ export const getPerfilMapadre = async function (dni) {
 
 export const modificarPerfilMapadre = async function (mapadre) {
     //url webservices
-    let url = urlWebServices.modificarPerfilMapadre + mapadre.dni
+    let url = urlWebServices.modificarPerfilMapadre + mapadre.dni_mapadre
 
     const formData = {
-        fecha_nacimiento: mapadre.fecha_nacimiento,
-        grupo_sanguineo: mapadre.grupo_sanguineo,
-        factor_sanguineo: mapadre.factor_sanguineo,
-        alergias: mapadre.alergias,
-        enfermedades_cronicas: mapadre.enfermedades_cronicas,
-        comentarios: mapadre.comentarios
+        nombre: mapadre.nombre, 
+        apellido: mapadre.apellido,
+        telefono: mapadre.telefono,
+        imagen_perfil: mapadre.imagen_perfil
     };
+
+    alert(JSON.stringify(formData));
 
     try {
         let response = await api.post(url, formData);

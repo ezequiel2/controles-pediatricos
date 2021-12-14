@@ -106,14 +106,19 @@ export default function UserProfile() {
   const [showMostrarForm, setMostrarForm] = useState(false);
   const [tipoForm, setTipoForm] = useState('');
 
-
   // const { register, handleSubmit } = useForm();
+
 
   const [hijos, setHijos] = useState([]);
   const [mapadre, setMapadre] = useState([]);
   const [hijosStatus, setHijosStatus] = useState(false);
 
   const { user, changeUser } = useUser();
+
+  const [nombreModif, setNombreModif] = useState(user.nombre);
+  const [apellidoModif, setApellidoModif] = useState(user.apellido);
+  const [telModif, setTelModif] = useState(user.telefono);
+
 
   const handleFormControles = () => {
     cargarHijos(user.dni);
@@ -178,12 +183,25 @@ export default function UserProfile() {
     }
   }
 
-  const onSubmitActuPerfil = async (data) => {
+  const onClickActualizarPerfil = async (data) => {
+
+    let dni_mapadre = user.dni;
+    let nombre = nombreModif;
+    let apellido = apellidoModif;
+    let telefono = telModif;
+
+    const req = {
+      ...data,
+      dni_mapadre,
+      nombre,
+      apellido,
+      telefono
+    }
 
     alert("en onSubActuPerfil");
-    alert(JSON.stringify(data));
-    
-    let modifPerfil = await modificarPerfilMapadre(data);
+    // alert(JSON.stringify(req));
+
+    let modifPerfil = await modificarPerfilMapadre(req);
 
     if (modifPerfil.rdo === 0) {
       changeUser(modifPerfil.perfil);
@@ -204,91 +222,100 @@ export default function UserProfile() {
                 <h4 className={classes.cardTitleWhite}>Edita tu Perfil</h4>
                 {/* <p className={classes.cardCategoryWhite}>Completa tu perfil</p> */}
               </CardHeader>
-              {/* <form onSubmit={handleSubmit(onSubmitActuPerfil)}> */}
-                <CardBody>
-                  <GridContainer>
-                    <GridItem xs={12} sm={12} md={5}>
-                      <CustomInput
-                        labelText="DNI"
-                        //id="company-disabled"
-                        id='dni'
-                        formControlProps={{
-                          fullWidth: true,
-                          focused: true,
-                        }}
-                        inputProps={{
-                          readOnly: true,
-                          shrink: true,
-                        }}
-                        value={user.dni}
-                      />
-                    </GridItem>
-                    <GridItem xs={12} sm={12} md={5}>
-                      <CustomInput
-                        labelText="Email"
-                        id="email"
-                        formControlProps={{
-                          fullWidth: true,
-                          focused: true,
-                        }}
-                        inputProps={{
-                          readOnly: true,
-                          focused: true,
-                        }}
-                        value={user.email}
-                      />
-                    </GridItem>
-                  </GridContainer>
-                  <GridContainer>
-                    <GridItem xs={12} sm={12} md={5}>
-                      <CustomInput
-                        labelText="Nombre"
-                        id="nombre"
-                        formControlProps={{
-                          fullWidth: true,
-                          focused: true,
-                        }}
-                        value={user.nombre}
-                        // {...register("nombre")}
-                      />
-                    </GridItem>
-                    <GridItem xs={12} sm={12} md={5}>
-                      <CustomInput
-                        labelText="Apellido"
-                        id="apellido"
-                        formControlProps={{
-                          fullWidth: true,
-                          focused: true,
-                        }}
-                        value={user.apellido}
-                        // {...register("apellido")}
-                      />
-                    </GridItem>
-                  </GridContainer>
-                  <GridContainer>
-                    <GridItem xs={12} sm={12} md={5}>
-                      <CustomInput
-                        labelText="Telefono"
-                        id="telefono"
-                        formControlProps={{
-                          fullWidth: true,
-                          focused: true,
-                        }}
-                        value={user.telefono}
-                        // {...register("telefono")}
-                      />
-                    </GridItem>
-                  </GridContainer>
-                </CardBody>
-                <CardFooter>
-                  <Button
-                    className={classes.formButton}
-                    color='primary'
-                    // type='submit'
-                  >
-                    Actualizar Perfil
-                  </Button>
-                </CardFooter>
+              {/* <form onSubmit={handleSubmit(onSubmitActualizarPerfil)}> */}
+              <CardBody>
+                <GridContainer>
+                  <GridItem xs={12} sm={12} md={5}>
+                    <CustomInput
+                      labelText="DNI"
+                      //id="company-disabled"
+                      id='dni'
+                      formControlProps={{
+                        fullWidth: true,
+                        focused: true,
+                      }}
+                      inputProps={{
+                        readOnly: true,
+                        shrink: true,
+                      }}
+                      value={user.dni}
+                    />
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={5}>
+                    <CustomInput
+                      labelText="Email"
+                      id="email"
+                      formControlProps={{
+                        fullWidth: true,
+                        focused: true,
+                      }}
+                      inputProps={{
+                        readOnly: true,
+                        focused: true,
+                      }}
+                      value={user.email}
+                    />
+                  </GridItem>
+                </GridContainer>
+                <GridContainer>
+                  <GridItem xs={12} sm={12} md={5}>
+                    <CustomInput
+                      labelText="Nombre"
+                      id="nombre"
+                      formControlProps={{
+                        fullWidth: true,
+                        focused: true,
+                      }}
+                      inputProps={{
+                        value: nombreModif,
+                        onChange: (e) => setNombreModif(e.target.value)
+                      }}
+                      value={nombreModif}
+                    />
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={5}>
+                    <CustomInput
+                      labelText="Apellido"
+                      id="apellido"
+                      formControlProps={{
+                        fullWidth: true,
+                        focused: true,
+                      }}
+                      inputProps={{
+                        value: apellidoModif,
+                        onChange: (e) => setApellidoModif(e.target.value)
+                      }}
+                      value={apellidoModif}
+                    />
+                  </GridItem>
+                </GridContainer>
+                <GridContainer>
+                  <GridItem xs={12} sm={12} md={5}>
+                    <CustomInput
+                      labelText="Telefono"
+                      id="telefono"
+                      formControlProps={{
+                        fullWidth: true,
+                        focused: true,
+                      }}
+                      inputProps={{
+                        value: telModif,
+                        onChange: (e) => setTelModif(e.target.value)
+                      }}
+                      value={telModif}
+                    />
+                  </GridItem>
+                </GridContainer>
+              </CardBody>
+              <CardFooter>
+                <Button
+                  className={classes.formButton}
+                  color='primary'
+                  onClick={onClickActualizarPerfil}
+                >
+                  Actualizar Perfil
+                </Button>
+              </CardFooter>
               {/* </form> */}
             </Card>
           </GridItem>

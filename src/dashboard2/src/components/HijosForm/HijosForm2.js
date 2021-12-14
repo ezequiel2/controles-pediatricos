@@ -123,9 +123,10 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
   const [selectedGrupoSangOption, setSelectedGrupoSangOption] = useState(null);
   const [selectedFactorSangOption, setSelectedFactorSangOption] = useState(null);
 
-  const handleChangeSelect = (event) => {
-    setHijo(event.target.value);
-  };
+  const [fecNacModif, setFecNacModif] = useState(datosForm.fecha_nacimiento);
+  const [alergiasModif, setAlergiasModif] = useState(datosForm.alergias);
+  const [enfCronModif, setEnfCronModif] = useState(datosForm.enfermedades_cronicas);
+  const [comentariosModif, setComentariosModif] = useState(datosForm.comentarios);
 
   const onSubmitAlta = async (data) => {
 
@@ -133,7 +134,8 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
     let grupo_sanguineo = selectedGrupoSangOption.value;
     let factor_sanguineo = selectedFactorSangOption.value;
     const res = { ...data, dni_mapadre, grupo_sanguineo, factor_sanguineo }
-
+    setSelectedFactorSangOption(null);
+    setSelectedGrupoSangOption(null);
     // alert(JSON.stringify(data));
 
     let getHijo = await altaHijo(res);
@@ -146,13 +148,31 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
   }
 
   const onSubmitModificacion = async (data) => {
-    // alert(JSON.stringify(datosForm));
 
     //aca hay que ponerle el input del dni_mapadre
     let dni_mapadre = user.dni;
-    const res = { ...data, dni_mapadre }
+    let nombre = datosForm.nombre;
+    let grupo_sanguineo = selectedGrupoSangOption.value;
+    let factor_sanguineo = selectedFactorSangOption.value;
+    let fecha_nacimiento = fecNacModif;
+    let alergias = alergiasModif;
+    let enfermedades_cronicas = enfCronModif;
+    let comentarios = comentariosModif;
+    const req = {
+      ...data,
+      dni_mapadre, 
+      grupo_sanguineo, 
+      factor_sanguineo,
+      nombre,
+      fecha_nacimiento,
+      alergias,
+      enfermedades_cronicas,
+      comentarios
+    }
+    setSelectedFactorSangOption(null);
+    setSelectedGrupoSangOption(null);
 
-    let getHijo = await modificarHijo(res);
+    let getHijo = await modificarHijo(req);
 
     if (getHijo.rdo === 0) {
       handleFormControles();
@@ -477,7 +497,9 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                           name="nombre"
                           readOnly
                           value={datosForm.nombre}
-                          {...register("nombre")}
+                          // value={nombreModif}
+                          // onChange={(e) => setNombreModif(e.target.value)}
+                        // {...register("nombre")}
                         />
                       </GridItem>
                       <GridItem xs={12} sm={12} md={3}>
@@ -490,34 +512,44 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                           label="Fecha de Nacimiento"
                           name="fecha_nacimiento"
                           variant="outlined"
-                          value={datosForm.fecha_nacimiento}
-                          {...register("fecha_nacimiento")}
+                          // value={datosForm.fecha_nacimiento}
+                          value={fecNacModif}
+                          onChange={(e) => setFecNacModif(e.target.value)}
+                        // {...register("fecha_nacimiento")}
                         />
                       </GridItem>
                     </GridContainer>
                     <GridContainer>
                       <GridItem xs={12} sm={12} md={3}>
-                        <TextField
-                          className={classes.root}
-                          size='small'
-                          id="standard-basic"
-                          label="Grupo Sanguineo"
-                          name="grupo_sanguineo"
-                          variant="outlined"
-                          value={datosForm.grupo_sanguineo}
-                          {...register("grupo_sanguineo")}
+                        <InputLabel className={classes.selectLabel}>
+                          Grupo Sanguineo
+                        </InputLabel>
+                        <Select
+                          className="basic-single"
+                          classNamePrefix="select"
+                          name="grupoSangModif"
+                          defaultValue={datosForm.grupo_sanguineo}
+                          options={grupoSanguineoOptions}
+                          styles={{
+                            menu: provided => ({ ...provided, zIndex: 9999 })
+                          }}
+                          onChange={setSelectedGrupoSangOption}
                         />
                       </GridItem>
                       <GridItem xs={12} sm={12} md={3}>
-                        <TextField
-                          className={classes.root}
-                          size='small'
-                          id="standard-basic"
-                          variant="outlined"
-                          name="factor_sanguineo"
-                          label="Factor Sanguineo"
-                          value={datosForm.factor_sanguineo}
-                          {...register("factor_sanguineo")}
+                        <InputLabel className={classes.selectLabel}>
+                          Factor Sanguineo
+                        </InputLabel>
+                        <Select
+                          className="basic-single"
+                          classNamePrefix="select"
+                          name="color"
+                          defaultValue={datosForm.factor_sanguineo}
+                          options={factorSanguineoOptions}
+                          styles={{
+                            menu: provided => ({ ...provided, zIndex: 9999 })
+                          }}
+                          onChange={setSelectedFactorSangOption}
                         />
                       </GridItem>
                     </GridContainer>
@@ -533,8 +565,10 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                           rows='5'
                           fullWidth='true'
                           name="alergias"
-                          value={datosForm.alergias}
-                          {...register("alergias")}
+                          // value={datosForm.alergias}
+                          value={alergiasModif}
+                          onChange={(e) => setAlergiasModif(e.target.value)}
+                        // {...register("alergias")}
                         />
                       </GridItem>
                     </GridContainer>
@@ -550,8 +584,10 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                           rows='5'
                           fullWidth='true'
                           name="enfermedades_cronicas"
-                          value={datosForm.enfermedades_cronicas}
-                          {...register("enfermedades_cronicas")}
+                          // value={datosForm.enfermedades_cronicas}
+                          value={enfCronModif}
+                          onChange={(e) => setEnfCronModif(e.target.value)}
+                        // {...register("enfermedades_cronicas")}
                         />
                       </GridItem>
                     </GridContainer>
@@ -567,8 +603,10 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                           rows='5'
                           fullWidth='true'
                           name="comentarios"
-                          value={datosForm.comentarios}
-                          {...register("comentarios")}
+                          // value={datosForm.comentarios}
+                          value={comentariosModif}
+                          onChange={(e) => setComentariosModif(e.target.value)}
+                        // {...register("comentarios")}
                         />
                       </GridItem>
                     </GridContainer>
