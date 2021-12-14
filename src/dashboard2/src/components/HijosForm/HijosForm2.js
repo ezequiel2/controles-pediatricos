@@ -123,10 +123,10 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
   const [selectedGrupoSangOption, setSelectedGrupoSangOption] = useState(null);
   const [selectedFactorSangOption, setSelectedFactorSangOption] = useState(null);
 
-  const [fecNacModif, setFecNacModif] = useState(datosForm.fecha_nacimiento);
-  const [alergiasModif, setAlergiasModif] = useState(datosForm.alergias);
-  const [enfCronModif, setEnfCronModif] = useState(datosForm.enfermedades_cronicas);
-  const [comentariosModif, setComentariosModif] = useState(datosForm.comentarios);
+  const [fecNacModif, setFecNacModif] = useState(null);
+  const [alergiasModif, setAlergiasModif] = useState(null);
+  const [enfCronModif, setEnfCronModif] = useState(null);
+  const [comentariosModif, setComentariosModif] = useState(null);
 
   const onSubmitAlta = async (data) => {
 
@@ -160,8 +160,8 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
     let comentarios = comentariosModif;
     const req = {
       ...data,
-      dni_mapadre, 
-      grupo_sanguineo, 
+      dni_mapadre,
+      grupo_sanguineo,
       factor_sanguineo,
       nombre,
       fecha_nacimiento,
@@ -195,6 +195,21 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
     } else if (getHijo.rdo === 1) {
       alert(getHijo.mensaje)
     }
+  }
+
+
+  useEffect(() => {
+    if (tipoForm === 'M')
+      setValoresIniciales();
+  }, [tipoForm]);
+
+  const setValoresIniciales = () => {
+    setSelectedGrupoSangOption(datosForm.grupo_sanguineo);
+    setSelectedFactorSangOption(datosForm.factor_sanguineo);
+    setFecNacModif(datosForm.fecha_nacimiento);
+    setAlergiasModif(datosForm.alergias);
+    setEnfCronModif(datosForm.enfermedades_cronicas);
+    setComentariosModif(datosForm.comentarios);
   }
 
   return (
@@ -497,8 +512,8 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                           name="nombre"
                           readOnly
                           value={datosForm.nombre}
-                          // value={nombreModif}
-                          // onChange={(e) => setNombreModif(e.target.value)}
+                        // value={nombreModif}
+                        // onChange={(e) => setNombreModif(e.target.value)}
                         // {...register("nombre")}
                         />
                       </GridItem>
@@ -528,7 +543,7 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                           className="basic-single"
                           classNamePrefix="select"
                           name="grupoSangModif"
-                          defaultValue={datosForm.grupo_sanguineo}
+                          value={selectedGrupoSangOption}
                           options={grupoSanguineoOptions}
                           styles={{
                             menu: provided => ({ ...provided, zIndex: 9999 })
@@ -544,7 +559,7 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                           className="basic-single"
                           classNamePrefix="select"
                           name="color"
-                          defaultValue={datosForm.factor_sanguineo}
+                          defaultValue={selectedFactorSangOption}
                           options={factorSanguineoOptions}
                           styles={{
                             menu: provided => ({ ...provided, zIndex: 9999 })
