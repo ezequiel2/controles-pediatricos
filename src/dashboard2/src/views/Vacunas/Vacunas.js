@@ -28,6 +28,7 @@ import {
 } from '../../assets/jss/material-dashboard-react'
 
 import { listarVacunas } from '../../../../controllers/AppController';
+import useUser from "../../../../contexts/hooks/useUser.js";
 
 const styles = {
   cardCategoryWhite: {
@@ -74,12 +75,6 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-const tablaVacunas = [
-  { nombre: 'Dakota Rice', fecha: '01/02/2021', vacuna: 'Varicela', lugar: 'Lanus' , dosis: 'Unica'},
-  { nombre: 'Minerva Hooper', fecha: '08/01/2021', vacuna: 'Hepatitis B', lugar: 'Lomas de Zamora', dosis: 'Primera' },
-  { nombre: 'Dakota Rice', fecha: '12/02/2020', vacuna: 'BCG', lugar: 'CABA' , dosis: 'Refuerzo'},
-]
-
 export default function Vacunas() {
   const classes = useStyles();
   const [image, setImage] = React.useState(calendario);
@@ -88,21 +83,12 @@ export default function Vacunas() {
   const [tipoForm, setTipoForm] = useState('');
   const [datosForm, setDatosForm] = useState();
 
-  // const OnClickAgregarVacuna = () => {
-  //   setShowAgregarVacuna(!showAgregarVacuna);
-  // }
-
-  // const OnClickCargarVacuna = (e) => {
-  //   setShowAgregarVacuna(!showAgregarVacuna);
-  //   //alert('HOLA');
-  //   //console.log(e);
-  // }
-
   const [vacunas, setVacunas] = useState([]);
 
+  const { user, changeUser } = useUser();
+
   useEffect(() => {
-    //alert('en el useEffect')
-    cargarVacunas('35330117');
+    cargarVacunas(user.dni);
   }, []);
 
   const cargarVacunas = async (dni) => {
@@ -121,7 +107,7 @@ export default function Vacunas() {
       alert(getListarVacunas.mensaje)
     }
   }
-  
+
   // const OnClickCancelarCargarVacuna = (e) => {
   //   setShowAgregarVacuna(!showAgregarVacuna);
   //   //alert('HOLA');
@@ -154,7 +140,7 @@ export default function Vacunas() {
 
   const BajaForm = (vacuna) => {
     setDatosForm(vacuna);
-    setTipoForm('B'); 
+    setTipoForm('B');
     MostrarForm();
   }
 
@@ -188,107 +174,6 @@ export default function Vacunas() {
                   sx={{ width: 151 }}
                   image={image}
                 />
-                {/* <GridContainer> */}
-                {/* <GridItem xs={12} sm={12} md={5}>
-                  <CustomInput
-                    labelText="DNI"
-                    //id="company-disabled"
-                    id='dni'
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      disabled: true,
-                    }}
-                  />
-                </GridItem> */}
-                {/* <GridItem xs={12} sm={12} md={3}>
-                  <CustomInput
-                    labelText="Username"
-                    id="username"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                  />
-                </GridItem> */}
-                {/* <GridItem xs={12} sm={12} md={5}>
-                  <CustomInput
-                    labelText="Email"
-                    id="email"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      disabled: true,
-                    }}
-                  />
-                </GridItem> */}
-                {/* </GridContainer> */}
-                {/* <GridContainer>
-                <GridItem xs={12} sm={12} md={5}>
-                  <CustomInput
-                    labelText="Nombre"
-                    id="nombre"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={5}>
-                  <CustomInput
-                    labelText="Apellido"
-                    id="apellido"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                  />
-                </GridItem>
-              </GridContainer>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={5}>
-                  <CustomInput
-                    labelText="Telefono"
-                    id="telefono"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                  />
-                </GridItem> */}
-                {/* <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="Country"
-                    id="country"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                  />
-                </GridItem> */}
-                {/* <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="Postal Code"
-                    id="postal-code"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                  />
-                </GridItem> */}
-                {/* </GridContainer> */}
-                {/* <GridContainer>
-                <GridItem xs={12} sm={12} md={12}>
-                  <InputLabel style={{ color: "#AAAAAA" }}>About me</InputLabel>
-                  <CustomInput
-                    labelText="Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."
-                    id="about-me"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      multiline: true,
-                      rows: 5,
-                    }}
-                  />
-                </GridItem>
-              </GridContainer> */}
               </CardBody>
             </Card>
             <br />
@@ -309,36 +194,36 @@ export default function Vacunas() {
               {
                 vacunas &&
                 (
-              <CardBody>
-                <Table
-                  tableHeaderColor="primary"
-                  tableHead={["Nombre", "Fecha", "Vacuna", "Lugar", "Dosis", "", ""]}
-                  tableData={
-                    vacunas.map((vacuna) => (
-                      [vacuna.nombre_hijo, 
-                      vacuna.fecha_aplicacion,
-                      vacuna.vacuna,
-                      vacuna.lugar_aplicacion,
-                      vacuna.dosis,
-                      <IconButton className={classes.tableActionButton}>
-                        <RemoveRedEye className={classes.tableActionButtonIcon + " " + classes.edit} />
-                      </IconButton>,
-                      <IconButton className={classes.tableActionButton}>
-                        <EditIcon className={classes.tableActionButtonIcon + " " + classes.edit} />
-                      </IconButton>,
-                      <IconButton className={classes.tableActionButton}>
-                        <CloseIcon className={classes.tableActionButtonIcon + " " + classes.close} />
-                      </IconButton>
-                      ]))   
-                  }
-                    
-                  // [
-                  //   ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738"],
-                  //   ["Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789"],
-                  //   ["Sage Rodriguez", "Netherlands", "Baileux", "$56,142"],
-                  // ]}
-                />
-              </CardBody>
+                  <CardBody>
+                    <Table
+                      tableHeaderColor="primary"
+                      tableHead={["Nombre", "Fecha", "Vacuna", "Lugar", "Dosis", "", ""]}
+                      tableData={
+                        vacunas.map((vacuna) => (
+                          [vacuna.nombre_hijo,
+                          vacuna.fecha_aplicacion,
+                          vacuna.vacuna,
+                          vacuna.lugar_aplicacion,
+                          vacuna.dosis,
+                          <IconButton className={classes.tableActionButton} onClick={() => VisualizarForm(vacuna)}>
+                            <RemoveRedEye className={classes.tableActionButtonIcon + " " + classes.edit} />
+                          </IconButton>,
+                          <IconButton className={classes.tableActionButton} onClick={() => EditarForm(vacuna)}>
+                            <EditIcon className={classes.tableActionButtonIcon + " " + classes.edit} />
+                          </IconButton>,
+                          <IconButton className={classes.tableActionButton} onClick={() => BajaForm(vacuna)}>
+                            <CloseIcon className={classes.tableActionButtonIcon + " " + classes.close} />
+                          </IconButton>
+                          ]))
+                      }
+
+                    // [
+                    //   ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738"],
+                    //   ["Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789"],
+                    //   ["Sage Rodriguez", "Netherlands", "Baileux", "$56,142"],
+                    // ]}
+                    />
+                  </CardBody>
                 )
               }
               <CardFooter>
@@ -348,9 +233,14 @@ export default function Vacunas() {
           </GridItem>
         </GridContainer>
         {showMostrarForm ? (
-          <div><br /><VacunasForm
-            OnClickCargarVacuna={handleFormControles}
-            OnClickCancelarCargarVacuna={showMostrarForm} /> </div>
+          <div>
+            <br />
+            <VacunasForm
+              tipoForm={tipoForm}
+              handleFormControles={handleFormControles}
+              OnClickCancelar={MostrarForm}
+              datosForm={datosForm} />
+          </div>
         ) : null}
       </React.Fragment>
     </div>
