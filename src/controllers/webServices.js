@@ -47,6 +47,9 @@ export const urlWebServices = {
     modificarVacuna: urlApi + 'api/vacunas/actualizar/id-vacuna/',
     bajaVacuna: urlApi + 'api/vacunas/eliminar/id-vacuna/',
 
+    //Percentiles
+    listarUltimosControles: urlApi + 'api/controles-pediatricos/list/ultimos/dni-mapadre/',
+
     //Imagenes
     uploadFileImg: urlApi + "utils/uploadImg",
     guardarImgUser: urlApi + "api/users/guardarImgUser",

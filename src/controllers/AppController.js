@@ -344,7 +344,7 @@ export const altaControl = async function (control) {
         fecha_control_ped: control.fecha_control_ped,
         profesional: control.profesional,
         peso: control.peso,
-        altura: control.alergias,
+        altura: control.altura,
         diametro_cabeza: control.diametro_cabeza,
         medicamentos_recetados: control.medicamentos_recetados,
         estudios_realizados: control.estudios_realizados,
@@ -469,8 +469,6 @@ export const listarVacunas = async function (dniMapadre) {
 
 }
 
-
-
 export const altaVacuna = async function (vacuna) {
 
     let url = urlWebServices.altaVacuna;
@@ -562,6 +560,38 @@ export const bajaVacuna = async function (vacuna) {
         }
     } catch (error) {
         return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+    };
+
+}
+
+export const listarUltimosControles = async function (dniMapadre) {
+
+    //url webservices
+    let url = urlWebServices.listarUltimosControles + dniMapadre;
+
+    try {
+        let response = await api.get(url);
+
+        let rdo = response.status;
+        // alert("rdo");
+        // alert(rdo);
+        switch (rdo) {
+            case 200:
+                {
+                    return ({ rdo: 0, listaUltimosControles: response.data }); //correcto
+                }
+            default:
+                {
+                    //otro error
+                    return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+                }
+        }
+    } catch (error) {
+        return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+        // alert("esto es error");
+        // alert(error);
+        // alert("esto es el status");
+        // alert(error.status);
     };
 
 }

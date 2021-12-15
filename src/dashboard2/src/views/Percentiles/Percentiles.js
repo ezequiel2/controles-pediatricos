@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -26,6 +26,10 @@ import { Link } from 'react-router-dom';
 import Carousel from 'react-material-ui-carousel'
 import { CardActionArea } from '@mui/material';
 
+import { listarUltimosControles } from '../../../../controllers/AppController';
+
+//importo Context
+import useUser from "../../../../contexts/hooks/useUser";
 
 
 const styles = {
@@ -100,12 +104,12 @@ const imagenesPercentiles = [
   { nombreImagen: 'IMC niños 1 a 5 años', link: '/images/percentiles/IMCNiños1a5.jpg' },
 ]
 
-const tablaControlesMed = [
-  { nombre: 'Dakota Rice', fecha: '12/06/2021', peso: '6,12 kg', altura: '62,00 cm', diamCabeza: '34,90 cm' },
-  { nombre: 'Minerva Hooper', fecha: '12/07/2021', peso: '12,50 kg', altura: '82,50 cm', diamCabeza: '42,80 cm' },
-  { nombre: 'Dakota Rice', fecha: '12/08/2021', peso: '15,30 kg', altura: '100,20', diamCabeza: '45,10 cm' },
+// const tablaControlesMed = [
+//   { nombre: 'Dakota Rice', fecha: '12/06/2021', peso: '6,12 kg', altura: '62,00 cm', diamCabeza: '34,90 cm' },
+//   { nombre: 'Minerva Hooper', fecha: '12/07/2021', peso: '12,50 kg', altura: '82,50 cm', diamCabeza: '42,80 cm' },
+//   { nombre: 'Dakota Rice', fecha: '12/08/2021', peso: '15,30 kg', altura: '100,20', diamCabeza: '45,10 cm' },
 
-]
+// ]
 
 function Item(props) {
   return (
@@ -127,28 +131,28 @@ function Item(props) {
 
 export default function Percentiles() {
   const classes = useStyles();
-  //const [image, setImage] = React.useState(calendario);
-  //const [showAgregarVacuna, setShowAgregarVacuna] = useState(false);
-
-  // const OnClickAgregarVacuna = () => {
-  //   setShowAgregarVacuna(!showAgregarVacuna);
-  // }
-
-  // const OnClickCargarVacuna = (e) => {
-  //   setShowAgregarVacuna(!showAgregarVacuna);
-  //   //alert('HOLA');
-  //   //console.log(e);
-  // }
 
   const [percentiles, setPercentiles] = useState(tablaPercentiles);
   const [imgPercentiles, setImgPerentiles] = useState(imagenesPercentiles);
-  const [controlesMed, setControlesMed] = useState(tablaControlesMed);
+  const [ultimosControlesMed, setUltimosControlesMed] = useState(null);
 
-  // const OnClickCancelarCargarVacuna = (e) => {
-  //   setShowAgregarVacuna(!showAgregarVacuna);
-  //   //alert('HOLA');
-  //   //console.log(e);
-  // }
+  const { user, changeUser } = useUser();
+
+  useEffect(() => {
+    cargarControles(user.dni);
+  }, [user.dni]);
+
+  const cargarControles = async (dni) => {
+
+    let getUltimosControles = await listarUltimosControles(dni);
+
+    if (getUltimosControles.rdo === 0) {
+      setUltimosControlesMed(getUltimosControles.listaUltimosControles);
+
+    } else if (getUltimosControles.rdo === 1) {
+      alert(getUltimosControles.mensaje)
+    }
+  }
 
   return (
     <div>
@@ -179,19 +183,24 @@ export default function Percentiles() {
                 <h4 className={classes.cardTitleWhite}>Controles Medicos</h4>
               </CardHeader>
               <CardBody>
-                <Table
-                  tableHeaderColor="primary"
-                  tableHead={["Hijo", "Fecha", "Peso", "Altura", "Diametro Cabeza"]}
-                  tableData={
-                    controlesMed.map((controlMed) => (
-                      [controlMed.nombre,
-                      controlMed.fecha,
-                      controlMed.peso,
-                      controlMed.altura,
-                      controlMed.diamCabeza,
-                      ]))
-                  }
-                />
+                {
+                  ultimosControlesMed &&
+                  (
+                    <Table
+                      tableHeaderColor="primary"
+                      tableHead={["Hijo", "Fecha", "Peso", "Altura", "Diametro Cabeza"]}
+                      tableData={
+                        ultimosControlesMed.map((controlMed) => (
+                          [controlMed.nombre_hijo,
+                          controlMed.fecha_control_ped,
+                          controlMed.peso,
+                          controlMed.altura,
+                          controlMed.diametro_cabeza,
+                          ]))
+                      }
+                    />
+                  )
+                }
               </CardBody>
               <CardFooter>
               </CardFooter>

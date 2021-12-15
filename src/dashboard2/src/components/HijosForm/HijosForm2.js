@@ -245,7 +245,7 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                           size='small'
                           id="standard-basic"
                           name="fecha_nacimiento"
-                          label="Fecha Nacimiento"
+                          label="Fecha nacimiento"
                           variant="outlined"
                           {...register("fecha_nacimiento")}
                         />
@@ -254,7 +254,7 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                     <GridContainer>
                       <GridItem xs={12} sm={12} md={3}>
                         <InputLabel className={classes.selectLabel}>
-                          Grupo Sanguineo
+                          Grupo sanguineo
                         </InputLabel>
                         <Select
                           className="basic-single"
@@ -269,7 +269,7 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                       </GridItem>
                       <GridItem xs={12} sm={12} md={3}>
                         <InputLabel className={classes.selectLabel}>
-                          Factor Sanguineo
+                          Factor sanguineo
                         </InputLabel>
                         <Select
                           className="basic-single"
@@ -305,7 +305,7 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                           size='small'
                           id="standard-basic"
                           variant="outlined"
-                          label="Enfermedades Cronicas"
+                          label="Enfermedades cronicas"
                           multiline='true'
                           rows='5'
                           fullWidth='true'
@@ -495,14 +495,13 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
             <GridItem xs={12} sm={12} md={10}>
               <Card>
                 <CardHeader color="primary">
-                  <h4 className={classes.cardTitleWhite}>Completa la informacion de tu hij@</h4>
+                  <h4 className={classes.cardTitleWhite}>Modificá la informacion de tu hij@</h4>
                 </CardHeader>
                 <CardBody>
                   <form onSubmit={handleSubmit(onSubmitModificacion)}>
                     <GridContainer>
                       <GridItem xs={12} sm={12} md={3}>
                         <TextField
-                          //type='date'
                           className={classes.root}
                           size='small'
                           id="standard-basic"
@@ -511,9 +510,6 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                           name="nombre"
                           readOnly
                           value={datosForm.nombre}
-                        // value={nombreModif}
-                        // onChange={(e) => setNombreModif(e.target.value)}
-                        // {...register("nombre")}
                         />
                       </GridItem>
                       <GridItem xs={12} sm={12} md={3}>
@@ -526,10 +522,8 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                           label="Fecha de Nacimiento"
                           name="fecha_nacimiento"
                           variant="outlined"
-                          // value={datosForm.fecha_nacimiento}
                           value={fecNacModif}
                           onChange={(e) => setFecNacModif(e.target.value)}
-                        // {...register("fecha_nacimiento")}
                         />
                       </GridItem>
                     </GridContainer>

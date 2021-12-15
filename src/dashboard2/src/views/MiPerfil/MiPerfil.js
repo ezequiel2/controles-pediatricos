@@ -127,9 +127,6 @@ export default function UserProfile() {
 
   const MostrarForm = () => {
     setMostrarForm(!showMostrarForm);
-    // setTipoForm('A')
-    //formulario.current.scrollIntoView();
-    //this.PedControlForm.current.focus();
   }
 
   const AltaForm = () => {
@@ -405,7 +402,6 @@ export default function UserProfile() {
               tipoForm={tipoForm}
               handleFormControles={handleFormControles}
               OnClickCancelar={MostrarForm}
-              // OnClickCancelarCargarControl={OnClickCancelarCargarControl}
               datosForm={datosForm} />
           </div>
         ) : null}

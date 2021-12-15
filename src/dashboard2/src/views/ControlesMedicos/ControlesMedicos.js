@@ -28,7 +28,8 @@ import {
 
 import { listarControles } from '../../../../controllers/AppController';
 
-
+//importo Context
+import useUser from "../../../../contexts/hooks/useUser";
 
 
 const styles = {
@@ -85,13 +86,11 @@ const styles = {
   },
 };
 
-
-const tablaControlesMed = [
-  { nombre: 'Dakota Rice', fecha: '12/06/2021', profesional: 'Abdul Jabbar' },
-  { nombre: 'Minerva Hooper', fecha: '12/07/2021', profesional: 'Cosme Fulanito' },
-  { nombre: 'Dakota Rice', fecha: '12/08/2021', profesional: 'Woodrow Wilson' },
-
-]
+// const tablaControlesMed = [
+//   { nombre: 'Dakota Rice', fecha: '12/06/2021', profesional: 'Abdul Jabbar' },
+//   { nombre: 'Minerva Hooper', fecha: '12/07/2021', profesional: 'Cosme Fulanito' },
+//   { nombre: 'Dakota Rice', fecha: '12/08/2021', profesional: 'Woodrow Wilson' },
+// ]
 
 //const datos = { nombre: 'Juan', fecha: '17/05/2021' };
 
@@ -103,25 +102,29 @@ export default function ControlesMedicos() {
   const [showMostrarForm, setMostrarForm] = useState(false);
   const [tipoForm, setTipoForm] = useState('');
   const [showEditarControl, setShowEditarControl] = useState(false);
-  const [datosForm, setDatosForm] = useState({
-    hijo: '', //fecha, profesional, peso, altura, diametro, medicamentos, estudios, observaciones
-    fecha: '',
-    profesional: 'Dra Bombi',
-    peso: '',
-    altura: '',
-    diametro: '',
-    medicamentos: '',
-    estudios: '',
-    observaciones: ''
-  })
+  const [datosForm, setDatosForm] = useState();
+  // const [datosForm, setDatosForm] = useState({
+  //   hijo: '', //fecha, profesional, peso, altura, diametro, medicamentos, estudios, observaciones
+  //   fecha: '',
+  //   profesional: 'Dra Bombi',
+  //   peso: '',
+  //   altura: '',
+  //   diametro: '',
+  //   medicamentos: '',
+  //   estudios: '',
+  //   observaciones: ''
+  // })
+  const [controlesMed, setControlesMed] = useState([]);
 
-  // const [datosForm, setDatosForm] = useState();
+  const { user, changeUser } = useUser();
+
+  const handleFormControles = () => {
+    cargarControles(user.dni);
+    MostrarForm();
+  }
 
   const MostrarForm = () => {
     setMostrarForm(!showMostrarForm);
-    //setTipoForm('A')
-    //formulario.current.scrollIntoView();
-    //this.PedControlForm.current.focus();
   }
 
   const AltaForm = () => {
@@ -140,55 +143,23 @@ export default function ControlesMedicos() {
     setTipoForm('M');
     MostrarForm();
   }
-  // const OnClickEditarControl = () => {
-  //   //setShowEditarControl(!showEditarControl);
-  //   setShowAgregarControl(!showAgregarControl);
-  // }
 
-  // const OnClickCargarControl = (e) => {
-  //   setShowAgregarControl(!showAgregarControl);
-  //   //alert('HOLA');
-  //   //console.log(e);
-  // }
-
-  // const OnClickCancelar = () => {
-  //   setMostrarForm(!showMostrarForm);
-  //   //alert('HOLA');
-  //   //console.log(e);
-  // }
-
-  const handleFormControles = (data) => {
-    //const { hijo, fecha, profesional, peso, altura, diametro, medicamentos, estudios, observaciones } = data;
-    //MostrarForm();
-    //setDatosForm(data);
-    //setDatosForm(data);
-    //setProf(data.profesional)
-    //console.log(data)
-    // alert('Hola' + datosForm.profesional)
-    // alert('Hola2' + prof)
-    cargarControles('35330117');
+  const BajaForm = (controlMed) => {
+    setDatosForm(controlMed);
+    setTipoForm('B');
     MostrarForm();
-
   }
 
 
 
-  const [controlesMed, setControlesMed] = useState([]);
-
   useEffect(() => {
-    //alert('en el useEffect')
-    cargarControles('35330117');
-  }, []);
+    cargarControles(user.dni);
+  }, [user.dni]);
 
   const cargarControles = async (dni) => {
 
     let getListarControles = await listarControles(dni);
-    // let getListarHijos = await api.get('api/hijos/list/dni-mapadre/33419623');
 
-    // alert(JSON.stringify(getListarControles));
-    // setHijos(getListarHijos.data);
-    // alert("getLogin");
-    // alert(getLogin);
     if (getListarControles.rdo === 0) {
       setControlesMed(getListarControles.listaControles);
 
@@ -199,30 +170,19 @@ export default function ControlesMedicos() {
 
   return (
     <React.Fragment>
-      {/* <Button>Desplegar</Button> */}
-      {/* <ControlPed /> */}
       <GridContainer autoFocus>
         <GridItem xs={12} sm={12} md={12}>
           <Card>
-            {/* //aca esta la mugre para arreglar */}
             <CardHeader color="primary" display='inline-block'>
               <h4 className={classes.cardTitleWhite}>Historial de Controles Pediatricos</h4>
-              {/* <Button color= 'primary' size='sm' className={classes.cardHeaderButton} onClick={OnClickAgregarControl}>Boton feo</Button> */}
               <IconButton
                 className={classes.cardHeaderButton}
                 onClick={AltaForm}>
                 <AddToPhotosIcon
                   className={classes.cardTitleWhite}
-                //color='primary'
-                //size='large'
                 />
               </IconButton>
             </CardHeader>
-            {/* <Button onClick={OnClickAgregarControl}> Agregar control </Button>   */}
-            {/* {showAgregarControl ? (
-              <div><br /><PedControlForm
-                OnClickCargarCancelarControl={OnClickCargarCancelarControl} /> </div>
-            ) : null} */}
             <CardBody>
               {
                 controlesMed &&
@@ -241,7 +201,7 @@ export default function ControlesMedicos() {
                         <IconButton className={classes.tableActionButton} onClick={() => EditarForm(controlMed)}>
                           <EditIcon className={classes.tableActionButtonIcon + " " + classes.edit} />
                         </IconButton>,
-                        <IconButton className={classes.tableActionButton}>
+                        <IconButton className={classes.tableActionButton} onClick={() => BajaForm(controlMed)}>
                           <CloseIcon className={classes.tableActionButtonIcon + " " + classes.close} />
                         </IconButton>
                         ]))
@@ -262,7 +222,6 @@ export default function ControlesMedicos() {
             tipoForm={tipoForm}
             handleFormControles={handleFormControles}
             OnClickCancelar={MostrarForm}
-            // OnClickCancelarCargarControl={OnClickCancelarCargarControl}
             datosForm={datosForm} />
         </div>
       ) : null}
