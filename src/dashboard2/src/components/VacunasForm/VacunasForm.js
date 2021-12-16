@@ -16,7 +16,8 @@ import CardFooter from "../Card/CardFooter.js";
 import UploadButton from '../UploadButton/UploadButton';
 //import MenuItem from '@mui/material/MenuItem';
 //import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+//import Select from '@mui/material/Select';
+import Select from 'react-select';
 import { TextField, InputLabel, MenuItem, Box, FormControl } from "@material-ui/core";
 import avatar from "../../assets/img/faces/marc.jpg";
 import { listarHijos, altaVacuna, modificarVacuna, bajaVacuna } from '../../../../controllers/AppController';
@@ -108,13 +109,14 @@ export default function VacunasForm({ tipoForm, handleFormControles, OnClickCanc
   }, [tipoForm]);
 
   const onSubmitAlta = async (data) => {
-    // alert(JSON.stringify(data));
+    //alert(JSON.stringify(data));
 
     //aca hay que ponerle el input del dni_mapadre
     //let dni_mapadre = '33419623';
     let dni_mapadre = user.dni;
     let nombre_hijo = hijoSelected.value;
     let res = { ...data, dni_mapadre, nombre_hijo }
+    alert(JSON.stringify(res));
     setSelectedHijo(null);
 
     let getVacuna = await altaVacuna(res);
@@ -265,10 +267,11 @@ export default function VacunasForm({ tipoForm, handleFormControles, OnClickCanc
                       <GridItem xs={12} sm={12} md={3}>
                         <CustomInput
                           labelText="COMBO VACUNA"
-                          id="peso"
+                          id="vacuna"
                           formControlProps={{
                             fullWidth: true,
                           }}
+                          {...register("vacuna")}
                         />
                       </GridItem>
                       <GridItem xs={12} sm={12} md={3}>
