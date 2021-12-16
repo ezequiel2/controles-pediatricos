@@ -92,32 +92,12 @@ const useStyles = makeStyles(styles);
 export default function ControlPedForm3({ tipoForm, handleFormControles, OnClickCancelar, datosForm }) {
 
   const classes = useStyles();
-
   const { register, handleSubmit } = useForm();
+  const { user, changeUser } = useUser();
   const [result, setResult] = useState("");
   const [data, setData] = useState();
-  const onSubmit = (data, e) => {
-    //setResult(JSON.stringify(data));
-    handleFormControles(data);
-    e.target.reset();
-  }
-
-  const { user, changeUser } = useUser();
-
   const [hijosOption, setHijosOption] = useState([]);
-
-
-  const handleInputChange = (event) => {
-    // console.log(event.target.name)
-    // console.log(event.target.value)
-    setData({
-      ...data,
-      [event.target.name]: event.target.value
-    })
-  }
-
   const [hijoSelected, setSelectedHijo] = useState(null);
-
   const [prof, setProf] = useState(null);
   const [fecControl, setFecControl] = useState(null);
   const [peso, setPeso] = useState(null);
@@ -126,6 +106,21 @@ export default function ControlPedForm3({ tipoForm, handleFormControles, OnClick
   const [estudios, setEstudios] = useState(null);
   const [medicamentos, setMedicamentos] = useState(null);
   const [observaciones, setObservaciones] = useState(null);
+
+  // const onSubmit = (data, e) => {
+  //   //setResult(JSON.stringify(data));
+  //   handleFormControles(data);
+  //   e.target.reset();
+  // }
+
+  // const handleInputChange = (event) => {
+  //   // console.log(event.target.name)
+  //   // console.log(event.target.value)
+  //   setData({
+  //     ...data,
+  //     [event.target.name]: event.target.value
+  //   })
+  // }
 
   useEffect(() => {
     cargarHijos(user.dni);
@@ -668,7 +663,7 @@ export default function ControlPedForm3({ tipoForm, handleFormControles, OnClick
                         color='primary'
                         onClick={OnClickCancelar}
                       >
-                        Cerrar
+                        Cancelar
                       </Button>
                     </GridContainer>
                   </form>

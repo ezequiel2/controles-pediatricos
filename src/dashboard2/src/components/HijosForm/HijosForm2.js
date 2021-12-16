@@ -478,7 +478,7 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                       // type="submit"
                       onClick={OnClickCancelar}
                     >
-                      Cancelar
+                      Cerrar
                     </Button>
                   </GridContainer>
                 </CardBody>
