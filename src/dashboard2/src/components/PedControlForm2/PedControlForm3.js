@@ -205,6 +205,24 @@ export default function ControlPedForm3({ tipoForm, handleFormControles, OnClick
     }
   }
 
+  const onSubmitBaja = async () => {
+    //alert(JSON.stringify(data));
+
+    //aca hay que ponerle el input del dni_mapadre
+    // let dni_mapadre = user.dni;
+    // const res = { ...data, dni_mapadre }
+
+    let res = datosForm.id_control_ped;
+
+    let getControl = await bajaControl(res);
+
+    if (getControl.rdo === 0) {
+      handleFormControles();
+    } else if (getControl.rdo === 1) {
+      alert(getControl.mensaje)
+    }
+  }
+
   return (
     <Fragment>
 
@@ -672,6 +690,174 @@ export default function ControlPedForm3({ tipoForm, handleFormControles, OnClick
             </GridItem>
           </GridContainer>
         </div>
+      }
+
+      {tipoForm === 'B' &&
+
+        <div>
+          <GridContainer>
+            <GridItem xs={12} sm={12} md={10}>
+              <Card>
+                <CardHeader color="primary">
+                  <h4 className={classes.cardTitleWhite}>Completa tu control pediatrico</h4>
+                </CardHeader>
+                <CardBody>
+                  <form onSubmit={handleSubmit(onSubmitBaja)}>
+                    <GridContainer>
+                      <TextField
+                        //type='date'
+                        className={classes.root}
+                        size='small'
+                        id="standard-basic"
+                        label="Nombre"
+                        variant="outlined"
+                        readOnly
+                        value={datosForm.nombre_hijo}
+                        //{...register("nombre_hijo")}
+                      />
+                    </GridContainer>
+                    <GridContainer>
+                      <GridItem xs={12} sm={12} md={3}>
+                        <TextField
+                          type='date'
+                          className={classes.root}
+                          InputLabelProps={{ shrink: true }}
+                          size='small'
+                          id="standard-basic"
+                          name="fecha_control_ped"
+                          label="Fecha control pediatrico"
+                          variant="outlined"
+                          readOnly
+                          value={datosForm.fecha_control_ped}
+                          //{...register("fecha_control_ped")}
+                        />
+                      </GridItem>
+                      <GridItem xs={12} sm={12} md={3}>
+                        <TextField
+                          className={classes.root}
+                          size='small'
+                          id="standard-basic"
+                          label="Profesional"
+                          variant="outlined"
+                          readOnly
+                          value={datosForm.profesional}
+                        //{...register("profesional")} 
+                        />
+                      </GridItem>
+                    </GridContainer>
+                    <GridContainer>
+                      <GridItem xs={12} sm={12} md={3}>
+                        <TextField
+                          className={classes.root}
+                          size='small'
+                          id="standard-basic"
+                          label="Peso"
+                          variant="outlined"
+                          readOnly
+                          value={datosForm.peso}
+                        //{...register("peso")} 
+                        />
+                      </GridItem>
+                      <GridItem xs={12} sm={12} md={3}>
+                        <TextField
+                          className={classes.root}
+                          size='small'
+                          id="standard-basic"
+                          label="Altura"
+                          variant="outlined"
+                          readOnly
+                          value={datosForm.altura}
+                        //{...register("altura")} 
+                        />
+                      </GridItem>
+                      <GridItem xs={12} sm={12} md={3}>
+                        <TextField
+                          className={classes.root}
+                          size='small'
+                          id="standard-basic"
+                          label="Diametro cabeza"
+                          variant="outlined"
+                          readOnly
+                          value={datosForm.diametro_cabeza}
+                        //{...register("diametro_cabeza")} 
+                        />
+                      </GridItem>
+                    </GridContainer>
+                    <GridContainer>
+                      <GridItem xs={12} sm={12} md={9}>
+                        <TextField
+                          className={classes.root}
+                          size='small'
+                          id="standard-basic"
+                          label="Medicamentos recetados"
+                          variant="outlined"
+                          multiline='true'
+                          rows='5'
+                          fullWidth='true'
+                          readOnly
+                          value={datosForm.medicamentos_recetados}
+                        //{...register("medicamentos_recetados")}
+                        />
+                      </GridItem>
+                    </GridContainer>
+                    <GridContainer>
+                      <GridItem xs={12} sm={12} md={9}>
+                        <TextField
+                          className={classes.root}
+                          size='small'
+                          id="standard-basic"
+                          label="Estudios realizados"
+                          variant="outlined"
+                          multiline='true'
+                          rows='5'
+                          fullWidth='true'
+                          readOnly
+                          value={datosForm.estudios_realizados}
+                        //{...register("estudios_realizados")}
+                        />
+                      </GridItem>
+                    </GridContainer>
+                    <GridContainer>
+                      <GridItem xs={12} sm={12} md={9}>
+                        <TextField
+                          className={classes.root}
+                          size='small'
+                          id="standard-basic"
+                          label="Observaciones"
+                          variant="outlined"
+                          multiline='true'
+                          rows='5'
+                          fullWidth='true'
+                          readOnly
+                          value={datosForm.observaciones}
+                        //{...register("observaciones")} 
+                        />
+                      </GridItem>
+                    </GridContainer>
+                    <br />
+                    <GridContainer className={classes.cardFooter}>
+                      <Button
+                        className={classes.formButton}
+                        color='primary'
+                        type="submit"
+                      >
+                        Eliminar
+                      </Button>
+                      <Button
+                        className={classes.formButton}
+                        color='primary'
+                        onClick={OnClickCancelar}
+                      >
+                        Cancelar
+                      </Button>
+                    </GridContainer>
+                  </form>
+                </CardBody>
+              </Card>
+            </GridItem>
+          </GridContainer>
+        </div>
+
       }
 
     </Fragment>

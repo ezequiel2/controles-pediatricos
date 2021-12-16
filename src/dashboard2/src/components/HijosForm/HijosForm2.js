@@ -667,7 +667,7 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                           name="nombre"
                           readOnly
                           value={datosForm.nombre}
-                          {...register("nombre")}
+                          //{...register("nombre")}
 
                         />
                       </GridItem>
@@ -683,7 +683,7 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                           variant="outlined"
                           readOnly
                           value={datosForm.fecha_nacimiento}
-                          {...register("fecha_nacimiento")}
+                          //{...register("fecha_nacimiento")}
                         />
                       </GridItem>
                     </GridContainer>
@@ -698,7 +698,7 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                           variant="outlined"
                           readOnly
                           value={datosForm.grupo_sanguineo}
-                          {...register("grupo_sanguineo")}
+                          //{...register("grupo_sanguineo")}
                         />
                       </GridItem>
                       <GridItem xs={12} sm={12} md={3}>
@@ -711,7 +711,7 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                           label="Factor Sanguineo"
                           readOnly
                           value={datosForm.factor_sanguineo}
-                          {...register("factor_sanguineo")}
+                          //{...register("factor_sanguineo")}
                         />
                       </GridItem>
                     </GridContainer>
@@ -729,7 +729,7 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                           name="alergias"
                           readOnly
                           value={datosForm.alergias}
-                          {...register("alergias")}
+                          //{...register("alergias")}
                         />
                       </GridItem>
                     </GridContainer>
@@ -747,7 +747,7 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                           name="enfermedades_cronicas"
                           readOnly
                           value={datosForm.enfermedades_cronicas}
-                          {...register("enfermedades_cronicas")}
+                          //{...register("enfermedades_cronicas")}
                         />
                       </GridItem>
                     </GridContainer>
@@ -765,7 +765,7 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
                           name="comentarios"
                           readOnly
                           value={datosForm.comentarios}
-                          {...register("comentarios")}
+                          //{...register("comentarios")}
                         />
                       </GridItem>
                     </GridContainer>

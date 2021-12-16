@@ -411,9 +411,9 @@ export const modificarControl = async function (control) {
 
 }
 
-export const bajaControl = async function (control) {
+export const bajaControl = async function (id_control_ped) {
 
-    let url = urlWebServices.bajaControl + control.id_control_ped;
+    let url = urlWebServices.bajaControl + id_control_ped;
 
     try {
         let response = await api.delete(url);
@@ -538,9 +538,9 @@ export const modificarVacuna = async function (vacuna) {
 
 }
 
-export const bajaVacuna = async function (vacuna) {
+export const bajaVacuna = async function (id_vacuna) {
 
-    let url = urlWebServices.bajaVacuna + vacuna.id_vacuna;
+    let url = urlWebServices.bajaVacuna + id_vacuna;
 
     try {
         let response = await api.delete(url);
