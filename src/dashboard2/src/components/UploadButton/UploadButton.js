@@ -56,6 +56,8 @@ export default function UploadButtons() {
 
       if (resModifMapadre.rdo === 0) {
 
+        let dni = mapadreNewImage.dni_mapadre;
+        let imagen_perfil = mapadreNewImage.imagen_perfil;
         let email = user.email;
         let nombre = user.nombre;
         let apellido = user.apellido;
@@ -64,13 +66,14 @@ export default function UploadButtons() {
         let password_expirada = user.password_expirada;
 
         let newUserImage = {
-          ...mapadreNewImage,
+          dni,
           email,
           nombre,
           apellido,
           telefono,
           password,
-          password_expirada
+          password_expirada,
+          imagen_perfil
         }
         console.log("newUserImage");
         console.log(newUserImage);
