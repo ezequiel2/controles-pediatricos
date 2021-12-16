@@ -23,8 +23,9 @@ import {
   grayColor,
   dangerColor
 } from "../../assets/jss/material-dashboard-react";
+import { Image, Transformation } from "cloudinary-react";
 
-import avatar from "../../assets/img/faces/marc.jpg";
+// import avatar from "../../assets/img/faces/marc.jpg";
 import { listarHijos, getPerfilMapadre, modificarPerfilMapadre } from '../../../../controllers/AppController';
 
 //importo Context
@@ -100,20 +101,16 @@ const useStyles = makeStyles(styles);
 
 export default function UserProfile() {
   const classes = useStyles();
+  const { user, changeUser } = useUser();
 
   const [datosForm, setDatosForm] = useState();
 
   const [showMostrarForm, setMostrarForm] = useState(false);
   const [tipoForm, setTipoForm] = useState('');
 
-  // const { register, handleSubmit } = useForm();
-
-
   const [hijos, setHijos] = useState([]);
   const [mapadre, setMapadre] = useState([]);
   const [hijosStatus, setHijosStatus] = useState(false);
-
-  const { user, changeUser } = useUser();
 
   const [nombreModif, setNombreModif] = useState(user.nombre);
   const [apellidoModif, setApellidoModif] = useState(user.apellido);
@@ -155,7 +152,8 @@ export default function UserProfile() {
   useEffect(() => {
     cargarHijos(user.dni);
     cargarPerfilMapadre(user.dni);
-  }, [user.dni]);
+    // cargarAvatarImage(user.dni);
+  }, [user]);
 
 
   const cargarHijos = async (dni) => {
@@ -187,23 +185,13 @@ export default function UserProfile() {
     let apellido = apellidoModif;
     let telefono = telModif;
 
-    const req = {
-      ...data,
-      dni_mapadre,
-      nombre,
-      apellido,
-      telefono
-    }
-
-    alert("en onSubActuPerfil");
-    // alert(JSON.stringify(req));
+    const req = { ...data, dni_mapadre, nombre, apellido, telefono }
 
     let modifPerfil = await modificarPerfilMapadre(req);
 
     if (modifPerfil.rdo === 0) {
-      // alert(JSON.stringify(modifPerfil.perfil));
       setearNewUser();
-      
+
     } else if (modifPerfil.rdo === 1) {
       alert(modifPerfil.mensaje)
     }
@@ -216,13 +204,7 @@ export default function UserProfile() {
     let dni = user.dni;
     let email = user.email;
 
-    let newUser = {
-      dni,
-      email,
-      nombre,
-      apellido,
-      telefono
-    }
+    let newUser = { dni, email, nombre, apellido, telefono }
 
     changeUser(newUser);
   }
@@ -332,16 +314,19 @@ export default function UserProfile() {
                   Actualizar Perfil
                 </Button>
               </CardFooter>
-              {/* </form> */}
             </Card>
           </GridItem>
           <GridItem xs={12} sm={12} md={4}>
             <Card profile>
-              <CardAvatar profile>
-                <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                  <img src={avatar} alt="..." />
-                </a>
-              </CardAvatar>
+              {/* <CardAvatar profile> */}
+              {/* <a href="#pablo" onClick={(e) => e.preventDefault()}> */}
+              <Image publicId={user.imagen_perfil}>
+                <Transformation aspectRatio="1:1" gravity="face" radius="max" width="200" crop="fill" />
+                <Transformation height="50" width="50" />
+              </Image>
+              {/* <img src={avatar} alt="..." /> */}
+              {/* </a> */}
+              {/* </CardAvatar> */}
               <CardBody profile>
                 <h4 className={classes.cardTitle}>
                   {user.nombre + ' ' + user.apellido}

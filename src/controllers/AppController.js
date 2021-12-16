@@ -70,6 +70,7 @@ export const signup = async function (signup) {
         nombre: signup.nombre,
         apellido: signup.apellido,
         telefono: signup.telefono,
+        imagen_perfil: signup.imagen_perfil,
     };
 
     // alert(JSON.stringify(formData));

@@ -43,6 +43,8 @@ function SignUp() {
   const [validEmail, setValidEmail] = React.useState('');
   const [telefono, setTelefono] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [defaultImage, setDefaultImage] = React.useState("controles-pediatricos-profile/default-profile-img.png");
+  
 
   // const [signUpValido, setSignUpValido] = React.useState(false);
   const [usuarioSignup, setUsuarioSignup] = React.useState();
@@ -88,6 +90,7 @@ function SignUp() {
       nombre: nombre,
       apellido: apellido,
       telefono: telefono,
+      imagen_perfil: defaultImage
     }
 
     // alert(JSON.stringify(datos));

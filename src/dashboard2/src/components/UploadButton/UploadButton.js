@@ -11,6 +11,9 @@ import {
   grayColor,
 } from '../../assets/jss/material-dashboard-react'
 
+//importo Context
+import useUser from "../../../../contexts/hooks/useUser";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
@@ -31,6 +34,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function UploadButtons() {
   const classes = useStyles();
+  const { user, changeUser } = useUser();
+
+
+  const handleAvatarImage = (event) => {
+    console.log("se disparo el onchange");
+    console.log(JSON.stringify(event.target.value));
+  }
 
   return (
     <div className={classes.root}>
@@ -40,18 +50,19 @@ export default function UploadButtons() {
         id="contained-button-file"
         multiple
         type="file"
+        onChange={handleAvatarImage}
       />
-      {/* <label htmlFor="contained-button-file">
+      <label htmlFor="contained-button-file">
         <Button variant="contained" color="primary" component="span">
-          Upload
+          Cambiar imagen
         </Button>
-      </label> */}
-      <input accept="image/*" className={classes.input} id="icon-button-file" type="file" />
+      </label>
+      {/* <input accept="image/*" className={classes.input} id="icon-button-file" type="file" />
       <label htmlFor="icon-button-file">
         <IconButton color="primary" aria-label="upload picture" component="span">
           <PhotoCamera className={classes.cameraButton}/>
         </IconButton>
-      </label>
+      </label> */}
     </div>
   );
 }
