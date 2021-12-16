@@ -107,13 +107,7 @@ const SignIn = () => {
       <AppForm>
         <React.Fragment>
           <Typography variant="h4" gutterBottom marked="center" align="center">
-            Ingresar
-          </Typography>
-          <Typography variant="body1" align="center">
-            {'No sos miembro todavia? '}
-            <Link to="/sign-up" align="center" underline="always">
-              Registrate
-            </Link>
+            Cambiar Contraseña
           </Typography>
         </React.Fragment>
         <Form onSubmit={handleSubmit} subscription={{ submitting: true }} validate={validate}>
@@ -125,11 +119,12 @@ const SignIn = () => {
                 component={RFTextField}
                 disabled={submitting || sent}
                 fullWidth
-                label="Email"
+                label="Nueva Contraseña"
                 margin="normal"
-                name="email"
+                name="newpassword"
                 required
                 size="medium"
+                type="password"
                 //onChange={handleEmail}
                 model="validEmail"
               />
@@ -139,14 +134,15 @@ const SignIn = () => {
                 component={RFTextField}
                 disabled={submitting || sent}
                 required
-                name="password"
+                name="newpassword2"
                 autoComplete="current-password"
-                label="Contraseña"
+                label="Repita Nueva Contraseña"
                 type="password"
                 margin="normal"
                 //changeAction={handlePassword}
                 model="password"
               />
+             
               <FormSpy subscription={{ submitError: true }}>
                 {({ submitError }) =>
                   submitError ? (
@@ -171,14 +167,8 @@ const SignIn = () => {
           // to='/admin'
           onClick={loginUser}
         >
-          Ingresar
+          Guardar
         </FormButton>
-
-        <Typography align="center">
-          <Link underline="always" to="/forgot-password">
-            Olvidaste la contraseña?
-          </Link>
-        </Typography>
       </AppForm>
       {/* <AppFooter /> */}
     </React.Fragment>

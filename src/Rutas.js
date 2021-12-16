@@ -5,6 +5,7 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import ForgotPassword from './pages/ForgotPassword';
 import Admin from "../src/dashboard2/src/layouts/Admin";
+import NewPassword from './pages/NewPassword';
 import "./dashboard2/src/assets/css/material-dashboard-react.css?v=1.10.0";
 
 const Rutas = () => {
@@ -15,6 +16,7 @@ const Rutas = () => {
             <Route exact path='/sign-up' component={SignUp}/>
             <Route exact path='/forgot-password' component={ForgotPassword}/>
             <Route path="/admin" component={Admin} />
+            <Route path="/change-password" component={NewPassword} />
             <Redirect from="/admin" to="/admin/miperfil" />
         </Switch>
     )
