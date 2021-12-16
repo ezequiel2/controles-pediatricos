@@ -87,36 +87,57 @@ export default function VacunasForm({ tipoForm, handleFormControles, OnClickCanc
   const { user, changeUser } = useUser();
   const { register, handleSubmit } = useForm();
   const [mostrar, setMostrar] = useState(true);
+
   const [hijosOption, setHijosOption] = useState([]);
   const [hijoSelected, setSelectedHijo] = useState(null);
   const [fechaAplicacion, setFechaAplicacion] = useState(null);
   const [lugarAplicacion, setLugarAplicacion] = useState(null);
-  const [vacuna, setVacuna] = useState(null);
-  const [dosis, setDosis] = useState(null);
 
+  const [selectedVacunasOption, setSelectedVacunasOption] = useState(null);
+  const [selectedDosisOption, setSelectedDosisOption] = useState(null);
 
-  // const OnClickOcultar = () => {
-  //   setMostrar(!mostrar);
-  // }
-  //const { OnClickCargarVacuna, OnClickCancelarCargarVacuna } = props;
+  const vacunasOptions = [
+    { value: 'BCG', label: 'BCG' },
+    { value: 'Hepatitis A', label: 'Hepatitis A' },
+    { value: 'Hepatitis B', label: 'Hepatitis B' },
+    { value: 'Pentavalente', label: 'Pentavalente' },
+    { value: 'Rotavirus', label: 'Rotavirus' },
+    { value: 'Cuadruple', label: 'Cuadruple' },
+    { value: 'Poliomelitis', label: 'Poliomelitis' },
+    { value: 'Neumococo', label: 'Neumococo' },
+    { value: 'Gripe', label: 'Gripe' },
+    { value: 'Meningococo', label: 'Meningococo' },
+    { value: 'Triple Viral', label: 'Triple Viral' },
+    { value: 'Varicela', label: 'Varicela' },
+    { value: 'Triple Bacteriana Celular', label: 'Triple Bacteriana Celular' },
+    { value: 'Triple Bacteriana Acelular', label: 'Triple Bacteriana Acelular' },
+    { value: 'HPV', label: 'HPV' },
+    { value: 'Doble Bacteriana', label: 'Doble Bacteriana' },
+    { value: 'Doble Viral', label: 'Doble Viral' }
+  ]
+
+  const dosisOptions = [
+    { value: 'Unica Dosis', label: 'Unica Dosis' },
+    { value: '1° Dosis', label: '1° Dosis' },
+    { value: '2° Dosis', label: '2° Dosis' },
+    { value: '3° Dosis', label: '3° Dosis' }
+  ]
 
   useEffect(() => {
-    alert("useEffect");
-    alert(user.dni);
     cargarHijos(user.dni);
     if (tipoForm === 'M')
       setValoresIniciales();
   }, [tipoForm]);
 
   const onSubmitAlta = async (data) => {
-    //alert(JSON.stringify(data));
 
-    //aca hay que ponerle el input del dni_mapadre
-    //let dni_mapadre = '33419623';
     let dni_mapadre = user.dni;
     let nombre_hijo = hijoSelected.value;
-    let res = { ...data, dni_mapadre, nombre_hijo }
-    alert(JSON.stringify(res));
+    let vacuna = selectedVacunasOption.value;
+    let dosis = selectedDosisOption.value;
+    let res = { ...data, dni_mapadre, nombre_hijo, vacuna, dosis }
+    console.log("esto es res");
+    console.log(res);
     setSelectedHijo(null);
 
     let getVacuna = await altaVacuna(res);
@@ -131,8 +152,8 @@ export default function VacunasForm({ tipoForm, handleFormControles, OnClickCanc
   const setValoresIniciales = () => {
     setFechaAplicacion(datosForm.fecha_aplicacion);
     setLugarAplicacion(datosForm.lugar_aplicacion);
-    setVacuna(datosForm.vacuna);
-    setDosis(datosForm.dosis);
+    setSelectedVacunasOption(datosForm.vacuna);
+    setSelectedDosisOption(datosForm.dosis);
   }
 
   const cargarHijos = async (dni) => {
@@ -140,7 +161,6 @@ export default function VacunasForm({ tipoForm, handleFormControles, OnClickCanc
     let getListarHijos = await listarHijos(dni);
 
     if (getListarHijos.rdo === 0) {
-      alert("listar hijos OK")
       let cargaHijosOption =
         getListarHijos.listaHijos.map((hijo) => ({
           value: hijo.nombre,
@@ -148,7 +168,7 @@ export default function VacunasForm({ tipoForm, handleFormControles, OnClickCanc
         }))
 
       setHijosOption(cargaHijosOption);
-      alert(JSON.stringify(hijosOption));
+      // alert(JSON.stringify(hijosOption));
 
     } else if (getListarHijos.rdo === 1) {
       alert(getListarHijos.mensaje)
@@ -157,20 +177,15 @@ export default function VacunasForm({ tipoForm, handleFormControles, OnClickCanc
 
   const onSubmitModificacion = async () => {
 
-    let id_control_ped = datosForm.id_vacuna;
+    let id_vacuna = datosForm.id;
     let fecha_aplicacion = fechaAplicacion;
     let lugar_aplicacion = lugarAplicacion;
-    let nombreVacuna = vacuna;
-    let tipoDosis = dosis;
+    let vacuna = selectedVacunasOption.value;
+    let dosis = selectedDosisOption.value;
 
-    let req = {
-      id_control_ped,
-      fecha_aplicacion,
-      lugar_aplicacion,
-      nombreVacuna,
-      tipoDosis
-    }
-    setSelectedHijo(null);
+    let req = { id_vacuna, fecha_aplicacion, lugar_aplicacion, vacuna, dosis }
+    setSelectedDosisOption(null);
+    setSelectedVacunasOption(null);
 
     let getVacuna = await modificarVacuna(req);
 
@@ -181,7 +196,18 @@ export default function VacunasForm({ tipoForm, handleFormControles, OnClickCanc
     }
   }
 
+  const onSubmitBaja = async () => {
 
+    let id_vacuna = datosForm.id;
+
+    let getControl = await bajaVacuna(id_vacuna);
+
+    if (getControl.rdo === 0) {
+      handleFormControles();
+    } else if (getControl.rdo === 1) {
+      alert(getControl.mensaje)
+    }
+  }
 
 
   return (
@@ -194,14 +220,13 @@ export default function VacunasForm({ tipoForm, handleFormControles, OnClickCanc
               <Card>
                 <CardHeader color="primary">
                   <h4 className={classes.cardTitleWhite}>Completa los datos de la aplicacion</h4>
-                  {/* <p className={classes.cardCategoryWhite}>-------------------</p> */}
                 </CardHeader>
                 <CardBody>
                   <form onSubmit={handleSubmit(onSubmitAlta)}>
                     <GridContainer>
                       <GridItem xs={12} sm={12} md={3}>
                         <InputLabel className={classes.selectLabel}>
-                          Hijos
+                          Hijo
                         </InputLabel>
                         <Select
                           className="basic-single"
@@ -217,20 +242,6 @@ export default function VacunasForm({ tipoForm, handleFormControles, OnClickCanc
                     </GridContainer>
                     <GridContainer>
                       <GridItem xs={12} sm={12} md={3}>
-                        {/* <CustomInput
-                          labelText="Fecha"
-                          id='fecha'
-                          formControlProps={{
-                            fullWidth: true,
-                          }}
-                        /> */}
-                        {/* <TextField
-                          className={classes.root}
-                          size='small'
-                          id="standard-basic"
-                          label="Fecha aplicacion"
-                          variant="outlined"
-                        /> */}
                         <TextField
                           type='date'
                           className={classes.root}
@@ -265,25 +276,41 @@ export default function VacunasForm({ tipoForm, handleFormControles, OnClickCanc
                     </GridContainer>
                     <GridContainer>
                       <GridItem xs={12} sm={12} md={3}>
-                        <CustomInput
+                        <InputLabel className={classes.selectLabel}>
+                          Vacuna
+                        </InputLabel>
+                        <Select
+                          className="basic-single"
+                          classNamePrefix="select"
+                          name="color"
+                          options={vacunasOptions}
+                          styles={{
+                            menu: provided => ({ ...provided, zIndex: 9999 })
+                          }}
+                          onChange={setSelectedVacunasOption}
+                        />
+                        {/* <CustomInput
                           labelText="COMBO VACUNA"
                           id="vacuna"
                           formControlProps={{
                             fullWidth: true,
                           }}
                           {...register("vacuna")}
-                        />
+                        /> */}
                       </GridItem>
                       <GridItem xs={12} sm={12} md={3}>
-                        <TextField
-                          className={classes.root}
-                          InputLabelProps={{ shrink: true }}
-                          size='small'
-                          id="standard-basic"
-                          name="dosis"
-                          label="Dosis"
-                          variant="outlined"
-                          {...register("dosis")}
+                        <InputLabel className={classes.selectLabel}>
+                          Dosis
+                        </InputLabel>
+                        <Select
+                          className="basic-single"
+                          classNamePrefix="select"
+                          name="color"
+                          options={dosisOptions}
+                          styles={{
+                            menu: provided => ({ ...provided, zIndex: 9999 })
+                          }}
+                          onChange={setSelectedDosisOption}
                         />
                       </GridItem>
                     </GridContainer>
@@ -320,10 +347,8 @@ export default function VacunasForm({ tipoForm, handleFormControles, OnClickCanc
               <Card>
                 <CardHeader color="primary">
                   <h4 className={classes.cardTitleWhite}>Completa los datos de la aplicacion</h4>
-                  {/* <p className={classes.cardCategoryWhite}>-------------------</p> */}
                 </CardHeader>
                 <CardBody>
-                  {/* <form onSubmit={handleSubmit(onSubmitAlta)}> */}
                   <GridContainer>
                     <GridItem>
                       <TextField
@@ -334,20 +359,11 @@ export default function VacunasForm({ tipoForm, handleFormControles, OnClickCanc
                         variant="outlined"
                         value={datosForm.nombre_hijo}
                         disabled
-                        readOnly
                       />
                     </GridItem>
                   </GridContainer>
                   <GridContainer>
                     <GridItem xs={12} sm={12} md={3}>
-                      {/* <CustomInput
-                            labelText="Fecha"
-                            id='fecha'
-                            formControlProps={{
-                              fullWidth: true,
-                            }}
-                            disabled
-                          /> */}
                       <TextField
                         className={classes.root}
                         size='small'
@@ -356,18 +372,9 @@ export default function VacunasForm({ tipoForm, handleFormControles, OnClickCanc
                         variant="outlined"
                         value={datosForm.fecha_aplicacion}
                         disabled
-                        readOnly
                       />
                     </GridItem>
                     <GridItem xs={12} sm={12} md={6}>
-                      {/* <CustomInput
-                          labelText="Lugar de Aplicacion"
-                          id='lugar'
-                          formControlProps={{
-                            fullWidth: true,
-                          }}
-                          disabled
-                        /> */}
                       <TextField
                         className={classes.root}
                         size='small'
@@ -376,18 +383,19 @@ export default function VacunasForm({ tipoForm, handleFormControles, OnClickCanc
                         variant="outlined"
                         value={datosForm.lugar_aplicacion}
                         disabled
-                        readOnly
                       />
                     </GridItem>
                   </GridContainer>
                   <GridContainer>
                     <GridItem xs={12} sm={12} md={3}>
-                      <CustomInput
-                        labelText="COMBO VACUNA"
-                        id="peso"
-                        formControlProps={{
-                          fullWidth: true,
-                        }}
+                      <TextField
+                        className={classes.root}
+                        size='small'
+                        id="standard-basic"
+                        label="Vacuna"
+                        variant="outlined"
+                        value={datosForm.vacuna}
+                        disabled
                       />
                     </GridItem>
                     <GridItem xs={12} sm={12} md={3}>
@@ -399,7 +407,6 @@ export default function VacunasForm({ tipoForm, handleFormControles, OnClickCanc
                         variant="outlined"
                         value={datosForm.dosis}
                         disabled
-                        readOnly
                       />
                     </GridItem>
                   </GridContainer>
@@ -407,7 +414,6 @@ export default function VacunasForm({ tipoForm, handleFormControles, OnClickCanc
                   <GridContainer className={classes.cardFooter}>
                     <Button className={classes.formButton} color='primary' onClick={OnClickCancelar}>Cerrar</Button>
                   </GridContainer>
-                  {/* </form> */}
                 </CardBody>
               </Card>
             </GridItem>
@@ -423,7 +429,6 @@ export default function VacunasForm({ tipoForm, handleFormControles, OnClickCanc
               <Card>
                 <CardHeader color="primary">
                   <h4 className={classes.cardTitleWhite}>Completa los datos de la aplicacion</h4>
-                  {/* <p className={classes.cardCategoryWhite}>-------------------</p> */}
                 </CardHeader>
                 <CardBody>
                   <form onSubmit={handleSubmit(onSubmitModificacion)}>
@@ -436,21 +441,12 @@ export default function VacunasForm({ tipoForm, handleFormControles, OnClickCanc
                           label="Nombre"
                           variant="outlined"
                           value={datosForm.nombre_hijo}
-                          disabled
                           readOnly
                         />
                       </GridItem>
                     </GridContainer>
                     <GridContainer>
                       <GridItem xs={12} sm={12} md={3}>
-                        {/* <CustomInput
-                            labelText="Fecha"
-                            id='fecha'
-                            formControlProps={{
-                              fullWidth: true,
-                            }}
-                            disabled
-                          /> */}
                         <TextField
                           type='date'
                           className={classes.root}
@@ -464,14 +460,6 @@ export default function VacunasForm({ tipoForm, handleFormControles, OnClickCanc
                         />
                       </GridItem>
                       <GridItem xs={12} sm={12} md={6}>
-                        {/* <CustomInput
-                          labelText="Lugar de Aplicacion"
-                          id='lugar'
-                          formControlProps={{
-                            fullWidth: true,
-                          }}
-                          disabled
-                        /> */}
                         <TextField
                           className={classes.root}
                           size='small'
@@ -486,7 +474,21 @@ export default function VacunasForm({ tipoForm, handleFormControles, OnClickCanc
                     </GridContainer>
                     <GridContainer>
                       <GridItem xs={12} sm={12} md={3}>
-                        <TextField
+                        <InputLabel className={classes.selectLabel}>
+                          Vacuna
+                        </InputLabel>
+                        <Select
+                          className="basic-single"
+                          classNamePrefix="select"
+                          name="dosisModif"
+                          value={selectedVacunasOption}
+                          options={vacunasOptions}
+                          styles={{
+                            menu: provided => ({ ...provided, zIndex: 9999 })
+                          }}
+                          onChange={setSelectedVacunasOption}
+                        />
+                        {/* <TextField
                           className={classes.root}
                           size='small'
                           id="standard-basic"
@@ -495,10 +497,24 @@ export default function VacunasForm({ tipoForm, handleFormControles, OnClickCanc
                           value={vacuna}
                           onChange={(e) => setVacuna(e.target.value)}
                           readOnly
-                        />
+                        /> */}
                       </GridItem>
                       <GridItem xs={12} sm={12} md={3}>
-                        <TextField
+                        <InputLabel className={classes.selectLabel}>
+                          Dosis
+                        </InputLabel>
+                        <Select
+                          className="basic-single"
+                          classNamePrefix="select"
+                          name="dosisModif"
+                          value={selectedDosisOption}
+                          options={dosisOptions}
+                          styles={{
+                            menu: provided => ({ ...provided, zIndex: 9999 })
+                          }}
+                          onChange={setSelectedDosisOption}
+                        />
+                        {/* <TextField
                           className={classes.root}
                           size='small'
                           id="standard-basic"
@@ -507,7 +523,7 @@ export default function VacunasForm({ tipoForm, handleFormControles, OnClickCanc
                           value={dosis}
                           onChange={(e) => setDosis(e.target.value)}
                           readOnly
-                        />
+                        /> */}
                       </GridItem>
                     </GridContainer>
                     <br />
@@ -524,7 +540,7 @@ export default function VacunasForm({ tipoForm, handleFormControles, OnClickCanc
                         color='primary'
                         onClick={OnClickCancelar}
                       >
-                        Cancelar
+                        Cerrar
                       </Button>
                     </GridContainer>
                   </form>
@@ -538,6 +554,98 @@ export default function VacunasForm({ tipoForm, handleFormControles, OnClickCanc
       {/* Baja */}
       {tipoForm === 'B' &&
         <div>
+          <GridContainer>
+            <GridItem xs={12} sm={12} md={10}>
+              <Card>
+                <CardHeader color="primary">
+                  <h4 className={classes.cardTitleWhite}>Completa tu control pediatrico</h4>
+                </CardHeader>
+                <CardBody>
+                  <form onSubmit={handleSubmit(onSubmitBaja)}>
+                    <GridContainer>
+                      <TextField
+                        className={classes.root}
+                        size='small'
+                        id="standard-basic"
+                        label="Nombre"
+                        variant="outlined"
+                        readOnly
+                        value={datosForm.nombre_hijo}
+                      />
+                    </GridContainer>
+                    <GridContainer>
+                      <GridItem xs={12} sm={12} md={3}>
+                        <TextField
+                          type='date'
+                          className={classes.root}
+                          InputLabelProps={{ shrink: true }}
+                          size='small'
+                          id="standard-basic"
+                          name="fecha_aplicacion"
+                          label="Fecha aplicacion"
+                          variant="outlined"
+                          readOnly
+                          value={datosForm.fecha_aplicacion}
+                        />
+                      </GridItem>
+                      <GridItem xs={12} sm={12} md={3}>
+                        <TextField
+                          className={classes.root}
+                          size='small'
+                          id="standard-basic"
+                          label="Lugar Aplicacion"
+                          variant="outlined"
+                          readOnly
+                          value={datosForm.lugar_aplicacion}
+                        />
+                      </GridItem>
+                    </GridContainer>
+                    <GridContainer>
+                      <GridItem xs={12} sm={12} md={3}>
+                        <TextField
+                          className={classes.root}
+                          size='small'
+                          id="standard-basic"
+                          label="Vacuna"
+                          variant="outlined"
+                          readOnly
+                          value={datosForm.vacuna}
+                        />
+                      </GridItem>
+                      <GridItem xs={12} sm={12} md={3}>
+                        <TextField
+                          className={classes.root}
+                          size='small'
+                          id="standard-basic"
+                          label="Altura"
+                          variant="outlined"
+                          readOnly
+                          value={datosForm.dosis}
+                        />
+                      </GridItem>
+                    </GridContainer>
+                    <br />
+                    <GridContainer className={classes.cardFooter}>
+                      <Button
+                        className={classes.formButton}
+                        color='primary'
+                        type="submit"
+                      >
+                        Eliminar
+                      </Button>
+                      <Button
+                        className={classes.formButton}
+                        color='primary'
+                        onClick={OnClickCancelar}
+                      >
+                        Cerrar
+                      </Button>
+                    </GridContainer>
+                  </form>
+                </CardBody>
+              </Card>
+            </GridItem>
+          </GridContainer>
         </div>
       }
 

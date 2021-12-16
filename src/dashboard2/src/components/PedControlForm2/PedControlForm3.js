@@ -693,7 +693,6 @@ export default function ControlPedForm3({ tipoForm, handleFormControles, OnClick
       }
 
       {tipoForm === 'B' &&
-
         <div>
           <GridContainer>
             <GridItem xs={12} sm={12} md={10}>
