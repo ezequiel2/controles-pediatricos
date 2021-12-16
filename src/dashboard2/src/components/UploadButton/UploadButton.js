@@ -11,6 +11,8 @@ import {
   grayColor,
 } from '../../assets/jss/material-dashboard-react'
 
+import { uploadFileImg, modificarPerfilMapadre } from '../../../../controllers/AppController';
+
 //importo Context
 import useUser from "../../../../contexts/hooks/useUser";
 
@@ -37,9 +39,51 @@ export default function UploadButtons() {
   const { user, changeUser } = useUser();
 
 
-  const handleAvatarImage = (event) => {
-    console.log("se disparo el onchange");
-    console.log(JSON.stringify(event.target.value));
+  const handleAvatarImage = async (files) => {
+    let responseUploadImage = await uploadFileImg(files[0]);
+
+    if (responseUploadImage.rdo === 0) {
+      let imageDB = responseUploadImage.imagenResponse.public_id + "." + responseUploadImage.imagenResponse.format;
+
+      let mapadreNewImage = {
+        dni_mapadre: user.dni,
+        imagen_perfil: imageDB
+      }
+
+      console.log("mapadreNewImage")
+      console.log(mapadreNewImage);
+      let resModifMapadre = await modificarPerfilMapadre(mapadreNewImage);
+
+      if (resModifMapadre.rdo === 0) {
+
+        let email = user.email;
+        let nombre = user.nombre;
+        let apellido = user.apellido;
+        let telefono = user.telefono;
+        let password = user.password;
+        let password_expirada = user.password_expirada;
+
+        let newUserImage = {
+          ...mapadreNewImage,
+          email,
+          nombre,
+          apellido,
+          telefono,
+          password,
+          password_expirada
+        }
+        console.log("newUserImage");
+        console.log(newUserImage);
+
+        changeUser(newUserImage);
+
+      }else if (resModifMapadre.rdo === 1) {
+        alert(resModifMapadre.mensaje)
+      }
+
+    } else if (responseUploadImage.rdo === 1) {
+      alert(responseUploadImage.mensaje)
+    }
   }
 
   return (
@@ -50,7 +94,7 @@ export default function UploadButtons() {
         id="contained-button-file"
         multiple
         type="file"
-        onChange={handleAvatarImage}
+        onChange={(event) => handleAvatarImage(event.target.files)}
       />
       <label htmlFor="contained-button-file">
         <Button variant="contained" color="primary" component="span">

@@ -10,15 +10,19 @@ export const api = axios.create({
         'Content-Type': 'application/json',
         'Connection': 'keep-alive',
         'Cache-Control': 'no-cache, no-store, must-revalidate',
-        'Pragma': 'no-cache',
-        'Expires': '0'
+        // 'Pragma': 'no-cache',
+        // 'Expires': '0',
+        // 'Access-Control-Allow-Headers': 'Pragma',
+        // 'Access-Control-Allow-Credentials': 'true',
+        // 'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT',
+        // 'Access-Control-Allow-Headers': 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers'
     },
     withCredentials: false,
     timeout: TIME_OUT_REQUEST_MILLISECONDS
 });
 
 export const urlWebServices = {
-    
+
     //landing-page
     login: urlApi + "api/usuarios/sign-in/",
     signup: urlApi + "api/usuarios/create",
@@ -51,8 +55,9 @@ export const urlWebServices = {
     listarUltimosControles: urlApi + 'api/controles-pediatricos/list/ultimos/dni-mapadre/',
 
     //Imagenes
-    uploadFileImg: urlApi + "utils/uploadImg",
-    guardarImgUser: urlApi + "api/users/guardarImgUser",
-    getImgUser: urlApi + "api/users/imgUserByMail",
-    uploadFileImg2: urlApi + "api/users/uploadImg",
+    uploadFileImg: "https://api.cloudinary.com/v1_1/controles-pediatricos-api/image/upload",
+    upload_preset: "rwvhvefy",
+    // guardarImgUser: urlApi + "api/users/guardarImgUser",
+    // getImgUser: urlApi + "api/users/imgUserByMail",
+    // uploadFileImg2: urlApi + "api/users/uploadImg",
 };

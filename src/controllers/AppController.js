@@ -148,8 +148,6 @@ export const modificarPerfilMapadre = async function (mapadre) {
         imagen_perfil: mapadre.imagen_perfil
     };
 
-    alert(JSON.stringify(formData));
-
     try {
         let response = await api.post(url, formData);
 
@@ -597,6 +595,48 @@ export const listarUltimosControles = async function (dniMapadre) {
 
 }
 
+export const uploadFileImg = async function (file) {
+    //url webservices
+    let url = urlWebServices.uploadFileImg;
+    let upload_preset = urlWebServices.upload_preset;
+
+    console.log('files', file)
+    console.log('upload_preset', upload_preset)
+    console.log('url', url)
+    const formData = new FormData();
+    //agrego archivos para subir
+    // for (let i = 0; i < files.length; i++) {
+    formData.append("file", file)
+    formData.append("upload_preset", upload_preset)
+    // }
+
+    console.log("formData");
+    console.log(formData);
+
+    try {
+        let response = await api.post(url, formData);
+
+        let rdo = response.status;
+        // alert("rdo");
+        // alert(rdo);
+        switch (rdo) {
+            case 200:
+                {
+                    return ({ rdo: 0, imagenResponse: response.data }); //correcto
+                }
+            default:
+                {
+                    //otro error
+                    return ({ rdo: 1, mensaje: "Ha ocurrido un error en la subida de la foto" });
+                }
+        }
+    } catch (err) {
+        return ({ rdo: 1, mensaje: "Ha ocurrido un error en la subida de la foto" });
+    }
+}
+
+
+
 export const guardarImgUser = async function (message) {
     //url webservices
     let url = urlWebServices.guardarImgUser;
@@ -631,39 +671,7 @@ export const guardarImgUser = async function (message) {
     };
 }
 
-export const uploadFileImg = async function (files, nombres) {
-    //url webservices
-    let url = urlWebServices.uploadFileImg;
 
-    console.log('files', files)
-    console.log('nombres', nombres)
-    const formData = new FormData();
-    //agrego archivos para subir
-    for (let i = 0; i < files.length; i++) {
-        formData.append('files', files[i], nombres[i])
-    }
-
-    try {
-        let response = await fetch(url, {
-            method: 'POST', // or 'PUT'
-            mode: "cors",
-            headers: {
-                'Accept': 'application/form-data',
-                'x-access-token': localStorage.getItem('x'),
-                'Origin': 'http://localhost:3000',
-                //'Content-Type': 'application/form-data'
-            },
-            body: formData
-        });
-
-        let archivos = await response.json()
-        console.log('respuestaUpload', archivos);
-        return archivos;
-    } catch (err) {
-        alert('Error uploading the files')
-        console.log('Error uploading the files', err)
-    }
-}
 export const getImagenesByUser = async function () {
     //url webservices
     let url = urlWebServices.getImgUser;
