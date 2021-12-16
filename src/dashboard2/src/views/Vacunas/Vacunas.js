@@ -153,7 +153,7 @@ export default function Vacunas() {
     //console.log(data)
     // alert('Hola' + datosForm.profesional)
     // alert('Hola2' + prof)
-    cargarVacunas('35330117');
+    cargarVacunas(user.dni);
     MostrarForm();
 
   }
