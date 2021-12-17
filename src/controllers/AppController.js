@@ -680,7 +680,8 @@ export const sendEmailMapadre = async function (data) {
     try {
         let response = await api.post(url, formData);
 
-        let rdo = response.status;
+        let rdo = response.data.status;
+        console.log(response);
 
         switch (rdo) {
             case 200:

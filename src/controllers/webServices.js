@@ -21,10 +21,10 @@ export const api = axios.create({
     timeout: TIME_OUT_REQUEST_MILLISECONDS
 });
 
-export const urlWebServices = {
+    export const urlWebServices = {
 
-    //landing-page
-    login: urlApi + "api/usuarios/sign-in/",
+        //landing-page
+        login: urlApi + "api/usuarios/sign-in/",
     signup: urlApi + "api/usuarios/create",
 
     //Perfil
@@ -58,7 +58,7 @@ export const urlWebServices = {
     //Imagenes
     uploadFileImg: "https://api.cloudinary.com/v1_1/controles-pediatricos-api/image/upload",
     upload_preset: "rwvhvefy",
-    
+
     //Mail
-    sendEmail: urlApi + 'api/usuarios/send-email/dni/',
+    sendEmail: urlApi + 'api/usuarios/send-email/email/',
 };

@@ -95,7 +95,7 @@ const SignIn = () => {
   const redirect = () => {
     if (usuarioLogin) {
       changeUser(usuarioLogin);
-      if (user.password_expirada === 1) {
+      if (usuarioLogin.password_expirada === 1) {
         return <Redirect to='/change-password' />
       } else {
         return <Redirect to='/admin/miperfil' />

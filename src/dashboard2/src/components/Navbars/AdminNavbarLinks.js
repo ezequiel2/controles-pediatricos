@@ -21,10 +21,14 @@ import Button from "../../components/CustomButtons/Button.js";
 import { Link } from "react-router-dom";
 import styles from "../../assets/jss/material-dashboard-react/components/headerLinksStyle.js";
 
+import useUser from "../../../../contexts/hooks/useUser.js";
+
 const useStyles = makeStyles(styles);
+
 
 export default function AdminNavbarLinks() {
   const classes = useStyles();
+  const {user, changeUser} = useUser();
   const [openNotification, setOpenNotification] = React.useState(null);
   const [openProfile, setOpenProfile] = React.useState(null);
   const handleClickNotification = (event) => {
@@ -46,6 +50,7 @@ export default function AdminNavbarLinks() {
   };
   const handleCloseProfile = () => {
     setOpenProfile(null);
+    changeUser(null);
   };
   return (
     <div>
