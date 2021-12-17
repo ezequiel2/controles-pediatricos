@@ -181,11 +181,10 @@ export default function HijosForm2({ tipoForm, handleFormControles, OnClickCance
   }
 
   const onSubmitBaja = async (data) => {
-    // alert(JSON.stringify(data));
 
-    //aca hay que ponerle el input del dni_mapadre
     let dni_mapadre = user.dni;
-    const res = { ...data, dni_mapadre }
+    let nombre = datosForm.nombre;
+    const res = { ...data, dni_mapadre, nombre }
 
     let getHijo = await bajaHijo(res);
 

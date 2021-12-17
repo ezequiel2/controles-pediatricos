@@ -119,6 +119,7 @@ export default function UserProfile() {
 
   const handleFormControles = () => {
     cargarHijos(user.dni);
+    console.log(user);
     MostrarForm();
   }
 
@@ -151,6 +152,7 @@ export default function UserProfile() {
 
   useEffect(() => {
     cargarHijos(user.dni);
+    console.log(user.dni);
     cargarPerfilMapadre(user.dni);
     // cargarAvatarImage(user.dni);
   }, [user]);
@@ -172,6 +174,9 @@ export default function UserProfile() {
 
     if (getPerfil.rdo === 0) {
       setMapadre(getPerfil.perfil);
+      setNombreModif(getPerfil.perfil.nombre);
+      setApellidoModif(getPerfil.perfil.apellido);
+      setTelModif(getPerfil.perfil.telefono);
 
     } else if (getPerfil.rdo === 1) {
       alert(getPerfil.mensaje)
@@ -191,6 +196,7 @@ export default function UserProfile() {
 
     if (modifPerfil.rdo === 0) {
       setearNewUser();
+      alert("Perfil actualizado");
 
     } else if (modifPerfil.rdo === 1) {
       alert(modifPerfil.mensaje)
@@ -203,8 +209,11 @@ export default function UserProfile() {
     let telefono = telModif;
     let dni = user.dni;
     let email = user.email;
+    let password = user.password;
+    let password_expirada = user.password_expirada;
+    let imagen_perfil = user.imagen_perfil;
 
-    let newUser = { dni, email, nombre, apellido, telefono }
+    let newUser = { dni, email, nombre, apellido, telefono, password, password_expirada, imagen_perfil }
 
     changeUser(newUser);
   }
@@ -318,15 +327,11 @@ export default function UserProfile() {
           </GridItem>
           <GridItem xs={12} sm={12} md={4}>
             <Card profile>
-              {/* <CardAvatar profile> */}
-              {/* <a href="#pablo" onClick={(e) => e.preventDefault()}> */}
-              <Image publicId={user.imagen_perfil}>
-                <Transformation aspectRatio="1:1" gravity="face" radius="max" width="200" crop="fill" />
-                <Transformation height="50" width="50" />
-              </Image>
-              {/* <img src={avatar} alt="..." /> */}
-              {/* </a> */}
-              {/* </CardAvatar> */}
+              <CardAvatar profile>
+                <Image publicId={user.imagen_perfil}>
+                  <Transformation aspectRatio="1:1" gravity="face" radius="max" width="200" crop="fill" />
+                </Image>
+              </CardAvatar>
               <CardBody profile>
                 <h4 className={classes.cardTitle}>
                   {user.nombre + ' ' + user.apellido}

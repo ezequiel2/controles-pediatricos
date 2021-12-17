@@ -12,39 +12,13 @@ import AppAppBar from '../views/AppAppBar';
 import { ThemeProvider } from '@material-ui/styles';
 import theme from '../theme';
 
-//import { Router } from '@material-ui/icons';
-//import AppAppBar from './modules/views/AppAppBar';
-
-// function Index() {
-//   return (
-//     //<ThemeProvider theme={theme}>
-//       <Router>
-//           <Switch>
-//             <Route exact path="/">
-//               <React.Fragment>
-//                 <AppAppBar />
-//                 <ProductHero />
-//                 <ProductValues />
-//                 <ProductCategories />
-//                 <ProductHowItWorks />
-//                 {/* <ProductCTA /> */}
-//                 {/* <ProductSmokingHero /> */}
-//                 {/* <AppFooter /> */}
-//               </React.Fragment>
-//             </Route>
-//             <Route exact path="/sign-in">
-//               <SignIn />
-//             </Route>
-//           </Switch>
-//       </Router>
-//     //</ThemeProvider>
-//   );
-// }
-
-// export default withRoot(Index);
+import useUser from '../contexts/hooks/useUser'
 
 
 const Home = () => {
+
+  const { user, changeUser } = useUser(null);
+  console.log(user);
 
   return ( 
   

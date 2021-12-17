@@ -297,9 +297,6 @@ export const modificarHijo = async function (hijo) {
         comentarios: hijo.comentarios
     };
 
-    alert("estoy en modifHijo");
-    alert(JSON.stringify(formData));
-
     try {
         let response = await api.post(url, formData);
 
@@ -429,9 +426,6 @@ export const modificarControl = async function (control) {
         estudios_realizados: control.estudios_realizados,
         observaciones: control.observaciones
     };
-
-    alert("estoy en modifControl");
-    alert(JSON.stringify(formData));
 
     try {
         let response = await api.post(url, formData);

@@ -147,10 +147,9 @@ function ForgotPassword() {
           fullWidth
           onClick={sendEmail}
         >
-          'Enviar mail'
+          Enviar mail
         </FormButton>
       </AppForm>
-      {/* <AppFooter /> */}
     </React.Fragment>
   );
 }

@@ -260,12 +260,12 @@ export default function ControlPedForm3({ tipoForm, handleFormControles, OnClick
                           size='small'
                           id="standard-basic"
                           name="fecha_control_ped"
-                          label="Fecha control pediatrico"
+                          label="Fecha"
                           variant="outlined"
                           {...register("fecha_control_ped")}
                         />
-                      </GridItem>
-                      <GridItem xs={12} sm={12} md={3}>
+                        {/* </GridItem> */}
+                        {/* <GridItem xs={12} sm={12} md={3}> */}
                         <TextField
                           className={classes.root}
                           size='small'
@@ -712,7 +712,7 @@ export default function ControlPedForm3({ tipoForm, handleFormControles, OnClick
                         variant="outlined"
                         readOnly
                         value={datosForm.nombre_hijo}
-                        //{...register("nombre_hijo")}
+                      //{...register("nombre_hijo")}
                       />
                     </GridContainer>
                     <GridContainer>
@@ -728,7 +728,7 @@ export default function ControlPedForm3({ tipoForm, handleFormControles, OnClick
                           variant="outlined"
                           readOnly
                           value={datosForm.fecha_control_ped}
-                          //{...register("fecha_control_ped")}
+                        //{...register("fecha_control_ped")}
                         />
                       </GridItem>
                       <GridItem xs={12} sm={12} md={3}>

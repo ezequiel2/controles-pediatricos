@@ -50,7 +50,7 @@ export default function AdminNavbarLinks() {
   };
   const handleCloseProfile = () => {
     setOpenProfile(null);
-    changeUser(null);
+    // changeUser(null);
   };
   return (
     <div>
@@ -210,8 +210,8 @@ export default function AdminNavbarLinks() {
                       className={classes.dropdownItem}
                     >
                       Settings
-                    </MenuItem>
-                    <Divider light /> */}
+                    </MenuItem>*/}
+                    {/* <Divider light />  */}
                     <MenuItem
                       onClick={handleCloseProfile}
                       className={classes.dropdownItem}

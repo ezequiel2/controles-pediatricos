@@ -50,8 +50,6 @@ export default function UploadButtons() {
         imagen_perfil: imageDB
       }
 
-      console.log("mapadreNewImage")
-      console.log(mapadreNewImage);
       let resModifMapadre = await modificarPerfilMapadre(mapadreNewImage);
 
       if (resModifMapadre.rdo === 0) {
@@ -75,9 +73,6 @@ export default function UploadButtons() {
           password_expirada,
           imagen_perfil
         }
-        console.log("newUserImage");
-        console.log(newUserImage);
-
         changeUser(newUserImage);
 
       }else if (resModifMapadre.rdo === 1) {
