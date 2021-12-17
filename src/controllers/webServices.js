@@ -29,6 +29,7 @@ export const urlWebServices = {
 
     //Perfil
     perfilMapadre: urlApi + 'api/usuarios/find/dni/',
+    perfilMapadreEmail: urlApi + 'api/usuarios/find/email/',
     modificarPerfilMapadre: urlApi + 'api/usuarios/actualizar/dni/',
 
     //Hijos
@@ -57,7 +58,7 @@ export const urlWebServices = {
     //Imagenes
     uploadFileImg: "https://api.cloudinary.com/v1_1/controles-pediatricos-api/image/upload",
     upload_preset: "rwvhvefy",
-    // guardarImgUser: urlApi + "api/users/guardarImgUser",
-    // getImgUser: urlApi + "api/users/imgUserByMail",
-    // uploadFileImg2: urlApi + "api/users/uploadImg",
+    
+    //Mail
+    sendEmail: urlApi + 'api/usuarios/send-email/dni/',
 };

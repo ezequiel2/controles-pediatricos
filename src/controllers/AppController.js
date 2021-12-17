@@ -137,6 +137,47 @@ export const getPerfilMapadre = async function (dni) {
     };
 }
 
+export const getPerfilMapadreEmail = async function (email) {
+
+    //url webservices
+    let url = urlWebServices.perfilMapadreEmail + email;
+
+    try {
+        let response = await api.get(url);
+
+        let rdo = response.status;
+        // alert("rdo");
+        // alert(rdo);
+        switch (rdo) {
+            case 200:
+                {
+                    // alert("estoy en 200");
+                    // let result = []
+                    // result[1] = JSON.stringify(data);
+                    return ({ rdo: 0, perfil: response.data }); //correcto
+                }
+            case 204:
+                {
+                    return ({ rdo: 1, mensaje: "Mail ingresado inexistente" });
+                }
+            default:
+                {
+                    //otro error
+                    return ({ rdo: 1, mensaje: "Mail inexistente" });
+                }
+        }
+        // alert("aca esta el res");
+        // alert(JSON.stringify(res));            
+        // return res;
+    } catch (error) {
+        return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+        // alert("esto es error");
+        // alert(error);
+        // alert("esto es el status");
+        // alert(error.status);
+    };
+}
+
 export const modificarPerfilMapadre = async function (mapadre) {
     //url webservices
     let url = urlWebServices.modificarPerfilMapadre + mapadre.dni_mapadre
@@ -602,18 +643,9 @@ export const uploadFileImg = async function (file) {
     let url = urlWebServices.uploadFileImg;
     let upload_preset = urlWebServices.upload_preset;
 
-    console.log('files', file)
-    console.log('upload_preset', upload_preset)
-    console.log('url', url)
     const formData = new FormData();
-    //agrego archivos para subir
-    // for (let i = 0; i < files.length; i++) {
     formData.append("file", file)
     formData.append("upload_preset", upload_preset)
-    // }
-
-    console.log("formData");
-    console.log(formData);
 
     try {
         let response = await api.post(url, formData);
@@ -637,77 +669,32 @@ export const uploadFileImg = async function (file) {
     }
 }
 
-
-
-export const guardarImgUser = async function (message) {
+export const sendEmailMapadre = async function (data) {
     //url webservices
-    let url = urlWebServices.guardarImgUser;
-    //console.log("url",url);
-    //console.log("token",WebToken.webToken);
-    const formData = new URLSearchParams();
-    formData.append('email', message.email);
-    formData.append('nombreImagen', message.imagen);
+    let url = urlWebServices.sendEmail + data.email;
+
+    const formData = {
+        new_password: data.new_password
+    };
 
     try {
-        let response = await fetch(url, {
-            method: 'POST', // or 'PUT'
-            mode: "cors",
-            headers: {
-                'Accept': 'application/x-www-form-urlencoded',
-                'x-access-token': localStorage.getItem('x'),
-                'Origin': 'http://localhost:3000',
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: formData
-        });
-        if (response.status === 201) {
-            return true;
+        let response = await api.post(url, formData);
+
+        let rdo = response.status;
+
+        switch (rdo) {
+            case 200:
+                {
+                    return ({ rdo: 0, mensaje: "Mail enviado exitosamente" }); //correcto
+                }
+            default:
+                {
+                    //otro error
+                    return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+                }
         }
-        else {
-            return false;
-        }
-    }
-    catch (error) {
-        console.log("error", error);
-        return false;
+    } catch (error) {
+        return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
     };
-}
 
-
-export const getImagenesByUser = async function () {
-    //url webservices
-    let url = urlWebServices.getImgUser;
-    //console.log("url",url);
-    //console.log("token",WebToken.webToken);
-    const formData = new URLSearchParams();
-    formData.append('email', localStorage.getItem('email'));
-
-    try {
-        let response = await fetch(url, {
-            method: 'POST', // or 'PUT'
-            mode: "cors",
-            headers: {
-                'Accept': 'application/x-www-form-urlencoded',
-                'x-access-token': localStorage.getItem('x'),
-                'Origin': 'http://localhost:3000',
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: formData
-        });
-        if (response.status === 200) {
-            let data = await response.json();
-            console.log("imagenesUser", data);
-            let listaImg = data.data.docs;
-            return listaImg;
-        }
-        else {
-            let vacio = [];
-            console.log("No hay imagenes")
-            return (vacio);
-
-        }
-    }
-    catch (error) {
-        console.log("error", error);
-    };
 }

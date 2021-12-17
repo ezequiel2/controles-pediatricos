@@ -53,8 +53,6 @@ const SignIn = () => {
 
   const validate = (values) => {
     const errors = required(['email', 'password'], values);
-    console.log(errors);
-    console.log(values);
 
     if (!errors.email) {
       const emailError = email(values.email, values);
@@ -83,8 +81,6 @@ const SignIn = () => {
   }
 
   const loginUser = () => {
-    // alert(validEmail);
-    // alert(password);
     if (validEmail && password) {
       validarLogin();
     } else {
@@ -168,13 +164,9 @@ const SignIn = () => {
         <div>{redirect()}</div>
         <FormButton
           className={classes.button}
-          // disabled={submitting || sent}
           size="large"
           color="secondary"
           fullWidth
-          // component={Link}
-          //to='/user-profile'
-          // to='/admin'
           onClick={loginUser}
         >
           Ingresar
@@ -186,7 +178,6 @@ const SignIn = () => {
           </Link>
         </Typography>
       </AppForm>
-      {/* <AppFooter /> */}
     </React.Fragment>
   );
 }
