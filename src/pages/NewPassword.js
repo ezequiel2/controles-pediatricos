@@ -15,7 +15,7 @@ import FormButton from '../form/FormButton';
 import FormFeedback from '../form/FormFeedback';
 
 //importo llamada a log-in
-import { login } from '../controllers/AppController';
+import { modificarPerfilMapadre } from '../controllers/AppController';
 
 //importo useContext
 import useUser from '../contexts/hooks/useUser';
@@ -36,57 +36,75 @@ const useStyles = makeStyles((theme) => ({
 const SignIn = () => {
   const classes = useStyles();
   const [sent, setSent] = useState(false);
-  const [validEmail, setValidEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [contraseña, setContraseña] = useState('');
+  const [contraseña2, setContraseña2] = useState('');
   // const [usuarioValido, setUsuarioValido] = useState(false);
 
   const [usuarioLogin, setUsuarioLogin] = useState();
   const { user, changeUser } = useUser();
 
-  const handleEmail = (values) => {
-    setValidEmail(values.email);
+  const handleContraseña = (values) => {
+    setContraseña(values.contraseña);
   }
-  const handlePassword = (values) => {
-    //alert(values.password);
-    setPassword(values.password);
+  const handleContraseña2 = (values) => {
+    setContraseña2(values.contraseña2);
   }
 
   const validate = (values) => {
-    const errors = required(['email', 'password'], values);
+    const errors = required(['contraseña', 'contraseña2'], values);
 
-    if (!errors.email) {
-      const emailError = email(values.email, values);
-      if (emailError) {
-        errors.email = email(values.email, values);
-      }
+    if (values.contraseña === values.contraseña2) {
+      handleContraseña(values);
+      handleContraseña2(values);
+    }else{
+      errors.contraseña2 = "Contraseñas no coinciden"
     }
-    handleEmail(values);
-    handlePassword(values);
 
     return errors;
   };
 
-  const validarLogin = async function () {
-    let datos = {
-      validEmail: validEmail,
-      password: password
-    }
-    let getLogin = await login(datos);
-    if (getLogin.rdo === 0) {
-      setUsuarioLogin(getLogin.user);
+  const actualizarContraseña = async function () {
 
-    } else if (getLogin.rdo === 1) {
-      alert(getLogin.mensaje)
+    let datos = {
+      dni_mapadre: user.dni,
+      password: contraseña,
+      password_expirada: 0,
+    }
+    
+    let getModifPerfil = await modificarPerfilMapadre(datos);
+
+    if (getModifPerfil.rdo === 0) {
+      let dni = user.dni;
+      let password = contraseña;
+      let password_expirada = 0;
+      let telefono = user.telefono;
+      let nombre = user.nombre;
+      let apellido = user.apellido;
+      let email = user.email;
+      let imagen_perfil = user.imagen_perfil;
+
+      let updateUser = {
+        dni,
+        password,
+        password_expirada,
+        telefono,
+        nombre,
+        apellido,
+        email,
+        imagen_perfil
+      }
+      setUsuarioLogin(updateUser);
+
+    } else if (getModifPerfil.rdo === 1) {
+      alert(getModifPerfil.mensaje)
     }
   }
 
-  const loginUser = () => {
-    // alert(validEmail);
-    // alert(password);
-    if (validEmail !== "" && password !== "") {
-      validarLogin();
+  const newPasswordUser = () => {
+    if (contraseña && contraseña2) {
+      actualizarContraseña();
     } else {
-      alert("Debe completar usuario y password");
+      alert("Debe completar contraseña y nueva contraseña");
     }
   };
 
@@ -114,19 +132,19 @@ const SignIn = () => {
           {({ handleSubmit2, submitting }) => (
             <form onSubmit={handleSubmit2} className={classes.form} noValidate>
               <Field
-                autoComplete="email"
+                autoComplete="contraseña"
                 autoFocus
                 component={RFTextField}
                 disabled={submitting || sent}
                 fullWidth
                 label="Nueva Contraseña"
                 margin="normal"
-                name="newpassword"
+                name="contraseña"
                 required
                 size="medium"
                 type="password"
                 //onChange={handleEmail}
-                model="validEmail"
+                model="contraseña"
               />
               <Field
                 fullWidth
@@ -134,15 +152,15 @@ const SignIn = () => {
                 component={RFTextField}
                 disabled={submitting || sent}
                 required
-                name="newpassword2"
-                autoComplete="current-password"
+                name="contraseña2"
+                autoComplete="contraseña2"
                 label="Repita Nueva Contraseña"
                 type="password"
                 margin="normal"
                 //changeAction={handlePassword}
-                model="password"
+                model="contraseña2"
               />
-             
+
               <FormSpy subscription={{ submitError: true }}>
                 {({ submitError }) =>
                   submitError ? (
@@ -165,12 +183,11 @@ const SignIn = () => {
           // component={Link}
           //to='/user-profile'
           // to='/admin'
-          onClick={loginUser}
+          onClick={newPasswordUser}
         >
           Guardar
         </FormButton>
       </AppForm>
-      {/* <AppFooter /> */}
     </React.Fragment>
   );
 }

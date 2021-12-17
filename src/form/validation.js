@@ -1,4 +1,3 @@
-// import isEmail from '../../../../../../../../../Ezequiel/AppDataLocal/Microsoft/TypeScript/4.4/node_modules/@types/validator/lib/isEmail'
 import isEmail from 'validator/lib/isEmail';
 
 export function email(value) {

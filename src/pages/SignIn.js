@@ -53,6 +53,8 @@ const SignIn = () => {
 
   const validate = (values) => {
     const errors = required(['email', 'password'], values);
+    console.log(errors);
+    console.log(values);
 
     if (!errors.email) {
       const emailError = email(values.email, values);
@@ -83,7 +85,7 @@ const SignIn = () => {
   const loginUser = () => {
     // alert(validEmail);
     // alert(password);
-    if (validEmail !== "" && password !== "") {
+    if (validEmail && password) {
       validarLogin();
     } else {
       alert("Debe completar usuario y password");
@@ -97,7 +99,11 @@ const SignIn = () => {
   const redirect = () => {
     if (usuarioLogin) {
       changeUser(usuarioLogin);
-      return <Redirect to='/admin/miperfil' />
+      if (user.password_expirada === 1) {
+        return <Redirect to='/change-password' />
+      } else {
+        return <Redirect to='/admin/miperfil' />
+      }
     }
   }
 

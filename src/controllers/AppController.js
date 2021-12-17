@@ -34,11 +34,11 @@ export const login = async function (login) {
                     //error password
                     return ({ rdo: 1, mensaje: "La contraseña no es correcta." });
                 }
-            case 207:
-                {
-                    //error password
-                    return ({ rdo: 1, mensaje: "Contraseña expirada." });
-                }
+            // case 207:
+            //     {
+            //         //error password
+            //         return ({ rdo: 1, mensaje: "Contraseña expirada." });
+            //     }
             default:
                 {
                     //otro error
@@ -145,6 +145,8 @@ export const modificarPerfilMapadre = async function (mapadre) {
         nombre: mapadre.nombre,
         apellido: mapadre.apellido,
         telefono: mapadre.telefono,
+        password: mapadre.password,
+        password_expirada: mapadre.password_expirada,
         imagen_perfil: mapadre.imagen_perfil
     };
 
