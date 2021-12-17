@@ -1,5 +1,8 @@
 # El rincon de los mapadres - Proyecto UADE Aplicaciones Interactivas - 2c 2021
 
+## Requerimientos minimos
+    - Tener instalado y configurado NPM (https://www.npmjs.com/) para deplegar Front-end y Back-end
+
 ## Pasos para instalar Front-end y Back-end
 
 Para instalar ambos proyectos se deberán seguir los siguientes pasos:
