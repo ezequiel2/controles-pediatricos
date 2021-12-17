@@ -1,6 +1,6 @@
 import withRoot from '../withRoot';
 // --- Post bootstrap -----
-import { React, useState } from 'react';
+import React from 'react';
 import { Field, Form, FormSpy } from 'react-final-form';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '../components/Typography';
@@ -29,15 +29,10 @@ const useStyles = makeStyles((theme) => ({
 
 function ForgotPassword() {
   const classes = useStyles();
-  const [sent, setSent] = useState(false);
-  const [validEmail, setValidEmail] = useState('');
-
-  const handleEmail = (values) => {
-    setValidEmail(values.email);
-  }
+  const [sent, setSent] = React.useState(false);
 
   const validate = (values) => {
-    const errors = required(['email', 'password'], values);
+    const errors = required(['email'], values);
 
     if (!errors.email) {
       const emailError = email(values.email, values);
@@ -45,6 +40,7 @@ function ForgotPassword() {
         errors.email = email(values.email, values);
       }
     }
+
     handleEmail(values);
 
     return errors;
@@ -53,6 +49,12 @@ function ForgotPassword() {
   const handleSubmit = () => {
     setSent(true);
   };
+
+  const handleEmail = (values) => {
+    setValidEmail(values.email);
+  }
+
+  const [validEmail, setValidEmail] = React.useState('');
 
   const randomize = () => {
     const min = 100000;
@@ -148,6 +150,7 @@ function ForgotPassword() {
           'Enviar mail'
         </FormButton>
       </AppForm>
+      {/* <AppFooter /> */}
     </React.Fragment>
   );
 }
